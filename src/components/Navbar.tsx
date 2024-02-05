@@ -12,7 +12,9 @@ const Navbar = () => {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-          <span>Craft<span className="text-blue-600">Sync</span></span>
+            <span>
+              Craft<span className="text-blue-600">Sync</span>
+            </span>
           </Link>
 
           <MobileNav />
@@ -25,7 +27,7 @@ const Navbar = () => {
                 size: "sm",
               })}
             >
-              <Github className="h-5 w-5"/>
+              <Github className="h-5 w-5" />
               Github
             </Link>
             <Link
@@ -37,7 +39,7 @@ const Navbar = () => {
             >
               Sign in
             </Link>
-            
+
             <Link
               href="/"
               className={buttonVariants({

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Github, Menu } from "lucide-react";
+import { ArrowRight, Github, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,10 +24,17 @@ const MobileNav = () => {
 
   return (
     <div className="sm:hidden">
-      <Menu
-        onClick={toggleOpen}
-        className="relative z-50 h-5 w-5 text-zinc-700"
-      />
+      {isOpen ? (
+        <X
+          onClick={toggleOpen}
+          className="relative z-50 h-5 w-5 text-zinc-700"
+        />
+      ) : (
+        <Menu
+          onClick={toggleOpen}
+          className="relative z-50 h-5 w-5 text-zinc-700"
+        />
+      )}
 
       {isOpen ? (
         <div className="fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-0 w-full">
@@ -39,7 +46,7 @@ const MobileNav = () => {
                   className="flex items-center w-full font-semibold "
                   href="/"
                 >
-                  <Github className="h-5 w-5"/>
+                  <Github className="h-5 w-5" />
                   Github
                 </Link>
               </li>
@@ -64,9 +71,6 @@ const MobileNav = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </li>
-              
-              
-              
             </>
           </ul>
         </div>
