@@ -2,7 +2,7 @@ import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import MobileNav from "./MobileNav";
 import Image from "next/image";
 
@@ -12,7 +12,7 @@ const Navbar = () => {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-          <Image alt="logo" src={"/logo.png"} width={60} height={60} />
+          <span>Craft<span className="text-blue-600">Sync</span></span>
           </Link>
 
           <MobileNav />
@@ -25,7 +25,8 @@ const Navbar = () => {
                 size: "sm",
               })}
             >
-              Use Cases
+              <Github className="h-5 w-5"/>
+              Github
             </Link>
             <Link
               href="/"
@@ -34,26 +35,9 @@ const Navbar = () => {
                 size: "sm",
               })}
             >
-              Security
+              Sign in
             </Link>
-            <Link
-              href="/"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-              })}
-            >
-              Blog
-            </Link>
-            <Link
-              href="/"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-              })}
-            >
-               Careers
-            </Link>
+            
             <Link
               href="/"
               className={buttonVariants({

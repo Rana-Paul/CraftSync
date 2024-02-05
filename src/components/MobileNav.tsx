@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Menu } from "lucide-react";
+import { ArrowRight, Github, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -36,6 +36,27 @@ const MobileNav = () => {
               <li>
                 <Link
                   onClick={() => closeOnCurrent("/sign-up")}
+                  className="flex items-center w-full font-semibold "
+                  href="/"
+                >
+                  <Github className="h-5 w-5"/>
+                  Github
+                </Link>
+              </li>
+              <li className="my-3 h-px w-full bg-gray-300" />
+              <li>
+                <Link
+                  onClick={() => closeOnCurrent("/sign-up")}
+                  className="flex items-center w-full font-semibold "
+                  href="/"
+                >
+                  Sign in
+                </Link>
+              </li>
+              <li className="my-3 h-px w-full bg-gray-300" />
+              <li>
+                <Link
+                  onClick={() => closeOnCurrent("/sign-up")}
                   className="flex items-center w-full font-semibold text-green-600"
                   href="/"
                 >
@@ -43,36 +64,8 @@ const MobileNav = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </li>
-              <li className="my-3 h-px w-full bg-gray-300" />
-              <li>
-                <Link
-                  onClick={() => closeOnCurrent("/sign-in")}
-                  className="flex items-center w-full font-semibold"
-                  href="/"
-                >
-                  Use Cases
-                </Link>
-              </li>
-              <li className="my-3 h-px w-full bg-gray-300" />
-              <li>
-                <Link
-                  onClick={() => closeOnCurrent("/pricing")}
-                  className="flex items-center w-full font-semibold"
-                  href="/pricing"
-                >
-                  Security
-                </Link>
-              </li>
-              <li className="my-3 h-px w-full bg-gray-300" />
-              <li>
-                <Link
-                  onClick={() => closeOnCurrent("/pricing")}
-                  className="flex items-center w-full font-semibold"
-                  href="/pricing"
-                >
-                  Careers
-                </Link>
-              </li>
+              
+              
               
             </>
           </ul>

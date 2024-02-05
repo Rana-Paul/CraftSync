@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
-import Chat from "@/components/Chatbot/Chat";
-import Providers from "@/components/Providers";
 import { Toaster } from "react-hot-toast";
 
 
@@ -22,7 +20,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
         <body
           className={cn(
             "min-h-screen font-sans antialiased grainy",
@@ -30,11 +27,9 @@ export default function RootLayout({
           )}
         >
           <Navbar />
-          <Chat />
           <Toaster position="bottom-center" />
           {children}
         </body>
-      </Providers>
     </html>
   );
 }
