@@ -1,11 +1,15 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { buttonVariants } from "@/components/ui/button";
-
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../app/api/auth/[...nextauth]/route";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  console.log(session?.user);
+  
 
 
   return (
