@@ -1,3 +1,4 @@
+import { db } from "@/db";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
@@ -8,12 +9,13 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
+      name: "Google",
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       authorization: {
         params: {
           scope:
-            "openid https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
+            "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.upload  ",
         },
       },
     }),
@@ -23,6 +25,30 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ user }) {
+      if (!user?.email) {
+        throw new Error("Missing profile");
+      }
+      console.log("pro: "+ user.image);
+      
+      
+      await db.user.upsert({
+        where: {
+          email: user.email,
+        },
+        create: {
+          email: user.email,
+          name: user.name,
+          avatar: user.image,
+        },
+        update: {
+          name: user.name,
+          avatar: user.image,
+        },
+      })
+      return true
+      
+    },
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
