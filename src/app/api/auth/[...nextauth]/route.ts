@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       if (!user?.email) {
         throw new Error("Missing profile");
       }
-      console.log("pro: "+ user.image);
+      console.log("pro: "+ user.id);
       
       
       await db.user.upsert({
@@ -37,6 +37,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
         },
         create: {
+          id: user.id,
           email: user.email,
           name: user.name,
           avatar: user.image,
@@ -49,7 +50,7 @@ export const authOptions: NextAuthOptions = {
       return true
       
     },
-    async jwt({ token, account }) {
+    async jwt({ token, account, profile }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accessToken = account.access_token;
@@ -58,7 +59,11 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user.accessToken = token.accessToken as string;
+      if(session.user) {
+        session.user.id = token.sub as string;
+        session.user.accessToken = token.accessToken as string;
+      }
+      
       return session;
     },
   },
