@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <MaxWidthWrapper className="mb-12 mt-20 sm:mt-40 flex flex-col items-center justify-center text-center">
         <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
-          <p className="text-sm font-semibold text-gray-700">
+          <p className="text-sm font-semibold">
             Craft<span className="text-blue-600">Sync</span>
           </p>
         </div>
@@ -123,7 +123,7 @@ export default async function Home() {
                   Step 2
                 </span>
                 <span className="text-xl font-semibold">
-                  Upload your PDF file
+                Upload and Review Content
                 </span>
                 <span className="mt-2 text-zinc-700">
                   Upload videos, review them, and provide feedback.

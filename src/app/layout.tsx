@@ -4,8 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
-
-
+import { Provider } from "@/components/SessionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Provider>
         <body
           className={cn(
             "min-h-screen font-sans antialiased grainy",
@@ -30,6 +30,7 @@ export default function RootLayout({
           <Toaster position="bottom-center" />
           {children}
         </body>
+        </Provider>
     </html>
   );
 }

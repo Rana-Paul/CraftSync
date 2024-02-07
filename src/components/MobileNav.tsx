@@ -4,6 +4,7 @@ import { ArrowRight, Github, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 const MobileNav = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -11,6 +12,9 @@ const MobileNav = () => {
   const toggleOpen = () => setOpen((prev) => !prev);
 
   const pathname = usePathname();
+
+  const { data: session } = useSession();
+  console.log("client:" + session);
 
   useEffect(() => {
     if (isOpen) toggleOpen();
@@ -50,16 +54,20 @@ const MobileNav = () => {
                   Github
                 </Link>
               </li>
-              <li className="my-3 h-px w-full bg-gray-300" />
-              <li>
-                <Link
-                  onClick={() => closeOnCurrent("/sign-up")}
-                  className="flex items-center w-full font-semibold "
-                  href="/"
-                >
-                  Sign in
-                </Link>
-              </li>
+              {session === null ? (
+                <>
+                  <li className="my-3 h-px w-full bg-gray-300" />
+                  <li>
+                    <Link
+                      onClick={() => closeOnCurrent("/sign-up")}
+                      className="flex items-center w-full font-semibold "
+                      href="/"
+                    >
+                      Sign in
+                    </Link>
+                  </li>
+                </>
+              ) : null}
               <li className="my-3 h-px w-full bg-gray-300" />
               <li>
                 <Link

@@ -4,15 +4,19 @@ import { buttonVariants } from "./ui/button";
 
 import { ArrowRight, Github } from "lucide-react";
 import MobileNav from "./MobileNav";
-import Image from "next/image";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../app/api/auth/[...nextauth]/route";
+const Navbar = async() => {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+  
 
-const Navbar = () => {
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-            <span>
+            <span className="text-2xl">
               Craft<span className="text-blue-600">Sync</span>
             </span>
           </Link>
@@ -30,7 +34,8 @@ const Navbar = () => {
               <Github className="h-5 w-5" />
               Github
             </Link>
-            <Link
+            {!session?.user && (
+              <Link
               href="/"
               className={buttonVariants({
                 variant: "ghost",
@@ -39,9 +44,10 @@ const Navbar = () => {
             >
               Sign in
             </Link>
+            )}
 
             <Link
-              href="/"
+              href="/dashboard"
               className={buttonVariants({
                 size: "sm",
               })}
