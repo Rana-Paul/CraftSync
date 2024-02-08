@@ -67,16 +67,15 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                 </li>
                 <li className="my-3 h-px w-full bg-gray-300" />
                 <li>
-                <Link
-                  onClick={() => closeOnCurrent("/sign-up")}
-                  className="flex items-center w-full font-semibold "
-                  href="/"
-                >
-                  <Github className="h-5 w-5" />
-                  Github
-                </Link>
+                  <Link
+                    onClick={() => closeOnCurrent("/sign-up")}
+                    className="flex items-center w-full font-semibold "
+                    href="/"
+                  >
+                    <Github className="h-5 w-5" />
+                    Github
+                  </Link>
                 </li>
-                
               </>
             ) : (
               <>
@@ -87,7 +86,6 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                     href="/dashboard"
                   >
                     Dashboard
-                    
                   </Link>
                 </li>
                 <li className="my-3 h-px w-full bg-gray-300" />

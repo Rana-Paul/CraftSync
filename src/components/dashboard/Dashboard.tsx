@@ -19,23 +19,25 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     {
       id: "1",
       name: "My Workspace 1",
-      createdAt: new Date(),
+      createdAt: Date.now(),
     },
     {
       id: "2",
       name: "My Workspace 2",
-      createdAt: new Date(),
+      createdAt:  Date.now(),
     },
     {
       id: "3",
       name: "My Workspace 3",
-      createdAt: new Date(),
+      createdAt:  Date.now(),
     },
   ];
   return (
     <main className="mx-auto max-w-7xl md:p-10">
       <div className="mt-8 flex flex-col ml-4 items-start justify-between gap-4 border-b border-gray-200 pb-5 md:flex-row sm:items-center sm:gap-0">
-        <h1 className="mb-3 font-bold text-4xl md:text-5xl text-gray-900">My Workspaces</h1>
+        <h1 className="mb-3 font-bold text-4xl md:text-5xl text-gray-900">
+          My Workspaces
+        </h1>
 
         <UploadButton />
       </div>

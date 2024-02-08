@@ -8,10 +8,10 @@ export async function middleware(request: NextRequest) {
   //   console.log(request.nextUrl.pathname);
   const authURLS = ["/dashboard"];
 
-  if (token &&request.nextUrl.pathname == "/api/auth/signin" ) {
+  if (token && request.nextUrl.pathname == "/api/auth/signin") {
     return NextResponse.redirect(new URL("/", request.url));
   }
-  if (authURLS.includes(request.nextUrl.pathname) && !token){
+  if (authURLS.includes(request.nextUrl.pathname) && !token) {
     return NextResponse.redirect(new URL("/api/auth/signin", request.url));
   }
 

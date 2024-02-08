@@ -33,7 +33,6 @@ export default async function Home() {
             className: "mt-5",
           })}
           href="/dashboard"
-          target="_blank"
         >
           Get started <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
@@ -123,7 +122,7 @@ export default async function Home() {
                   Step 2
                 </span>
                 <span className="text-xl font-semibold">
-                Upload and Review Content
+                  Upload and Review Content
                 </span>
                 <span className="mt-2 text-zinc-700">
                   Upload videos, review them, and provide feedback.
@@ -167,8 +166,13 @@ export default async function Home() {
             <div className="mx-auto max-w-6xl px-6 lg:px-8">
               <div className="mt-16 flow-root sm:mt-24">
                 <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                  <Image src={"/img/poster3.png"} width={1364}
-                    height={766} alt="poster" className="rounded-md bg-white7 shadow-2xl ring-1 ring-gray-900/10"/>
+                  <Image
+                    src={"/img/poster3.png"}
+                    width={1364}
+                    height={766}
+                    alt="poster"
+                    className="rounded-md bg-white7 shadow-2xl ring-1 ring-gray-900/10"
+                  />
                 </div>
               </div>
             </div>

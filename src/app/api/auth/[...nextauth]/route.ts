@@ -25,13 +25,12 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user  }) {
+    async signIn({ user }) {
       if (!user?.email) {
         throw new Error("Missing profile");
       }
-      console.log("pro: "+ user.id);
-      
-      
+      console.log("pro: " + user.id);
+
       await db.user.upsert({
         where: {
           email: user.email,
@@ -46,9 +45,8 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           avatar: user.image,
         },
-      })
-      return true
-      
+      });
+      return true;
     },
     async jwt({ token, account, profile }) {
       // Persist the OAuth access_token to the token right after signin
@@ -59,22 +57,19 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      if(session.user) {
+      if (session.user) {
         session.user.id = token.sub as string;
         session.user.accessToken = token.accessToken as string;
       }
-      
+
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log('url', url);
-      console.log('baseUrl', baseUrl);
-      
-      return '/dashboard';
+      console.log("url", url);
+      console.log("baseUrl", baseUrl);
 
-    }
-
-    
+      return "/dashboard";
+    },
   },
 };
 
