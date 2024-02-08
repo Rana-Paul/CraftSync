@@ -6,16 +6,20 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   //   console.log("midd token" + token?.email);
   //   console.log(request.nextUrl.pathname);
+  const authURLS = ["/dashboard"];
 
-  if (request.nextUrl.pathname == "/api/auth/signin" && token) {
+  if (token &&request.nextUrl.pathname == "/api/auth/signin" ) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+  if (authURLS.includes(request.nextUrl.pathname) && !token){
+    return NextResponse.redirect(new URL("/api/auth/signin", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/api/auth/signin"],
+  matcher: ["/api/auth/signin", "/dashboard/:path*"],
 };
 
 // /api/auth/:path*

@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user  }) {
       if (!user?.email) {
         throw new Error("Missing profile");
       }
