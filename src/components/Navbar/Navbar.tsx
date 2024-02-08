@@ -1,12 +1,12 @@
 import Link from "next/link";
-import MaxWidthWrapper from "./MaxWidthWrapper";
-import { buttonVariants } from "./ui/button";
+import MaxWidthWrapper from "../MaxWidthWrapper";
+import { buttonVariants } from "../ui/button";
 
 import { ArrowRight, Github } from "lucide-react";
 import MobileNav from "./MobileNav";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../app/api/auth/[...nextauth]/route";
-import UserAccountNav from "./UserAccontNavBar/UserAccontNav";
+import { authOptions } from "../../app/api/auth/[...nextauth]/route";
+import UserAccountNav from "./UserAccontNav";
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   console.log(session);
