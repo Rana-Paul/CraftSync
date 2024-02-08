@@ -44,7 +44,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
 
       {/* Display all file */}
       {projects && projects.length !== 0 ? (
-        <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3 ">
+        <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-3 lg:grid-cols-3 ">
           {projects
             .sort(
               (a, b) =>
@@ -53,7 +53,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
             )
             .map((file) => (
               <li
-                className=" col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg"
+                className=" col-span-1 divide-y divide-gray-200 border-t-2 border-gray-300/50 rounded-lg bg-white shadow transition hover:shadow-lg"
                 key={file.id}
               >
                 <Link
@@ -100,7 +100,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
         <div className="mt-16 flex flex-col items-center gap-2">
           <GhostIcon className="h-8 w-8 text-zinc-800" />
           <h3 className=" font-semibold text-xl">Pretty empty around here</h3>
-          <p>Let&apos;s upload your PDF.</p>
+          <p>Let&apos;s create a Workspace.</p>
         </div>
       )}
     </main>
