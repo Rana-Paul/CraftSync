@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
+import { useQuery } from "@tanstack/react-query";
 
 interface DashboardProps {}
 
@@ -14,7 +15,30 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     null | string
   >(null);
-  const isLoading = false;
+
+  const {data, error, isLoading} = useQuery({
+    queryKey: ["projects"],
+    queryFn: async () => {
+      const res = await fetch("https://catfact.ninja/fact");
+      return res.json();
+    },
+  })
+
+  if(isLoading) {
+    console.log("loading...");
+    
+  }
+
+  if (data) {
+    console.log("Data: ", data);
+    
+  }
+
+  
+  
+
+
+  // const isLoading = false;
   const projects = [
     {
       id: "1",

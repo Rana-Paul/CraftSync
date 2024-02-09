@@ -4,7 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
-import { Provider } from "@/components/SessionProvider";
+import { Provider } from "@/components/Providers/SessionProvider";
+import QueryclientProvider from "@/components/Providers/QueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,11 +27,13 @@ export default function RootLayout({
             inter.className
           )}
         >
-          <Navbar />
-          <Toaster position="bottom-center" />
-          {children}
+          <QueryclientProvider>
+            <Navbar />
+            <Toaster position="bottom-center" />
+            {children}
+          </QueryclientProvider>
         </body>
-        </Provider>
+      </Provider>
     </html>
   );
 }
