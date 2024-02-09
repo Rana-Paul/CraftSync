@@ -16,6 +16,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     null | string
   >(null);
 
+  // Testing Query client
   const {data, error, isLoading} = useQuery({
     queryKey: ["projects"],
     queryFn: async () => {
