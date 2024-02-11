@@ -2,13 +2,13 @@
 
 import { GhostIcon, Loader2, Plus, Trash } from "lucide-react";
 import { FC, useState } from "react";
-import UploadButton from "../UploadButton";
 import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 
 interface DashboardProps {}
 
@@ -78,7 +78,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
           My Workspaces
         </h1>
 
-        <UploadButton /> 
+        <CreateWorkSpaceButton /> 
       </div>
 
       {/* Display all file */}

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Button } from "../ui/button";
 
 
-const UploadButton = () => {
+const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -26,4 +26,4 @@ const UploadButton = () => {
   );
 };
 
-export default UploadButton;
+export default CreateWorkSpaceButton;
