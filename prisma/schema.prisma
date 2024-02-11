@@ -16,15 +16,28 @@ model User {
   name      String?
   avatar    String?
   createdAt DateTime @default(now())
+
+  workspaces Workspace[]
+  // sharewith Workspace[] @relation("SharedWorkspace")
+  // sharedWith SharedWorkspaceWith[] @relation("SharedWorkspace")
 }
 
 model Workspace {
-  id         String            @id @default(cuid())
-  title      String
-  content    String
-  creator    User              @relation(fields: [creatorId], references: [id])
-  creatorId  String
-  SharedWorkSpace SharedWorkspace[]
+  id        String @id @default(cuid())
+  title     String
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String
+  editors String[]
+
+  // SharedWorkspaceWith SharedWorkspaceWith[]
 }
 
+// model SharedWorkspaceWith {
+//   id          String    @id @default(cuid())
+//   workspace   Workspace @relation(fields: [workspaceId], references: [id])
+//   workspaceId String
+//   sharedWith  User[]      @relation(name: "SharedWorkspace",fields: [sharedWithEditorsId], references: [id])
+//   sharedWithEditorsId String[]
 
+//   // @@unique([workspaceId, sharedWithEditorsId])
+// }

@@ -8,6 +8,7 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 interface DashboardProps {}
 
@@ -16,30 +17,43 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     null | string
   >(null);
 
+  const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+
   // Testing Query client
-  const {data, error, isLoading} = useQuery({
-    queryKey: ["projects"],
+  // const {data, error, isLoading} = useQuery({
+  //   queryKey: ["projects"],
+  //   queryFn: async () => {
+  //     const res = await fetch("https://catfact.ninja/fact");
+  //     return res.json();
+  //   },
+  // })
+
+  // if(isLoading) {
+  //   console.log("loading...");
+
+  // }
+
+  // if (data) {
+  //   console.log("Data: ", data);
+
+  // }
+
+  const { data } = useQuery({
+    queryKey: ["workspace"],
     queryFn: async () => {
-      const res = await fetch("https://catfact.ninja/fact");
+      const res = await fetch("/api/test");
+      console.log(res);
+
       return res.json();
     },
-  })
+  });
 
-  if(isLoading) {
-    console.log("loading...");
-    
-  }
+  // start from here (button to create workspace):
+  // 1) crete hooks
+  // 2) create proper endpoint to create workspace
+  // 3) configure dashboard to create workspace
 
-  if (data) {
-    console.log("Data: ", data);
-    
-  }
-
-  
-  
-
-
-  // const isLoading = false;
   const projects = [
     {
       id: "1",
@@ -49,12 +63,12 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     {
       id: "2",
       name: "My Workspace 2",
-      createdAt:  Date.now(),
+      createdAt: Date.now(),
     },
     {
       id: "3",
       name: "My Workspace 3",
-      createdAt:  Date.now(),
+      createdAt: Date.now(),
     },
   ];
   return (
@@ -64,7 +78,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
           My Workspaces
         </h1>
 
-        <UploadButton />
+        <UploadButton /> 
       </div>
 
       {/* Display all file */}
