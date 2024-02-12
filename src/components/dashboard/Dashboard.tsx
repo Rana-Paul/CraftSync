@@ -1,7 +1,7 @@
 "use client";
 
 import { GhostIcon, Loader2, Plus, Trash } from "lucide-react";
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
+import {useGetAllWorkspace} from "@/hooks/useWorkspace"
 
 interface DashboardProps {}
 
@@ -19,6 +20,18 @@ const Dashboard: FC<DashboardProps> = ({}) => {
 
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
+
+  const {mutateAsync}: any = useGetAllWorkspace()
+
+  
+
+  const handelUpdate = useCallback(async () => {
+    console.log("inside func");
+    
+
+    await mutateAsync()
+
+  }, [isLoading]);
 
   // Testing Query client
   // const {data, error, isLoading} = useQuery({
@@ -39,15 +52,15 @@ const Dashboard: FC<DashboardProps> = ({}) => {
 
   // }
 
-  const { data } = useQuery({
-    queryKey: ["workspace"],
-    queryFn: async () => {
-      const res = await fetch("/api/test");
-      console.log(res);
+  // const { data } = useQuery({
+  //   queryKey: ["workspace"],
+  //   queryFn: async () => {
+  //     const res = await fetch("/api/test");
+  //     console.log(res);
 
-      return res.json();
-    },
-  });
+  //     return res.json();
+  //   },
+  // });
 
   // start from here (button to create workspace):
   // 1) crete hooks
@@ -78,7 +91,8 @@ const Dashboard: FC<DashboardProps> = ({}) => {
           My Workspaces
         </h1>
 
-        <CreateWorkSpaceButton /> 
+        {/* <CreateWorkSpaceButton />  */}
+        <button onClick={handelUpdate}>test</button>
       </div>
 
       {/* Display all file */}

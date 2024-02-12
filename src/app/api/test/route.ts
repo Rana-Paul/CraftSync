@@ -1,3 +1,4 @@
+"use client"
 import { db } from "@/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
@@ -12,7 +13,7 @@ export async function GET(request: Request) {
                 id: "clsho3kmq00139y9mbjn7boq0",
             },
             data: {
-                editors: {push: "data"}
+                editors: {push: "new data"}
             },
         })
         return NextResponse.json({ message: "Workspace Created!" });
