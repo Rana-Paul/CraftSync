@@ -6,14 +6,14 @@ import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
-import {useGetAllWorkspace} from "@/hooks/useWorkspace"
 
 interface DashboardProps {}
 
 const Dashboard: FC<DashboardProps> = ({}) => {
+
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     null | string
   >(null);
@@ -21,52 +21,22 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
-  const {mutateAsync}: any = useGetAllWorkspace()
-
-  
-
-  const handelUpdate = useCallback(async () => {
-    console.log("inside func");
-    
-
-    await mutateAsync()
-
-  }, [isLoading]);
-
-  // Testing Query client
-  // const {data, error, isLoading} = useQuery({
-  //   queryKey: ["projects"],
-  //   queryFn: async () => {
-  //     const res = await fetch("https://catfact.ninja/fact");
-  //     return res.json();
-  //   },
-  // })
-
-  // if(isLoading) {
-  //   console.log("loading...");
-
-  // }
-
-  // if (data) {
-  //   console.log("Data: ", data);
-
-  // }
-
-  // const { data } = useQuery({
-  //   queryKey: ["workspace"],
-  //   queryFn: async () => {
-  //     const res = await fetch("/api/test");
-  //     console.log(res);
-
-  //     return res.json();
-  //   },
-  // });
-
   // start from here (button to create workspace):
-  // 1) crete hooks
-  // 2) create proper endpoint to create workspace
-  // 3) configure dashboard to create workspace
+  // 1) create proper endpoint to create workspace
+  // 2) configure dashboard to create workspace\
 
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const res = await fetch("/api/test", {
+        method: "GET",
+      });
+      return res.json();
+    },
+  })
+
+    
+  
   const projects = [
     {
       id: "1",
@@ -92,7 +62,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
         </h1>
 
         {/* <CreateWorkSpaceButton />  */}
-        <button onClick={handelUpdate}>test</button>
+        <button onClick={() => mutation.mutate()}>test</button>
       </div>
 
       {/* Display all file */}
