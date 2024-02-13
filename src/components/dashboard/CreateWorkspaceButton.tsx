@@ -5,20 +5,19 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button, buttonVariants } from "../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import {zodResolver} from "@hookform/resolvers/zod";
+import { CreateWorkspaceType, createWorkspaceSchema } from "@/lib/validators/workspaces";
+import { test } from "@/services/test";
 
 const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { register, handleSubmit, formState: { errors, isSubmitting }, resetField } = useForm({
-    defaultValues: {
-      name: "",
-    },
+  const { register, handleSubmit, formState: { errors, isSubmitting }, resetField } = useForm<CreateWorkspaceType>({
+    resolver: zodResolver(createWorkspaceSchema),
   });
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/test", {
-        method: "GET",
-      });
+      const res = await test();
       return res.json();
     },
   });
@@ -46,6 +45,7 @@ const CreateWorkSpaceButton = () => {
           <input
             type="text"
             className="w-full mt-2 rounded-sm"
+            placeholder="Enter Your Workspace Name"
             {...register("name", { required: "Name is required" })}
           />
           <div className="h-3">
