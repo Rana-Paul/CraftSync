@@ -3,15 +3,37 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button, buttonVariants } from "../ui/button";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 
 const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting }, resetField } = useForm({
+    defaultValues: {
+      name: "",
+    },
+  });
 
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const res = await fetch("/api/test", {
+        method: "GET",
+      });
+      return res.json();
+    },
+  });
+
+
+  const submit: SubmitHandler<any> = async (data) => {
+    await mutation.mutate();
+    console.log(data);
+  }
   return (
     <Dialog
       open={isOpen}
       onOpenChange={(x) => {
         if (!x) setIsOpen(x);
+        resetField("name");
       }}
     >
       <DialogTrigger onClick={() => setIsOpen(true)} asChild>
@@ -19,23 +41,31 @@ const CreateWorkSpaceButton = () => {
       </DialogTrigger>
 
       <DialogContent>
-        <div className="w-full mt-2">
+        <form className="w-full mt-2" onSubmit={handleSubmit(submit)}>
           <h2 className="text-xl font-semibold">Create Workspace</h2>
-          <input type="text" className="w-full mt-2 rounded-sm" />
-          <div className=" border-red-700">
+          <input
+            type="text"
+            className="w-full mt-2 rounded-sm"
+            {...register("name", { required: "Name is required" })}
+          />
+          <div className="h-3">
+
+          {errors.name?.message && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
+          </div>
           <Button
             className={buttonVariants({
               size: "sm",
               className: "mt-3",
               variant: "default",
             })}
-            onClick={() => setIsOpen(false)}
+            type="submit"
+            disabled={isSubmitting}
           >
-            Create
+            {isSubmitting ? "Creating..." : "Create"}
           </Button>
-          </div>
-          
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

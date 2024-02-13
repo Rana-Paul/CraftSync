@@ -11,7 +11,7 @@ export async function GET(request: Request) {
                 id: "clsho3kmq00139y9mbjn7boq0",
             },
             data: {
-                editors: {push: "new data"}
+                editors: {push: "hii data"}
             },
         })
         return NextResponse.json({ message: "Workspace Created!" });
