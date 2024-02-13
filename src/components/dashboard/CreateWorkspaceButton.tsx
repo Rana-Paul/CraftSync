@@ -7,7 +7,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { CreateWorkspaceType, createWorkspaceSchema } from "@/lib/validators/workspaces";
-import { test } from "@/services/test";
 
 const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -17,9 +16,14 @@ const CreateWorkSpaceButton = () => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await test();
+      const res = await fetch("/api/test", {
+        method: "GET",
+      });
+      console.log(res);
+      
       return res.json();
     },
+    
   });
 
 
