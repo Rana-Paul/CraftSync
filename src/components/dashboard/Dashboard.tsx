@@ -13,7 +13,6 @@ import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 interface DashboardProps {}
 
 const Dashboard: FC<DashboardProps> = ({}) => {
-
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     null | string
   >(null);
@@ -25,7 +24,6 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   // 1) create proper endpoint to create workspace
   // 2) configure dashboard to create workspace\
 
-
   const mutation = useMutation({
     mutationFn: async () => {
       const res = await fetch("/api/test", {
@@ -33,10 +31,8 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       });
       return res.json();
     },
-  })
+  });
 
-    
-  
   const projects = [
     {
       id: "1",
@@ -61,8 +57,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
           My Workspaces
         </h1>
 
-        {/* <CreateWorkSpaceButton />  */}
-        <button onClick={() => mutation.mutate()}>test</button>
+        <CreateWorkSpaceButton /> 
       </div>
 
       {/* Display all file */}
