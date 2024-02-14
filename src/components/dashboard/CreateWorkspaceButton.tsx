@@ -24,18 +24,29 @@ const CreateWorkSpaceButton = () => {
           "Content-Type": "application/json",
         }
       });
-      console.log(await res.json());
-      
+
       return res.json();
     },
+    
     onSuccess: async(data) => {
-      console.log("data", data);
-      
-    }
+      setIsSubmitting(false);
+      console.log("created");
+      console.log("dataaaaa: ", data.status);
+      if (data.status === 409) {
+        // logic for workspace already exists error (UI)
+      }
+      // OR logic for workspace created (UI)
+            
+    },
+    onError: (_, message) => {
+      // Internal server error
+      setIsSubmitting(false);
+      console.log("error", message);
+    },
     
   });
 
-  // create a perfect mutation to create a workspace
+  // setup ui for error and success 
 
 
   const submit: SubmitHandler<any> = async (data) => {

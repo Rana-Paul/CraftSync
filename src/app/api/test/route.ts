@@ -8,7 +8,6 @@ export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   const { title } = await request.json();
   const parseTitle = createWorkspaceSchema.parse(title);
-
   try {
     const workspace = await db.workspace.findFirst({
       where: {
@@ -18,13 +17,16 @@ export async function POST(request: Request) {
           },
           {
             title: parseTitle.name,
-          }
-        ]
-      }
+          },
+        ],
+      },
     });
 
     if (workspace) {
-      return new Response("Workspace already exists", { status: 409 });
+      return NextResponse.json({
+        message: "Workspace already exists",
+        status: 409,
+      });
     }
     await db.workspace.create({
       data: {
@@ -32,10 +34,10 @@ export async function POST(request: Request) {
         creatorId: session?.user?.id as string,
       },
     });
-    return NextResponse.json({ message: "Workspace Created!", status: 200 });
+
+    return NextResponse.json({ message: "Workspace created" });
   } catch (error) {
-    console.log("prisma: ", error);
-    return NextResponse.json({ message: error });
+    return new Error("Something went wrong");
   }
 }
 
