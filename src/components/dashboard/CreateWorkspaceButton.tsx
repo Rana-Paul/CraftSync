@@ -10,25 +10,37 @@ import { CreateWorkspaceType, createWorkspaceSchema } from "@/lib/validators/wor
 
 const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { register, handleSubmit, formState: { errors, isSubmitting }, resetField } = useForm<CreateWorkspaceType>({
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const { register, handleSubmit, formState: { errors }, resetField } = useForm<CreateWorkspaceType>({
     resolver: zodResolver(createWorkspaceSchema),
   });
 
   const mutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (data: CreateWorkspaceType) => {      
       const res = await fetch("/api/test", {
-        method: "GET",
+        method: "POST",
+        body: JSON.stringify({ title: data.name }),
+        headers: {
+          "Content-Type": "application/json",
+        }
       });
-      console.log(res);
+      console.log(await res.json());
       
       return res.json();
     },
+    onSuccess: async(data) => {
+      console.log("data", data);
+      
+    }
     
   });
 
+  // create a perfect mutation to create a workspace
+
 
   const submit: SubmitHandler<any> = async (data) => {
-    await mutation.mutate();
+    setIsSubmitting(true);
+    await mutation.mutate({name: data});
     console.log(data);
   }
   return (
