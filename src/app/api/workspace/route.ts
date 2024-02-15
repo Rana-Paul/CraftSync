@@ -4,6 +4,7 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import { createWorkspaceSchema } from "@/lib/validators/workspaces";
 
+// create workspace
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   const { title } = await request.json();
@@ -36,6 +37,23 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ message: "Workspace created" });
+  } catch (error) {
+    return new Error("Something went wrong");
+  }
+}
+// Get all workspaces by id
+export async function GET(request: Request) {
+  const session = await getServerSession(authOptions);
+  const { title } = await request.json();
+  const parseTitle = createWorkspaceSchema.parse(title);
+  try {
+    const workspace = await db.workspace.findMany({
+      where: {
+        creatorId: session?.user?.id as string,
+      },
+    });
+
+    return NextResponse.json({ workspace });
   } catch (error) {
     return new Error("Something went wrong");
   }
