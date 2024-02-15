@@ -74,27 +74,22 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       {/* Display all file */}
       {workspaces?.workspace && workspaces.workspace.length !== 0 ? (
         <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-3 lg:grid-cols-3 ">
-          {workspaces
-            .sort(
-              (a, b) =>
-                new Date(b.).getTime() -
-                new Date(a.createdAt).getTime()
-            )
-            .map((file) => (
+          {workspaces.workspace.sort((a: any, b: any) => b.createdAt - a.createdAt)
+          .map((data: any, index: number) => (
               <li
                 className=" col-span-1 divide-y divide-gray-200 border-t-2 border-gray-300/50 rounded-lg bg-white shadow transition hover:shadow-lg"
-                key={file.id}
+                key={index}
               >
                 <Link
                   className="flex flex-col gap-2"
-                  href={`/dashboard/${file.id}`}
+                  href={`/dashboard/${data.id}`}
                 >
                   <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6">
                     <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
                     <div className="flex-1 truncate">
                       <div className="flex items-center space-x-3">
                         <h3 className=" truncate text-lg font-medium text-zinc-900">
-                          {file.name}
+                          {data.title}
                         </h3>
                       </div>
                     </div>
@@ -104,7 +99,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
                 <div className="px-6 mt-4 grid grid-cols-2 place-items-center py-2 gap-6 text-xs text-zinc-500">
                   <div className="flex items-center gap-2">
                     <Plus className="h-4 w-4" />
-                    {format(new Date(file.createdAt), "MMM yyyy")}
+                    {format(new Date(data.createdAt), "MMM yyyy")}
                   </div>
 
                   <Button
@@ -113,7 +108,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
                     className="w-full"
                     variant="destructive"
                   >
-                    {currentlyDeletingFile === file.id ? (
+                    {currentlyDeletingFile === data.id ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
                       <Trash className="h-4 w-4" />
