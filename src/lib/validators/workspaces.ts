@@ -8,3 +8,11 @@ export const createWorkspaceSchema = z.object({
 });
 
 export type CreateWorkspaceType = z.infer<typeof createWorkspaceSchema>;
+
+export interface WorkspaceType {
+  id: string;
+  title: string;
+  creatorId: string;
+  createdAt: Date;
+  editors: string[];
+}

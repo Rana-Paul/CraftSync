@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
+import { WorkspaceType } from "@/lib/validators/workspaces";
 
 interface DashboardProps {}
 
@@ -74,7 +75,8 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       {/* Display all file */}
       {workspaces?.workspace && workspaces.workspace.length !== 0 ? (
         <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-3 lg:grid-cols-3 ">
-          {workspaces.workspace.sort((a: any, b: any) => b.createdAt - a.createdAt)
+          {workspaces.workspace.sort((a: WorkspaceType, b: WorkspaceType) => new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime())
           .map((data: any, index: number) => (
               <li
                 className=" col-span-1 divide-y divide-gray-200 border-t-2 border-gray-300/50 rounded-lg bg-white shadow transition hover:shadow-lg"
