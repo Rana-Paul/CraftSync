@@ -18,7 +18,7 @@ const CreateWorkSpaceButton = () => {
 
   const mutation = useMutation({
     mutationFn: async (data: CreateWorkspaceType) => {      
-      const res = await fetch("/api/test", {
+      const res = await fetch("/api/workspace", {
         method: "POST",
         body: JSON.stringify({ title: data.name }),
         headers: {
@@ -39,9 +39,10 @@ const CreateWorkSpaceButton = () => {
       }
       else{
 
+        // OR logic for workspace created (UI)
         toast.success("Workspace created successfully");
+        setIsOpen(false);
       }
-      // OR logic for workspace created (UI)
             
     },
     onError: (_, message) => {
