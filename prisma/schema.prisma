@@ -28,6 +28,7 @@ model Workspace {
   creator   User   @relation(fields: [creatorId], references: [id])
   creatorId String
   editors String[]
+  createdAt DateTime @default(now())
   @@index([creatorId])
 
   // SharedWorkspaceWith SharedWorkspaceWith[]

@@ -44,8 +44,6 @@ export async function POST(request: Request) {
 // Get all workspaces by id
 export async function GET(request: Request) {
   const session = await getServerSession(authOptions);
-  const { title } = await request.json();
-  const parseTitle = createWorkspaceSchema.parse(title);
   try {
     const workspace = await db.workspace.findMany({
       where: {

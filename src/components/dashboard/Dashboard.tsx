@@ -18,7 +18,6 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   >(null);
 
   const { data: session } = useSession();
-  const [isLoading, setIsLoading] = useState(false);
 
   // start from here (button to create workspace):
   // 1) create proper endpoint to create workspace
@@ -26,12 +25,24 @@ const Dashboard: FC<DashboardProps> = ({}) => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch("/api/test", {
+      const res = await fetch("/api/workspace", {
         method: "GET",
       });
       return res.json();
     },
   });
+  const {data: workspaces, isLoading, isError} = useQuery({
+    queryKey: ["workspaces"],
+    queryFn: async () => {
+      const res = await fetch("/api/workspace", {
+        method: "GET",
+      });
+      return res.json();
+    },
+  })
+  console.log(workspaces?.workspace);
+  
+  
 
   const projects = [
     {
@@ -61,12 +72,12 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       </div>
 
       {/* Display all file */}
-      {projects && projects.length !== 0 ? (
+      {workspaces?.workspace && workspaces.workspace.length !== 0 ? (
         <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-3 lg:grid-cols-3 ">
-          {projects
+          {workspaces
             .sort(
               (a, b) =>
-                new Date(b.createdAt).getTime() -
+                new Date(b.).getTime() -
                 new Date(a.createdAt).getTime()
             )
             .map((file) => (
