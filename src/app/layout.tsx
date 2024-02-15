@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "@/components/Providers/SessionProvider";
 import QueryclientProvider from "@/components/Providers/QueryClientProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
         >
           <QueryclientProvider>
             <Navbar />
-            <Toaster position="bottom-center" />
+            <Toaster position="top-center" />
             {children}
           </QueryclientProvider>
         </body>

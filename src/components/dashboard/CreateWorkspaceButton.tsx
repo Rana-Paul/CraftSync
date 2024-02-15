@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { CreateWorkspaceType, createWorkspaceSchema } from "@/lib/validators/workspaces";
+import toast from "react-hot-toast";
 
 const CreateWorkSpaceButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,6 +35,11 @@ const CreateWorkSpaceButton = () => {
       console.log("dataaaaa: ", data.status);
       if (data.status === 409) {
         // logic for workspace already exists error (UI)
+        toast.error("This Workspace already exists. Please try another name");
+      }
+      else{
+
+        toast.success("Workspace created successfully");
       }
       // OR logic for workspace created (UI)
             
@@ -42,6 +48,7 @@ const CreateWorkSpaceButton = () => {
       // Internal server error
       setIsSubmitting(false);
       console.log("error", message);
+      toast.error("There was an error creating your workspace, please try again later");
     },
     
   });
