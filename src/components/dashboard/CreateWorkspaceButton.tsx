@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button, buttonVariants } from "../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { CreateWorkspaceType, createWorkspaceSchema } from "@/lib/validators/workspaces";
 import toast from "react-hot-toast";
@@ -15,6 +15,8 @@ const CreateWorkSpaceButton = () => {
   const { register, handleSubmit, formState: { errors }, resetField } = useForm<CreateWorkspaceType>({
     resolver: zodResolver(createWorkspaceSchema),
   });
+
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (data: CreateWorkspaceType) => {      
@@ -40,6 +42,7 @@ const CreateWorkSpaceButton = () => {
       else{
 
         // OR logic for workspace created (UI)
+        queryClient.invalidateQueries({queryKey: ["workspaces"]});
         toast.success("Workspace created successfully");
         setIsOpen(false);
       }

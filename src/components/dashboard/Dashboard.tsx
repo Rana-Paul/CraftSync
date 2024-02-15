@@ -41,27 +41,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       return res.json();
     },
   })
-  console.log(workspaces?.workspace);
-  
-  
 
-  const projects = [
-    {
-      id: "1",
-      name: "My Workspace 1",
-      createdAt: Date.now(),
-    },
-    {
-      id: "2",
-      name: "My Workspace 2",
-      createdAt: Date.now(),
-    },
-    {
-      id: "3",
-      name: "My Workspace 3",
-      createdAt: Date.now(),
-    },
-  ];
   return (
     <main className="mx-auto max-w-7xl md:p-10">
       <div className="mt-8 flex flex-col ml-4 items-start justify-between gap-4 border-b border-gray-200 pb-5 md:flex-row sm:items-center sm:gap-0">
