@@ -6,7 +6,12 @@ import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 import { WorkspaceType } from "@/lib/validators/workspaces";
@@ -22,11 +27,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  // start from here (button to create workspace):
-  // 1) create proper endpoint to create workspace
-  // 2) configure dashboard to create workspace\
-
-  const {mutate: deleteWorkspace} = useMutation({
+  const { mutate: deleteWorkspace } = useMutation({
     mutationFn: async (id: string) => {
       const res = await fetch("/api/workspace", {
         method: "DELETE",
@@ -38,24 +39,27 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       setCurrentlyDeletingFile(id);
     },
     onError: () => {
-      toast.error("There was an error whilec deleting your workspace, please try again later");
-      
+      toast.error(
+        "There was an error whilec deleting your workspace, please try again later"
+      );
     },
     onSuccess: async (data) => {
       console.log(data.status);
       if (data.status == 403) {
         setCurrentlyDeletingFile(null);
         toast.error(data.message);
-      }
-      else{
-        queryClient.invalidateQueries({queryKey: ["workspaces"]});
+      } else {
+        queryClient.invalidateQueries({ queryKey: ["workspaces"] });
         setCurrentlyDeletingFile(null);
         toast.success(data.message);
       }
-      
-    }
+    },
   });
-  const {data: workspaces, isLoading, isError} = useQuery({
+  const {
+    data: workspaces,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["workspaces"],
     queryFn: async () => {
       const res = await fetch("/api/workspace", {
@@ -63,7 +67,9 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       });
       return res.json();
     },
-  })
+  });
+
+  // todo: fix skeleton
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
@@ -72,15 +78,19 @@ const Dashboard: FC<DashboardProps> = ({}) => {
           My Workspaces
         </h1>
 
-        <CreateWorkSpaceButton /> 
+        <CreateWorkSpaceButton />
       </div>
 
       {/* Display all file */}
       {workspaces?.workspace && workspaces.workspace.length !== 0 ? (
         <ul className=" mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-3 lg:grid-cols-3 ">
-          {workspaces.workspace.sort((a: WorkspaceType, b: WorkspaceType) => new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime())
-          .map((data: any, index: number) => (
+          {workspaces.workspace
+            .sort(
+              (a: WorkspaceType, b: WorkspaceType) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .map((data: any, index: number) => (
               <li
                 className=" col-span-1 divide-y divide-gray-200 border-t-2 border-gray-300/50 rounded-lg bg-white shadow transition hover:shadow-lg"
                 key={index}
@@ -108,7 +118,9 @@ const Dashboard: FC<DashboardProps> = ({}) => {
                   </div>
 
                   <Button
-                    onClick={() => {deleteWorkspace(data.id)}}
+                    onClick={() => {
+                      deleteWorkspace(data.id);
+                    }}
                     size="sm"
                     className="w-full"
                     variant="destructive"
