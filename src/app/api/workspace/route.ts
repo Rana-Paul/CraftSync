@@ -56,5 +56,34 @@ export async function GET(request: Request) {
     return new Error("Something went wrong");
   }
 }
+export async function DELETE(request: Request) {
+  const session = await getServerSession(authOptions);
+  const { id } = await request.json();
+  console.log("deleted id: ", id);
+  try {
+    const isCreator = await db.workspace.findFirst({
+      where: {
+        AND: [
+          {
+            id: id
+          },
+          {
+            creatorId: session?.user.id
+          }
+        ]
+       },
+
+    });
+
+    if (isCreator) {
+      return NextResponse.json({
+        message: "You have no access to delete this workspace",
+        status: 403,
+      });
+    }
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+}
 
 // create a perfect route to create workspace

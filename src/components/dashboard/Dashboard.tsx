@@ -10,6 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 import { WorkspaceType } from "@/lib/validators/workspaces";
+import toast from "react-hot-toast";
 
 interface DashboardProps {}
 
@@ -24,13 +25,33 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   // 1) create proper endpoint to create workspace
   // 2) configure dashboard to create workspace\
 
-  const mutation = useMutation({
-    mutationFn: async () => {
+  const {mutate: deleteWorkspace} = useMutation({
+    mutationFn: async (id: string) => {
       const res = await fetch("/api/workspace", {
-        method: "GET",
+        method: "DELETE",
+        body: JSON.stringify({ id }),
       });
       return res.json();
     },
+    onMutate: async (id: string) => {
+      setCurrentlyDeletingFile(id);
+    },
+    onError: () => {
+      toast.error("There was an error whilec deleting your workspace, please try again later");
+      
+    },
+    onSuccess: async (data) => {
+      console.log(data.status);
+      if (data.status == 403) {
+        setCurrentlyDeletingFile(null);
+        toast.error(data.message);
+      }
+      else{
+        setCurrentlyDeletingFile(null);
+        toast.success("Workspace Deleted Successfully");
+      }
+      
+    }
   });
   const {data: workspaces, isLoading, isError} = useQuery({
     queryKey: ["workspaces"],
@@ -85,7 +106,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
                   </div>
 
                   <Button
-                    onClick={() => {}}
+                    onClick={() => {deleteWorkspace(data.id)}}
                     size="sm"
                     className="w-full"
                     variant="destructive"

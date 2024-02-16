@@ -52,7 +52,7 @@ const CreateWorkSpaceButton = () => {
       // Internal server error
       setIsSubmitting(false);
       console.log("error", message);
-      toast.error("There was an error creating your workspace, please try again later");
+      toast.error("There was an error while creating your workspace, please try again later");
     },
     
   });
