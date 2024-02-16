@@ -33,8 +33,6 @@ const CreateWorkSpaceButton = () => {
     
     onSuccess: async(data) => {
       setIsSubmitting(false);
-      console.log("created");
-      console.log("dataaaaa: ", data.status);
       if (data.status === 409) {
         // logic for workspace already exists error (UI)
         toast.error("This Workspace already exists. Please try another name");

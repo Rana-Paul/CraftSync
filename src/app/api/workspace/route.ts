@@ -65,22 +65,28 @@ export async function DELETE(request: Request) {
       where: {
         AND: [
           {
-            id: id
+            id: id,
           },
           {
-            creatorId: session?.user.id
-          }
-        ]
-       },
-
+            creatorId: session?.user.id,
+          },
+        ],
+      },
     });
 
-    if (isCreator) {
+    if (!isCreator) {
       return NextResponse.json({
         message: "You have no access to delete this workspace",
         status: 403,
       });
     }
+
+    await db.workspace.delete({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json({ message: "Workspace deleted successfully" });
   } catch (error) {
     throw new Error("Something went wrong");
   }

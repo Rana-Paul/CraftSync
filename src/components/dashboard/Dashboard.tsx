@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 import { WorkspaceType } from "@/lib/validators/workspaces";
@@ -20,6 +20,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
   >(null);
 
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
   // start from here (button to create workspace):
   // 1) create proper endpoint to create workspace
@@ -47,8 +48,9 @@ const Dashboard: FC<DashboardProps> = ({}) => {
         toast.error(data.message);
       }
       else{
+        queryClient.invalidateQueries({queryKey: ["workspaces"]});
         setCurrentlyDeletingFile(null);
-        toast.success("Workspace Deleted Successfully");
+        toast.success(data.message);
       }
       
     }
