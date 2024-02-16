@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ message: "Workspace created" });
+    return NextResponse.json({ message: "Workspace created successfully" });
   } catch (error) {
     return new Error("Something went wrong");
   }

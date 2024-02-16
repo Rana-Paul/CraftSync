@@ -35,13 +35,13 @@ const CreateWorkSpaceButton = () => {
       setIsSubmitting(false);
       if (data.status === 409) {
         // logic for workspace already exists error (UI)
-        toast.error("This Workspace already exists. Please try another name");
+        toast.error(data.message);
       }
       else{
 
         // OR logic for workspace created (UI)
         queryClient.invalidateQueries({queryKey: ["workspaces"]});
-        toast.success("Workspace created successfully");
+        toast.success(data.message);
         setIsOpen(false);
       }
             
