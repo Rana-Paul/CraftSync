@@ -29,12 +29,19 @@ export async function POST(request: Request) {
         status: 409,
       });
     }
-    await db.workspace.create({
+    const data = await db.workspace.create({
       data: {
         title: parseTitle.name,
         creatorId: session?.user?.id as string,
       },
     });
+  console.log("work data: ",data);
+    
+    // await db.video.create({
+    //   data: {
+    //     workspaceId: 
+    //   },
+    // })
 
     return NextResponse.json({ message: "Workspace created successfully" });
   } catch (error) {
