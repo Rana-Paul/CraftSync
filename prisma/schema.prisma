@@ -38,7 +38,7 @@ model Video {
   id          String    @id @default(cuid())
   title       String    @default("Untitled")
   url         String    @default("")
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
   createdAt   DateTime  @default(now())
 

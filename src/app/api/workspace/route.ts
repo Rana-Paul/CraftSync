@@ -87,6 +87,7 @@ export async function DELETE(request: Request) {
         status: 403,
       });
     }
+    
 
     await db.workspace.delete({
       where: {
