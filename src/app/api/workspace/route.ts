@@ -37,11 +37,11 @@ export async function POST(request: Request) {
     });
   console.log("work data: ",data);
     
-    // await db.video.create({
-    //   data: {
-    //     workspaceId: 
-    //   },
-    // })
+    await db.video.create({
+      data: {
+        workspaceId: data.id
+      },
+    })
 
     return NextResponse.json({ message: "Workspace created successfully" });
   } catch (error) {
