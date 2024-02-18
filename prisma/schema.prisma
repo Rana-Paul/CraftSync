@@ -23,15 +23,26 @@ model User {
 }
 
 model Workspace {
-  id        String @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
-  creator   User   @relation(fields: [creatorId], references: [id])
+  creator   User     @relation(fields: [creatorId], references: [id])
   creatorId String
-  editors String[]
+  editors   String[]
   createdAt DateTime @default(now())
-  @@index([creatorId])
 
   // SharedWorkspaceWith SharedWorkspaceWith[]
+  Video Video[]
+
+  @@index([creatorId])
+}
+
+model Video {
+  id          String    @id @default(cuid())
+  title       String  @default("Untitled")
+  url         String  @default("")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String
+  createdAt   DateTime  @default(now())
 }
 
 // model SharedWorkspaceWith {

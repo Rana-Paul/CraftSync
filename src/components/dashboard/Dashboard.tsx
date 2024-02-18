@@ -6,13 +6,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { Button } from "../ui/button";
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import CreateWorkSpaceButton from "./CreateWorkspaceButton";
 import { WorkspaceType } from "@/lib/validators/workspaces";
 import toast from "react-hot-toast";
@@ -24,7 +18,6 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     null | string
   >(null);
 
-  const { data: session } = useSession();
   const queryClient = useQueryClient();
 
   const { mutate: deleteWorkspace } = useMutation({
