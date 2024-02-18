@@ -29,20 +29,20 @@ model Workspace {
   creatorId String
   editors   String[]
   createdAt DateTime @default(now())
-
-  // SharedWorkspaceWith SharedWorkspaceWith[]
-  Video Video[]
+  Video     Video?
 
   @@index([creatorId])
 }
 
 model Video {
   id          String    @id @default(cuid())
-  title       String  @default("Untitled")
-  url         String  @default("")
+  title       String    @default("Untitled")
+  url         String    @default("")
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
   workspaceId String
   createdAt   DateTime  @default(now())
+
+  @@unique([workspaceId])
 }
 
 // model SharedWorkspaceWith {
