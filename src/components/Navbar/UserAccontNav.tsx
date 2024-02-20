@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import Link from "next/link";
-import { Gem } from "lucide-react";
 
 interface UserAccountNavProps {
   email: string | undefined;
@@ -17,7 +17,7 @@ interface UserAccountNavProps {
   imageUrl: string;
 }
 
-const UserAccountNav = async ({
+const UserAccountNav =  ({
   email,
   imageUrl,
   name,

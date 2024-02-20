@@ -13,9 +13,6 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
 
   const pathname = usePathname();
 
-  const { data: session } = useSession();
-  console.log("client:" + session);
-
   useEffect(() => {
     if (isOpen) toggleOpen();
   }, [pathname]);
