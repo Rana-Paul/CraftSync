@@ -20,11 +20,15 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
   const editors = [
     {
       img: "https://picsum.photos/200",
+      name: "Ranapaul",
+      email: "ranapaul741223@gmail.com",
     },
-    
     {
-      img: "https://picsum.photos/200/200",
+      img: "https://picsum.photos/200/300",
+      name: "Jani Sen",
+      email: "janisen840@gmail.com",
     },
+       
     
 
 
@@ -45,8 +49,8 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
               <div className="relative aspect-square h-full w-full">
               <EditorAccountNav
               imageUrl={editor.img}
-              name="Ranapaul"
-                email="ranapaul741223@gmail.com"
+              name={editor.name}
+                email={editor.email}
               />
             </div>
             ))}
