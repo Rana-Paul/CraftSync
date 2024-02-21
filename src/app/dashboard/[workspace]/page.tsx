@@ -1,4 +1,4 @@
-import VideoPageNavbar from '@/components/Navbar/VideoPageNavbar'
+import VideoPageNavbar from '@/components/Workspace/VideoPageNavbar'
 import { FC } from 'react'
 
 interface pageProps {
