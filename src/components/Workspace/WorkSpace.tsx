@@ -1,6 +1,6 @@
 "use client";
 import MaxWidthWrapper from "../MaxWidthWrapper";
-import { Loader2,  } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import UserAccountNav from "../Navbar/UserAccontNav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import InviteEditorButton from "./InviteEditorButton";
 import Image from "next/image";
 import EditorAccountNav from "./EditorAccountNav";
 
-const VideoPageNavbar = ({ id }: { id: string }) => {
+const WorkSpace = ({ id }: { id: string }) => {
   const pathname = usePathname();
   console.log(pathname);
 
@@ -17,6 +17,11 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
   if (status === "loading") {
     return <Loader2 className="h-4 w-4 animate-spin" />;
   }
+
+  // TODO: 
+  // get editors api
+  // get all editor and display properly
+  
   const editors = [
     {
       img: "https://picsum.photos/200",
@@ -28,11 +33,7 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
       name: "Jani Sen",
       email: "janisen840@gmail.com",
     },
-       
-    
-
-
-  ]
+  ];
 
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -47,12 +48,12 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
           <div className="hidden items-center space-x-4 sm:flex">
             {editors?.map((editor, index) => (
               <div className="relative aspect-square h-full w-full">
-              <EditorAccountNav
-              imageUrl={editor.img}
-              name={editor.name}
-                email={editor.email}
-              />
-            </div>
+                <EditorAccountNav
+                  imageUrl={editor.img}
+                  name={editor.name}
+                  email={editor.email}
+                />
+              </div>
             ))}
             <InviteEditorButton />
             <UserAccountNav
@@ -69,4 +70,4 @@ const VideoPageNavbar = ({ id }: { id: string }) => {
   );
 };
 
-export default VideoPageNavbar;
+export default WorkSpace;

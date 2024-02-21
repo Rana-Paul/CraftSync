@@ -19,6 +19,10 @@ interface EditorAccountNav {
 }
 
 const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
+
+    // TODO: 
+    // delete editor api
+    // delete editor from workspace
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">

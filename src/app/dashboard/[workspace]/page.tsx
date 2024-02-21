@@ -1,4 +1,4 @@
-import VideoPageNavbar from '@/components/Workspace/VideoPageNavbar'
+import WorkSpace from '@/components/Workspace/Workspace'
 import { FC } from 'react'
 
 interface pageProps {
@@ -11,8 +11,7 @@ const page: FC<pageProps> = ({params}: pageProps) => {
   const { workspace } = params
   return (
     <div>
-    <VideoPageNavbar id='test'/>
-    <div>page: {workspace}</div>
+    <WorkSpace id={workspace}/>
     </div>
   )
 }
