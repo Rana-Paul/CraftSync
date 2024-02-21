@@ -6,24 +6,18 @@ import MobileNav from "./MobileNav";
 import UserAccountNav from "./UserAccontNav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 const Navbar = () => {
-  const pathname = usePathname();
-  console.log(pathname);
 
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <Loader2 className="h-4 w-4 animate-spin" />;
-  }
-  if (pathname.includes("/dashboard/")) {
-    console.log("inside");
   }
 
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-          <Link href="/" className="flex text-xl z-40 font-semibold">
+          <Link href="/" className="flex text-2xl z-40 font-semibold">
             Craft<span className="text-blue-600">Sync</span>
           </Link>
 
@@ -62,31 +56,27 @@ const Navbar = () => {
               </>
             ) : (
               <div>
-                {pathname.includes("/dashboard/") ? (
-                  <div>test</div>
-                ) : (
-                  <div>
-                    <Link
-                      href="/dashboard"
-                      className={buttonVariants({
-                        variant: "ghost",
-                        size: "sm",
-                      })}
-                    >
-                      Dashboard
-                    </Link>
+                <div>
+                  <Link
+                    href="/dashboard"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      size: "sm",
+                    })}
+                  >
+                    Dashboard
+                  </Link>
 
-                    <UserAccountNav
-                      name={
-                        !session?.user.name
-                          ? "Your Account"
-                          : `${session?.user.name}`
-                      }
-                      email={session?.user.email ?? ""}
-                      imageUrl={session?.user.image ?? ""}
-                    />
-                  </div>
-                )}
+                  <UserAccountNav
+                    name={
+                      !session?.user.name
+                        ? "Your Account"
+                        : `${session?.user.name}`
+                    }
+                    email={session?.user.email ?? ""}
+                    imageUrl={session?.user.image ?? ""}
+                  />
+                </div>
               </div>
             )}
           </div>

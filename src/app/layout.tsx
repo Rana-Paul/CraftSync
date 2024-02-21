@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "@/components/Providers/SessionProvider";
 import QueryclientProvider from "@/components/Providers/QueryClientProvider";
 import 'react-loading-skeleton/dist/skeleton.css'
-import Navbar from "@/components/Navbar/Navbar";
+import NavBarController from "@/components/Navbar/NavBarController";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
           )}
         >
           <QueryclientProvider>
-            <Navbar />
+            <NavBarController />
             <Toaster position="top-center" />
             {children}
           </QueryclientProvider>
