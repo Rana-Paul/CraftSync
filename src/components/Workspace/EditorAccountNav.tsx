@@ -6,10 +6,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface EditorAccountNav {
   email: string | undefined;
@@ -17,11 +18,7 @@ interface EditorAccountNav {
   imageUrl: string;
 }
 
-const EditorAccountNav =  ({
-  email,
-  imageUrl,
-  name,
-}: EditorAccountNav) => {
+const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
@@ -60,7 +57,12 @@ const EditorAccountNav =  ({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="/dashboard">{email}</Link>
+          <Button
+            onClick={() => {}}
+            className={cn(buttonVariants({ variant: "destructive", size: "sm" }), "w-full")}
+          >
+            Remove Editor
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
