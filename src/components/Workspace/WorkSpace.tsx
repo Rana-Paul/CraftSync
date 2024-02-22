@@ -11,37 +11,27 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 const WorkSpace = ({ id }: { id: string }) => {
-  const { data, isLoading } = useQuery({
+  const { data: editors, isLoading } = useQuery({
     queryKey: ["editors"],
     queryFn: async () => {
       const res = await fetch("/api/editors?id=" + id, {
         method: "GET",
-        // body: JSON.stringify({id})
       });
+      return res.json();
     },
   });
+
   const { data: session, status } = useSession();
+  
   if (status === "loading" || isLoading) {
     return <Loader2 className="h-4 w-4 animate-spin" />;
-  }
+  }  
   
 
   // TODO:
   // get editors api
   // get all editor and display properly
 
-  const editors = [
-    {
-      img: "https://picsum.photos/200",
-      name: "Ranapaul",
-      email: "ranapaul741223@gmail.com",
-    },
-    {
-      img: "https://picsum.photos/200/300",
-      name: "Jani Sen",
-      email: "janisen840@gmail.com",
-    },
-  ];
 
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -54,12 +44,12 @@ const WorkSpace = ({ id }: { id: string }) => {
           {/*   Video page navbar for mobile */}
 
           <div className="hidden items-center space-x-4 sm:flex">
-            {editors?.map((editor, index) => (
+            {editors?.map((editor: any, index: any) => (
               <div className="relative aspect-square h-full w-full">
                 <EditorAccountNav
-                  imageUrl={editor.img}
-                  name={editor.name}
-                  email={editor.email}
+                  imageUrl={editor.editor.avatar}
+                  name={editor.editor.name}
+                  email={editor.editor.email}
                 />
               </div>
             ))}
