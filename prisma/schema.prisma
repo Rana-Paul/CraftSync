@@ -20,6 +20,7 @@ model User {
   workspaces Workspace[]
   // sharewith Workspace[] @relation("SharedWorkspace")
   // sharedWith SharedWorkspaceWith[] @relation("SharedWorkspace")
+  Editor     Editor[]
 }
 
 model Workspace {
@@ -27,11 +28,19 @@ model Workspace {
   title     String
   creator   User     @relation(fields: [creatorId], references: [id])
   creatorId String
-  editors   String[]
   createdAt DateTime @default(now())
   Video     Video?
+  Editor    Editor[]
 
   @@index([creatorId])
+}
+
+model Editor {
+  id          String    @id @default(cuid())
+  editor      User      @relation(fields: [editorId], references: [id])
+  editorId    String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String
 }
 
 model Video {

@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import InviteEditorButton from "./InviteEditorButton";
-import Image from "next/image";
 import EditorAccountNav from "./EditorAccountNav";
+import { useQuery } from "@tanstack/react-query";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const pathname = usePathname();
@@ -21,6 +21,12 @@ const WorkSpace = ({ id }: { id: string }) => {
   // TODO: 
   // get editors api
   // get all editor and display properly
+  const {} = useQuery({
+    queryKey: ["editors"],
+    queryFn: () => {
+      return fetch("/api/editors").then((res) => res.json());
+    },
+  })
   
   const editors = [
     {
