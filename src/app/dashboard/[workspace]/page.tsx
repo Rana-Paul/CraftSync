@@ -1,4 +1,4 @@
-import WorkSpace from '@/components/Workspace/Workspace'
+import WorkSpace from '@/components/Workspace/WorkSpace'
 import { FC } from 'react'
 
 interface pageProps {
