@@ -21,10 +21,13 @@ const WorkSpace = ({ id }: { id: string }) => {
   // TODO: 
   // get editors api
   // get all editor and display properly
-  const {} = useQuery({
+  const {data} = useQuery({
     queryKey: ["editors"],
-    queryFn: () => {
-      return fetch("/api/editors").then((res) => res.json());
+    queryFn: async() => {
+      const res = await fetch("/api/editors?id=hiiiiiiiii", {
+        method: "GET",
+        // body: JSON.stringify({id})
+      });
     },
   })
   
