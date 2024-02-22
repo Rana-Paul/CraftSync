@@ -22,17 +22,15 @@ const WorkSpace = ({ id }: { id: string }) => {
     },
   });
 
+  // TODO:
+  // add error handling
+  // add empety editor logic
+
   const { data: session, status } = useSession();
-  
+
   if (status === "loading" || isLoading) {
     return <Loader2 className="h-4 w-4 animate-spin" />;
-  }  
-  
-
-  // TODO:
-  // get editors api
-  // get all editor and display properly
-
+  }
 
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
