@@ -9,6 +9,7 @@ import InviteEditorButton from "./InviteEditorButton";
 import EditorAccountNav from "./EditorAccountNav";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { GetEditorResType } from "@/lib/validators/editor";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const { data: editors, isLoading } = useQuery({
@@ -44,8 +45,8 @@ const WorkSpace = ({ id }: { id: string }) => {
           {/*   Video page navbar for mobile */}
 
           <div className="hidden items-center space-x-4 sm:flex">
-            {editors?.map((editor: any, index: any) => (
-              <div className="relative aspect-square h-full w-full">
+            {editors?.map((editor: GetEditorResType, index: string) => (
+              <div className="relative aspect-square h-full w-full" key={index}>
                 <EditorAccountNav
                   imageUrl={editor.editor.avatar}
                   name={editor.editor.name}
