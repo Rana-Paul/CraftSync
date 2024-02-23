@@ -5,6 +5,9 @@ import { Share2 } from "lucide-react";
 interface InviteEditorButtonProps {}
 
 const InviteEditorButton: FC<InviteEditorButtonProps> = ({}) => {
+
+  // TODO: 
+  // invite editor UI
   return (
     <Button
       onClick={() => {

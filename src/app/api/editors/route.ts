@@ -22,6 +22,9 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// TODO: 
+  // Invite Editor endpoint
+
 // Delete editor api (Try)
 // export async function DELETE(request: NextRequest) {
 //   const session = await getServerSession(authOptions);

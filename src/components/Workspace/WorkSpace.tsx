@@ -27,10 +27,6 @@ const WorkSpace = ({ id }: { id: string }) => {
     toast.error("something went wrong, Please Reload the window");
   }
 
-
-  // TODO:
-  // add empety editor logic
-
   const { data: session, status } = useSession();
 
   if (status === "loading" || isLoading) {
