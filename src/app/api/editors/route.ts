@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
+  // throw new Error();
   try {
     const editors = await db.editor.findMany({
       where: {

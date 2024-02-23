@@ -10,9 +10,10 @@ import EditorAccountNav from "./EditorAccountNav";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { GetEditorResType } from "@/lib/validators/editor";
+import toast from "react-hot-toast";
 
 const WorkSpace = ({ id }: { id: string }) => {
-  const { data: editors, isLoading } = useQuery({
+  const { data: editors, isLoading, isError } = useQuery({
     queryKey: ["editors"],
     queryFn: async () => {
       const res = await fetch("/api/editors?id=" + id, {
@@ -21,6 +22,10 @@ const WorkSpace = ({ id }: { id: string }) => {
       return res.json();
     },
   });
+  
+  if(isError){
+    toast.error("something went wrong, Please Reload the window");
+  }
 
   // TODO:
   // add error handling
