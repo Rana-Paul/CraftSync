@@ -21,3 +21,21 @@ export async function GET(request: NextRequest) {
     throw new Error("Something went wrong");
   }
 }
+
+// Delete editor api (Try)
+// export async function DELETE(request: NextRequest) {
+//   const session = await getServerSession(authOptions);
+//   // const { id } = await request.json();
+//   try {
+//     const editor = await db.editor.deleteMany({
+//       where: {
+//         workspaceId: "clsxbvkmg000110oo0de3gt2d" as string,
+//         editorId: "106790389685886129132"
+//       },
+//     });
+//     return NextResponse.json(editor);
+//   }
+//   catch (error) {
+//     throw new Error("Something went wrong");
+//   }
+// }

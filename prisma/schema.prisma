@@ -41,6 +41,8 @@ model Editor {
   editorId    String
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
   workspaceId String
+
+  @@index([workspaceId, editorId])
 }
 
 model Video {
