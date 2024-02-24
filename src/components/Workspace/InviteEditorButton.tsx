@@ -1,26 +1,84 @@
-import { FC } from "react";
+"use client";
+
+import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button, buttonVariants } from "../ui/button";
-import { Share2 } from "lucide-react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  inviteEditorSchema,
+  InviteEditorType
+} from "@/lib/validators/editor";
+import toast from "react-hot-toast";
 
-interface InviteEditorButtonProps {}
+const InviteEditorButton = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    resetField,
+  } = useForm<InviteEditorType>({
+    resolver: zodResolver(inviteEditorSchema),
+  });
 
-const InviteEditorButton: FC<InviteEditorButtonProps> = ({}) => {
+  // const queryClient = useQueryClient();
 
-  // TODO: 
-  // invite editor UI
+
+  // setup ui for error and success
+
+  const submit: SubmitHandler<any> = async (data) => {
+    setIsSubmitting(true);
+    console.log(data);
+    setIsSubmitting(false);
+    
+    //
+    // mutation logic here
+  };
   return (
-    <Button
-      onClick={() => {
-        console.log("hui");
+    <Dialog
+      open={isOpen}
+      onOpenChange={(x) => {
+        if (!x) setIsOpen(x);
+        resetField("email");
       }}
-      className={buttonVariants({
-        size: "sm",
-      })}
     >
-      <Share2 className="mr-2 h-5 w-5" />
-      Invite Editor
-    </Button>
+      <DialogTrigger onClick={() => setIsOpen(true)} asChild>
+        <Button>Invite Editor</Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <form className="w-full mt-2" onSubmit={handleSubmit(submit)}>
+          <h2 className="text-xl font-semibold">Invite Editor</h2>
+          <input
+            type="text"
+            className="w-full mt-2 rounded-sm"
+            placeholder="Enter editor email name"
+            {...register("email", { required: "Name is required" })}
+          />
+          <div className="h-3">
+            {errors.email?.message && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
+          <Button
+            className={buttonVariants({
+              size: "sm",
+              className: "mt-3",
+              variant: "default",
+            })}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Inviting..." : "Invite"}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
+
 
 export default InviteEditorButton;

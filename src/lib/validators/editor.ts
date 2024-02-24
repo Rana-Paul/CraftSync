@@ -8,3 +8,9 @@ export interface GetEditorResType {
     avatar: string;
   };
 }
+
+export const inviteEditorSchema = z.object({
+  email: z.string().email(),
+});
+
+export type InviteEditorType = z.infer<typeof inviteEditorSchema>;
