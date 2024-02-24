@@ -6,10 +6,7 @@ import { Button, buttonVariants } from "../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  inviteEditorSchema,
-  InviteEditorType
-} from "@/lib/validators/editor";
+import { inviteEditorSchema, InviteEditorType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 
 const InviteEditorButton = () => {
@@ -27,13 +24,11 @@ const InviteEditorButton = () => {
   // const queryClient = useQueryClient();
 
 
-  // setup ui for error and success
-
   const submit: SubmitHandler<any> = async (data) => {
     setIsSubmitting(true);
     console.log(data);
     setIsSubmitting(false);
-    
+
     //
     // mutation logic here
   };
@@ -79,6 +74,5 @@ const InviteEditorButton = () => {
     </Dialog>
   );
 };
-
 
 export default InviteEditorButton;

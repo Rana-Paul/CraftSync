@@ -56,12 +56,4 @@ model Video {
   @@unique([workspaceId])
 }
 
-// model SharedWorkspaceWith {
-//   id          String    @id @default(cuid())
-//   workspace   Workspace @relation(fields: [workspaceId], references: [id])
-//   workspaceId String
-//   sharedWith  User[]      @relation(name: "SharedWorkspace",fields: [sharedWithEditorsId], references: [id])
-//   sharedWithEditorsId String[]
-
-//   // @@unique([workspaceId, sharedWithEditorsId])
-// }
+// add invite schema

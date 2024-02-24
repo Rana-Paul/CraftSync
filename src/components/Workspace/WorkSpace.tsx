@@ -4,11 +4,9 @@ import { Loader2 } from "lucide-react";
 import UserAccountNav from "../Navbar/UserAccontNav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import InviteEditorButton from "./InviteEditorButton";
 import EditorAccountNav from "./EditorAccountNav";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 

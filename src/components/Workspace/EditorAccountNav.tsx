@@ -20,9 +20,10 @@ interface EditorAccountNav {
 
 const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
 
-    // TODO: 
-    // delete editor api
-    // delete editor from workspace
+  
+  // TODO:
+  // delete editor api
+  // delete editor from workspace
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
@@ -63,7 +64,10 @@ const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
         <DropdownMenuItem asChild>
           <Button
             onClick={() => {}}
-            className={cn(buttonVariants({ variant: "destructive", size: "sm" }), "w-full")}
+            className={cn(
+              buttonVariants({ variant: "destructive", size: "sm" }),
+              "w-full"
+            )}
           >
             Remove Editor
           </Button>
