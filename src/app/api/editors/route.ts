@@ -56,6 +56,8 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // send email logic should be here
+
     return NextResponse.json({
       message: "Invitation sent successfully",
       status: 200

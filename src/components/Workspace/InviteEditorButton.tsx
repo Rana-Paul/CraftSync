@@ -21,16 +21,16 @@ const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
     resolver: zodResolver(inviteEditorSchema),
   });
 
-  // const queryClient = useQueryClient();
-
+  // TODO
+  // Mutation logic should be here
 
   const submit: SubmitHandler<any> = async (data) => {
     setIsSubmitting(true);
     console.log(data);
     setIsSubmitting(false);
 
-    //
-    // mutation logic here
+    // TODO
+    //call  mutation  here
   };
   return (
     <Dialog
