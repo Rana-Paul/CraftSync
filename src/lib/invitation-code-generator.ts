@@ -1,12 +1,12 @@
-import referralCodes from 'referral-codes';
+import invitationCodeGenerator from 'referral-codes';
 
 
 
-export const getReferralCode = () => {
-    const referralCode = referralCodes.generate({
+export const getInvitationCode = () => {
+    const invitationCode = invitationCodeGenerator.generate({
         length: 8,
         count: 1,
     });
-    return referralCode[0];
+    return invitationCode[0];
 }
 

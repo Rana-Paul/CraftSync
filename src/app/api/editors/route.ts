@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
-import { getReferralCode } from "@/lib/invitation-code-generator";
+import { getInvitationCode } from "@/lib/invitation-code-generator";
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
@@ -46,11 +46,25 @@ export async function POST(request: NextRequest) {
       });
     };
 
-    const invitation_code = getReferralCode();
+    const invitation_code = getInvitationCode();
+
+    await db.invitation.create({
+      data: {
+        invitation_code: invitation_code,
+        workspaceId: workspaceId,
+        editorEmail: email
+      }
+    })
+
+    return NextResponse.json({
+      message: "Invitation sent successfully",
+      status: 200
+    })
+  
 
 
   } catch (error) {
-    
+    throw new Error("Something went wrong");
   }
 }
 
