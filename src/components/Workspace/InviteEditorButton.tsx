@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { inviteEditorSchema, InviteEditorType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 
-const InviteEditorButton = () => {
+const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const {

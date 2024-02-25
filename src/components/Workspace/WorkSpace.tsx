@@ -51,7 +51,7 @@ const WorkSpace = ({ id }: { id: string }) => {
                 />
               </div>
             ))}
-            <InviteEditorButton />
+            <InviteEditorButton workspaceId={id}/>
             <UserAccountNav
               name={
                 !session?.user.name ? "Your Account" : `${session?.user.name}`
