@@ -25,6 +25,32 @@ export async function GET(request: NextRequest) {
 // TODO: 
   // Invite Editor endpoint
 
+export async function POST(request: NextRequest) {
+  const session =  await getServerSession(authOptions);
+  const {email, workspaceId} = await request.json();
+  try {
+    const isCreator = await db.workspace.findFirst({
+      where: {
+        AND: [
+          {id: workspaceId},
+          {creatorId: session?.user.id}
+        ]
+      }
+    });
+
+    if (!isCreator) {
+      return NextResponse.json({
+        message: "You are not authorized to invite editor",
+        status: 401,
+      });
+    };
+
+    
+  } catch (error) {
+    
+  }
+}
+
 // Delete editor api (Try)
 // export async function DELETE(request: NextRequest) {
 //   const session = await getServerSession(authOptions);
