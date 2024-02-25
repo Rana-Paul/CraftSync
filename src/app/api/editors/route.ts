@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
+import { getReferralCode } from "@/lib/invitation-code-generator";
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
@@ -45,7 +46,9 @@ export async function POST(request: NextRequest) {
       });
     };
 
-    
+    const invitation_code = getReferralCode();
+
+
   } catch (error) {
     
   }
