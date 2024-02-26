@@ -2,8 +2,7 @@ import { db } from "@/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
-import { getInvitationCode } from "@/lib/invitation-code-generator";
-
+import {nanoid} from "nanoid"
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   // throw new Error();
@@ -49,7 +48,8 @@ export async function POST(request: NextRequest) {
       });
     };
 
-    const invitation_code = await getInvitationCode();
+    const invitation_code = await nanoid(8);
+    
 
     await db.invitation.create({
       data: {

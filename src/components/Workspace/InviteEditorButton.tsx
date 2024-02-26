@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { inviteEditorSchema, InviteEditorType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 
-const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
+const InviteEditorButton = ({ workspaceId }: { workspaceId: string }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const {
@@ -23,12 +23,11 @@ const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
 
   const queryClient = useQueryClient();
 
-  // TODO
-  // Mutation logic should be here
+  // Mutation logic 
   const mutation = useMutation({
-    mutationFn: async ({email}: {email: string}) => {
+    mutationFn: async ({ email }: { email: string }) => {
       console.log("email", email);
-      
+
       const res = await fetch("/api/editors", {
         method: "POST",
         body: JSON.stringify({ email: email, workspaceId: workspaceId }),
@@ -39,19 +38,18 @@ const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
 
       return res.json();
     },
-
+    // Success logic
     onSuccess: async (data) => {
       setIsSubmitting(false);
       if (data.status === 401) {
-        // logic for workspace already exists error (UI)
         toast.error(data.message);
       } else {
-        // OR logic for workspace created (UI)
         queryClient.invalidateQueries({ queryKey: ["editors"] });
         toast.success(data.message);
         setIsOpen(false);
       }
     },
+    // Error logic
     onError: (_, message) => {
       // Internal server error
       setIsSubmitting(false);
@@ -65,12 +63,10 @@ const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
   const submit: SubmitHandler<any> = async (data: InviteEditorType) => {
     setIsSubmitting(true);
     console.log(data);
-    await mutation.mutate({email: data.email})
+    await mutation.mutate({ email: data.email });
     setIsSubmitting(false);
-
-    // TODO
-    //call  mutation  here
   };
+  
   return (
     <Dialog
       open={isOpen}
