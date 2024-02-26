@@ -21,12 +21,51 @@ const InviteEditorButton = ({workspaceId}: {workspaceId: string}) => {
     resolver: zodResolver(inviteEditorSchema),
   });
 
+  const queryClient = useQueryClient();
+
   // TODO
   // Mutation logic should be here
+  const mutation = useMutation({
+    mutationFn: async ({email}: {email: string}) => {
+      console.log("email", email);
+      
+      const res = await fetch("/api/editors", {
+        method: "POST",
+        body: JSON.stringify({ email: email, workspaceId: workspaceId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  const submit: SubmitHandler<any> = async (data) => {
+      return res.json();
+    },
+
+    onSuccess: async (data) => {
+      setIsSubmitting(false);
+      if (data.status === 401) {
+        // logic for workspace already exists error (UI)
+        toast.error(data.message);
+      } else {
+        // OR logic for workspace created (UI)
+        queryClient.invalidateQueries({ queryKey: ["editors"] });
+        toast.success(data.message);
+        setIsOpen(false);
+      }
+    },
+    onError: (_, message) => {
+      // Internal server error
+      setIsSubmitting(false);
+      console.log("error", message);
+      toast.error(
+        "There was an error while iniviting your editor, please try again later"
+      );
+    },
+  });
+
+  const submit: SubmitHandler<any> = async (data: InviteEditorType) => {
     setIsSubmitting(true);
     console.log(data);
+    await mutation.mutate({email: data.email})
     setIsSubmitting(false);
 
     // TODO

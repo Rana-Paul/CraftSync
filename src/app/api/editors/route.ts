@@ -39,6 +39,9 @@ export async function POST(request: NextRequest) {
       }
     });
 
+    console.log("isCreator: ",isCreator);
+    
+
     if (!isCreator) {
       return NextResponse.json({
         message: "You are not authorized to invite editor",
@@ -46,7 +49,7 @@ export async function POST(request: NextRequest) {
       });
     };
 
-    const invitation_code = getInvitationCode();
+    const invitation_code = await getInvitationCode();
 
     await db.invitation.create({
       data: {
