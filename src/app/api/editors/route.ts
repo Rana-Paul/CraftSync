@@ -67,8 +67,10 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // send email logic should be here
     console.log("hereeee");
+
+    // <button onClick={() => signIn('google', {callbackUrl: '/'})}>Here Button</button>
+
     
     
 

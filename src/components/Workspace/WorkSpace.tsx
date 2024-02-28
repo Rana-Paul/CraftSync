@@ -9,7 +9,6 @@ import EditorAccountNav from "./EditorAccountNav";
 import { useQuery } from "@tanstack/react-query";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
-import {signIn} from "next-auth/react"
 
 
 const WorkSpace = ({ id }: { id: string }) => {
@@ -40,7 +39,6 @@ const WorkSpace = ({ id }: { id: string }) => {
           <Link href="/" className="flex text-2xl z-40 font-semibold">
             Craft<span className="text-blue-600">Sync</span>
           </Link>
-          <button onClick={() => signIn('google', {callbackUrl: '/'})}>Here Button</button>
 
 
           {/*   Video page navbar for mobile */}
