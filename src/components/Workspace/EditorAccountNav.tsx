@@ -9,7 +9,6 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 interface EditorAccountNav {
@@ -29,6 +28,7 @@ const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
       <DropdownMenuTrigger asChild className="overflow-visible">
         <Button className="rounded-full h-8 w-8 aspect-square bg-slate-400">
           <Avatar className="relative w-8 h-8">
+            
             {imageUrl ? (
               <div className="relative aspect-square h-full w-full">
                 <Image

@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
 import {nanoid} from "nanoid"
+import {invitationEmail} from "@/lib/send-emails"
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   // throw new Error();
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const session =  await getServerSession(authOptions);
-  const {email, workspaceId} = await request.json();
+  const {email, workspaceId}: {email: string, workspaceId: string} = await request.json();
   try {
     const isCreator = await db.workspace.findFirst({
       where: {
@@ -49,6 +50,13 @@ export async function POST(request: NextRequest) {
     };
 
     const invitation_code = await nanoid(8);
+
+    const data = await invitationEmail({email, invitation_code, workspace: isCreator.title});
+    console.log("errrr");
+
+    if (!data) {
+      throw new Error("Something went wrong");
+    }
     
 
     await db.invitation.create({
@@ -60,6 +68,9 @@ export async function POST(request: NextRequest) {
     })
 
     // send email logic should be here
+    console.log("hereeee");
+    
+    
 
     return NextResponse.json({
       message: "Invitation sent successfully",
@@ -73,6 +84,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
+
+function emailSender(arg0: { email: string; invitation_code: string; }) {
+  throw new Error("Function not implemented.");
+}
 // Delete editor api (Try)
 // export async function DELETE(request: NextRequest) {
 //   const session = await getServerSession(authOptions);
