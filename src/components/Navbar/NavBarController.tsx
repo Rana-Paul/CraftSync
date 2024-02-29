@@ -13,8 +13,14 @@ const NavBarController: FC<NavBarControllerProps> = ({}) => {
     if (pathname.includes("/dashboard/")) {
         return null 
     }
+    if (pathname.includes("/accept-invitation")) {
+        return null
+    }
+    else {
+      <Navbar />
+    }
 
-  return (<Navbar />)
+
 }
 
 export default NavBarController

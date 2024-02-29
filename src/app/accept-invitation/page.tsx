@@ -9,6 +9,7 @@ interface pageProps {
 const page: FC<pageProps> = ({ searchParams }: pageProps) => {
     const code = searchParams.code
   const id = searchParams.id
+  const name = searchParams.name
     console.log("code: ", code, "id: ", id);
     
   return <div>page</div>
