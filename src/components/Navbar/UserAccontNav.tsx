@@ -22,7 +22,7 @@ const UserAccountNav = ({ email, imageUrl, name }: UserAccountNavProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
         <Button className="rounded-full h-8 w-8 aspect-square bg-slate-400">
-          <Avatar className="relative w-8 h-8">
+          <Avatar className="relative w-9 h-9">
             {imageUrl ? (
               <div className="relative aspect-square h-full w-full">
                 <Image
@@ -31,15 +31,16 @@ const UserAccountNav = ({ email, imageUrl, name }: UserAccountNavProps) => {
                   alt="profile picture"
                   referrerPolicy="no-referrer"
                 />
-                
               </div>
             ) : (
               <AvatarFallback>
-                <span className="sr-only">{name}cfdsg</span>
+                <span className="sr-only">{name}</span>
               </AvatarFallback>
             )}
+            
           </Avatar>
         </Button>
+
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-white" align="end">

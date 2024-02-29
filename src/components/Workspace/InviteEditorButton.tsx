@@ -76,7 +76,7 @@ const InviteEditorButton = ({ workspaceId }: { workspaceId: string }) => {
       }}
     >
       <DialogTrigger onClick={() => setIsOpen(true)} asChild>
-        <Button>Invite Editor</Button>
+        <Button className={buttonVariants({ variant: "default", size: "sm" })}>Invite Editor</Button>
       </DialogTrigger>
 
       <DialogContent>
