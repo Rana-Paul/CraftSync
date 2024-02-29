@@ -1,8 +1,9 @@
+import { AcceptInvitation } from '@/components/accept-invitation/AcceptInvitation'
 import { FC } from 'react'
 
 interface pageProps {
     searchParams: {
-        [key: string]: string | string[] | undefined
+        [key: string]: string | undefined
       }
 }
 
@@ -12,7 +13,12 @@ const page: FC<pageProps> = ({ searchParams }: pageProps) => {
   const name = searchParams.name
     console.log("code: ", code, "id: ", id);
     
-  return <div>page</div>
+  return (
+    <div>
+      <AcceptInvitation workspaceName={name as string} workspaceId={id as string} code={code as string}/>
+
+    </div>
+  )
 }
 
 export default page

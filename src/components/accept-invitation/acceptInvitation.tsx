@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from 'next-auth/react';
 import { FC } from 'react'
 
 interface acceptInvitationProps {
@@ -7,8 +8,16 @@ interface acceptInvitationProps {
   code: string
 }
 
-const acceptInvitation: FC<acceptInvitationProps> = ({workspaceName, workspaceId, code}: acceptInvitationProps) => {
-  return <div>accept-invitation</div>
+export const AcceptInvitation: FC<acceptInvitationProps> = ({workspaceName, workspaceId, code}: acceptInvitationProps) => {
+  console.log("hiiii");
+  
+  console.log("code: ", code, "workspaceId: ", workspaceId, "workspaceName: ", workspaceName);
+  
+  
+  return (
+    <div>
+      <button onClick={() => signIn('google', {callbackUrl: `${process.env.NEXT_PUBLIC_URL}/accept-invitation?code=${code}&id=${workspaceId}&name=${workspaceName}`})}>Here Button</button>
+    </div>
+  )
 }
 
-export default acceptInvitation
