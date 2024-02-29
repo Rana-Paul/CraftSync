@@ -17,11 +17,7 @@ interface UserAccountNavProps {
   imageUrl: string;
 }
 
-const UserAccountNav =  ({
-  email,
-  imageUrl,
-  name,
-}: UserAccountNavProps) => {
+const UserAccountNav = ({ email, imageUrl, name }: UserAccountNavProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
@@ -35,10 +31,11 @@ const UserAccountNav =  ({
                   alt="profile picture"
                   referrerPolicy="no-referrer"
                 />
+                
               </div>
             ) : (
               <AvatarFallback>
-                <span className="sr-only">{name}</span>
+                <span className="sr-only">{name}cfdsg</span>
               </AvatarFallback>
             )}
           </Avatar>

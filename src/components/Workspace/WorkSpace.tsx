@@ -10,9 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 
-
 const WorkSpace = ({ id }: { id: string }) => {
-  const { data: editors, isLoading, isError } = useQuery({
+  const {
+    data: editors,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["editors"],
     queryFn: async () => {
       const res = await fetch("/api/editors?id=" + id, {
@@ -21,8 +24,8 @@ const WorkSpace = ({ id }: { id: string }) => {
       return res.json();
     },
   });
-  
-  if(isError){
+
+  if (isError) {
     toast.error("something went wrong, Please Reload the window");
   }
 
@@ -33,38 +36,46 @@ const WorkSpace = ({ id }: { id: string }) => {
   }
 
   return (
-    <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
-      <MaxWidthWrapper>
-        <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-          <Link href="/" className="flex text-2xl z-40 font-semibold">
-            Craft<span className="text-blue-600">Sync</span>
-          </Link>
+    <>
+      <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
 
+        {/* can separate workspace navbar */}
+        <MaxWidthWrapper>
+          <div className="flex h-14 items-center justify-between border-b border-zinc-200">
+            <Link href="/" className="flex text-2xl z-40 font-semibold">
+              Craft<span className="text-blue-600">Sync</span>
+            </Link>
 
-          {/*   Video page navbar for mobile */}
+            {/*   Video page navbar for mobile */}
 
-          <div className="hidden items-center space-x-4 sm:flex">
-            {editors?.map((editor: GetEditorResType, index: string) => (
-              <div className="relative aspect-square h-full w-full" key={index}>
-                <EditorAccountNav
-                  imageUrl={editor.editor.avatar}
-                  name={editor.editor.name}
-                  email={editor.editor.email}
-                />
-              </div>
-            ))}
-            <InviteEditorButton workspaceId={id}/>
-            <UserAccountNav
-              name={
-                !session?.user.name ? "Your Account" : `${session?.user.name}`
-              }
-              email={session?.user.email ?? ""}
-              imageUrl={session?.user.image ?? ""}
-            />
+            <div className="hidden items-center space-x-4 sm:flex">
+              {editors?.map((editor: GetEditorResType, index: string) => (
+                <div
+                  className="relative aspect-square h-full w-full"
+                  key={index}
+                >
+                  <EditorAccountNav
+                    imageUrl={editor.editor.avatar}
+                    name={editor.editor.name}
+                    email={editor.editor.email}
+                  />
+                </div>
+              ))}
+              <InviteEditorButton workspaceId={id} />
+              <UserAccountNav
+                name={
+                  !session?.user.name ? "Your Account" : `${session?.user.name}`
+                }
+                email={session?.user.email ?? ""}
+                imageUrl={session?.user.image ?? ""}
+              />
+            </div>
           </div>
-        </div>
-      </MaxWidthWrapper>
-    </nav>
+        </MaxWidthWrapper>
+      </nav>
+
+      <div>adjfivjadhuifv</div>
+    </>
   );
 };
 

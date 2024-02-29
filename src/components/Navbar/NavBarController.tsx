@@ -17,7 +17,7 @@ const NavBarController: FC<NavBarControllerProps> = ({}) => {
         return null
     }
     else {
-      <Navbar />
+      return(<Navbar />)
     }
 
 

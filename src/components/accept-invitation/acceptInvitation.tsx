@@ -9,9 +9,12 @@ interface acceptInvitationProps {
 }
 
 export const AcceptInvitation: FC<acceptInvitationProps> = ({workspaceName, workspaceId, code}: acceptInvitationProps) => {
-  console.log("hiiii");
   
-  console.log("code: ", code, "workspaceId: ", workspaceId, "workspaceName: ", workspaceName);
+  // console.log("code: ", code, "workspaceId: ", workspaceId, "workspaceName: ", workspaceName);
+
+  // TODO: 
+    // design invitation page
+    // complete invitation api
   
   
   return (
