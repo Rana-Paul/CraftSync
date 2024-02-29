@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     const invitation_code = await nanoid(8);
 
-    const data = await invitationEmail({email, invitation_code, workspace: isCreator.title});
+    const data = await invitationEmail({email, invitation_code, workspaceName: isCreator.title, workspaceId});
     console.log("errrr");
 
     if (!data) {
