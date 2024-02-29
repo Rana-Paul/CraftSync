@@ -14,7 +14,7 @@ export async function invitationEmail ({email, invitation_code, workspaceName, w
         html: PrimaryActionEmailHtml({
           actionLabel: "Accept invitation",
           buttonText: "Join Workspace",
-          href: `${process.env.NEXT_PUBLIC_URL}/accept-invitation?code=${invitation_code}&workspace=${workspaceId}`
+          href: `${process.env.NEXT_PUBLIC_URL}/accept-invitation?code=${invitation_code}&id=${workspaceId}`
         }),
     });
     console.log(data.data);
