@@ -18,8 +18,6 @@ interface EditorAccountNav {
 }
 
 const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
-
-  
   // TODO:
   // delete editor api
   // delete editor from workspace
@@ -28,7 +26,6 @@ const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
       <DropdownMenuTrigger asChild className="overflow-visible">
         <Button className="rounded-full h-8 w-8 aspect-square bg-slate-400">
           <Avatar className="relative w-8 h-8">
-            
             {imageUrl ? (
               <div className="relative aspect-square h-full w-full">
                 <Image

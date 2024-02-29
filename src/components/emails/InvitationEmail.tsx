@@ -14,6 +14,8 @@ import {
 
 import * as React from "react";
 
+// add craftSync logo/image
+
 interface EmailTemplateProps {
   actionLabel: string;
   buttonText: string;
