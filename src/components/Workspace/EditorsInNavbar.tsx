@@ -17,7 +17,7 @@ interface EditorAccountNav {
   imageUrl: string;
 }
 
-const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
+const EditorsInNavbar = ({ email, imageUrl, name }: EditorAccountNav) => {
   // TODO:
   // delete editor api
   // delete editor from workspace
@@ -74,4 +74,4 @@ const EditorAccountNav = ({ email, imageUrl, name }: EditorAccountNav) => {
   );
 };
 
-export default EditorAccountNav;
+export default EditorsInNavbar;

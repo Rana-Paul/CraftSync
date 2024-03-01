@@ -46,6 +46,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // check if editor already exists in the workspace
+
+
     const invitation_code = await nanoid(8);
 
     const data = await invitationEmail({

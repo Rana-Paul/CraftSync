@@ -5,7 +5,7 @@ import UserAccountNav from "../Navbar/UserAccontNav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import InviteEditorButton from "./InviteEditorButton";
-import EditorAccountNav from "./EditorAccountNav";
+import EditorAccountNav from "./EditorsInNavbar";
 import { useQuery } from "@tanstack/react-query";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
@@ -41,9 +41,8 @@ const WorkSpace = ({ id }: { id: string }) => {
 
   return (
     <>
+      {/* can separate workspace navbar */}
       <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
-
-        {/* can separate workspace navbar */}
         <MaxWidthWrapper>
           <div className="flex h-14 items-center justify-between border-b border-zinc-200">
             <Link href="/" className="flex text-2xl z-40 font-semibold">
@@ -65,7 +64,7 @@ const WorkSpace = ({ id }: { id: string }) => {
                   />
                 </div>
               ))}
-              <span className="h-10 w-px bg-gray-200"/>
+              <span className="h-10 w-px bg-gray-200" />
               <InviteEditorButton workspaceId={id} />
               <UserAccountNav
                 name={
