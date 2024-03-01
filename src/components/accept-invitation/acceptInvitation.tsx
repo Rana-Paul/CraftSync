@@ -5,9 +5,10 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
 
 interface acceptInvitationProps {
-  workspaceName: string;
+  workspaceName?: string;
   workspaceId: string;
   code: string;
 }
@@ -22,12 +23,26 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
   // TODO:
   // design invitation page
   // complete invitation api
+  const mutation = useMutation({
+    mutationFn: async (data: acceptInvitationProps) => {
+      const res = await fetch("/api/invitation", {
+        method: "POST",
+        body: JSON.stringify({ code: data.code, workspaceId: data.workspaceId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return res.json();
+    }
+  })
   const { data: session, status } = useSession();
   if (status === "loading") {
     // make loader beautiful
     return <Loader2 className="h-4 w-4 animate-spin" />;
   }
   console.log(session?.user);
+
   
 
   return (
@@ -55,10 +70,7 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
             size: "lg",
             className: "mt-5",
           })}
-          onClick={() =>
-            console.log("hiiii")
-            
-          }
+          onClick={() => mutation.mutate({ code: code, workspaceId: workspaceId })}
           
           >
           Join Workspace
