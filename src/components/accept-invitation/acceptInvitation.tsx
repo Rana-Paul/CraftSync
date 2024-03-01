@@ -27,6 +27,8 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
     // make loader beautiful
     return <Loader2 className="h-4 w-4 animate-spin" />;
   }
+  console.log(session?.user);
+  
 
   return (
     
@@ -41,7 +43,10 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
         </p>
         <p className="mt-4 font-bold text-zinc-700">You are Invited to join <span className="text-blue-600">{workspaceName}</span> workspace</p>
 
-        <button
+        {!session?.user ? (
+          <button className={buttonVariants({ size: "lg", className: "mt-5" })}>Login to Join</button>
+        ) : (
+          <button
           className={buttonVariants({
             size: "lg",
             className: "mt-5",
@@ -52,9 +57,10 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
             })
           }
           
-        >
+          >
           Join Workspace
         </button>
+        )}
       </MaxWidthWrapper>
       
     </div>
