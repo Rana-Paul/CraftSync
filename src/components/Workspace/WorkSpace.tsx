@@ -9,8 +9,10 @@ import EditorAccountNav from "./EditorAccountNav";
 import { useQuery } from "@tanstack/react-query";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const WorkSpace = ({ id }: { id: string }) => {
+  const [isCreator, setIsCreator] = useState(false);
   const {
     data: editors,
     isLoading,
@@ -21,6 +23,8 @@ const WorkSpace = ({ id }: { id: string }) => {
       const res = await fetch("/api/editors?id=" + id, {
         method: "GET",
       });
+
+      // second api call to get workspace creator and set into the state
       return res.json();
     },
   });
@@ -48,7 +52,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
             {/*   Video page navbar for mobile */}
 
-            <div className="hidden items-center space-x-4 sm:flex">
+            <div className="hidden items-center space-x-3 sm:flex">
               {editors?.map((editor: GetEditorResType, index: string) => (
                 <div
                   className="relative aspect-square h-full w-full"
@@ -61,6 +65,7 @@ const WorkSpace = ({ id }: { id: string }) => {
                   />
                 </div>
               ))}
+              <span className="h-10 w-px bg-gray-200"/>
               <InviteEditorButton workspaceId={id} />
               <UserAccountNav
                 name={
