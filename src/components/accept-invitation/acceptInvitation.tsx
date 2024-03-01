@@ -44,7 +44,11 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
         <p className="mt-4 font-bold text-zinc-700">You are Invited to join <span className="text-blue-600">{workspaceName}</span> workspace</p>
 
         {!session?.user ? (
-          <button className={buttonVariants({ size: "lg", className: "mt-5" })}>Login to Join</button>
+          <button className={buttonVariants({ size: "lg", className: "mt-5" })} onClick={() =>
+            signIn("google", {
+              callbackUrl: `${process.env.NEXT_PUBLIC_URL}/accept-invitation?code=${code}&id=${workspaceId}&name=${workspaceName}`,
+            })
+          }>Login to Join</button>
         ) : (
           <button
           className={buttonVariants({
@@ -52,9 +56,8 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
             className: "mt-5",
           })}
           onClick={() =>
-            signIn("google", {
-              callbackUrl: `${process.env.NEXT_PUBLIC_URL}/accept-invitation?code=${code}&id=${workspaceId}&name=${workspaceName}`,
-            })
+            console.log("hiiii")
+            
           }
           
           >
