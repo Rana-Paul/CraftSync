@@ -6,6 +6,8 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   const { workspaceId, code } = await request.json();
+  console.log("myyycode: ", code, "workspaceId: ", workspaceId);
+  
   try {
     const invitation = await db.invitation.findFirst({
       where: {
