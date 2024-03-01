@@ -30,6 +30,7 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
           "Content-Type": "application/json",
         },
       });
+      // test
 
       return res.json();
     },
