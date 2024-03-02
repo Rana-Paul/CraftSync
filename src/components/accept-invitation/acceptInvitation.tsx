@@ -1,11 +1,12 @@
 "use client";
 import { signIn, useSession } from "next-auth/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 interface acceptInvitationProps {
   workspaceName?: string;
@@ -18,6 +19,7 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
   workspaceId,
   code,
 }: acceptInvitationProps) => {
+  const [isJoining, setIsJoining] = useState<boolean>(false);
   const mutation = useMutation({
     mutationFn: async (data: acceptInvitationProps) => {
       const res = await fetch("/api/invitation", {
@@ -33,6 +35,19 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
       // test
 
       return res.json();
+    },
+
+    onSuccess: async(data) => {
+      setIsJoining(false);
+      if (data.status === 409) {
+        // logic for workspace already exists error (UI)
+        toast.error(data.message);
+      } else {
+        // OR logic for workspace created (UI)
+        setIsJoining(false);
+        toast.success(data.message);
+        window.location.href = "/dashboard";
+      }
     },
   });
 
@@ -80,7 +95,10 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
               className: "mt-5",
             })}
             onClick={() =>
+              {
+              setIsJoining(true);
               mutation.mutate({ code: code, workspaceId: workspaceId })
+              }
             }
           >
             Join Workspace
