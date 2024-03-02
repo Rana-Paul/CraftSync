@@ -62,7 +62,9 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     },
   });
 
-  // todo: fix skeleton
+  //TODO: 
+  // fetch all workspaces where the user is a editor
+
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">

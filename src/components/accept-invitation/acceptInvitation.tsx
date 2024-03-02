@@ -46,16 +46,11 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
         toast.error(data.message);
       }
        else {
-        // OR logic for workspace created (UI)
         toast.success(data.message);
         window.location.href = "/dashboard";
       }
     },
   });
-
-  // TODO:
-  // handle error in mutation
-  // redirect to dashboard
 
   const { data: session, status } = useSession();
   if (status === "loading") {
