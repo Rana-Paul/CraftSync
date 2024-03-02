@@ -39,12 +39,14 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
 
     onSuccess: async(data) => {
       setIsJoining(false);
-      if (data.status === 409) {
-        // logic for workspace already exists error (UI)
+      if (data.status === 404) {
         toast.error(data.message);
-      } else {
+      }
+      if (data.status === 401) {
+        toast.error(data.message);
+      }
+       else {
         // OR logic for workspace created (UI)
-        setIsJoining(false);
         toast.success(data.message);
         window.location.href = "/dashboard";
       }
