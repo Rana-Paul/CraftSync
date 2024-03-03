@@ -61,15 +61,10 @@ const Dashboard: FC<DashboardProps> = ({}) => {
         method: "GET",
       });
       const data = await res.json();
-      console.log("my: ", data.workspace);
 
       return data;
     },
   });
-  console.log("hereeeee:", workspaces);
-
-  //TODO:
-  // fetch all workspaces where the user is a editor
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
