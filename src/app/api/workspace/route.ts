@@ -52,13 +52,13 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const session = await getServerSession(authOptions);
   try {
-    const workspace = await db.workspace.findMany({
+    const workspaceAsCreator = await db.workspace.findMany({
       where: {
         creatorId: session?.user?.id as string,
       },
     });
 
-    return NextResponse.json({ workspace });
+    return NextResponse.json({ workspaceAsCreator });
   } catch (error) {
     return new Error("Something went wrong");
   }
