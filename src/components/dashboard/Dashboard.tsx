@@ -1,6 +1,6 @@
 "use client";
 
-import { GhostIcon, Loader2, Plus, Trash } from "lucide-react";
+import { Divide, GhostIcon, Loader2, Plus, Trash } from "lucide-react";
 import { FC, useCallback, useState } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -48,6 +48,8 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       }
     },
   });
+
+  // fetch all workspaces
   const {
     data: workspaces,
     isLoading,
@@ -58,13 +60,17 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       const res = await fetch("/api/workspace", {
         method: "GET",
       });
-      return res.json();
+      const data = await res.json();
+      console.log("my: ", data.workspace);
+
+      return data;
     },
   });
+  console.log("hereeeee:",workspaces);
+  
 
-  //TODO: 
+  //TODO:
   // fetch all workspaces where the user is a editor
-
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
