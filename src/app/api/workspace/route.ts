@@ -54,9 +54,21 @@ export async function GET(request: Request) {
   try {
     const workspace = await db.workspace.findMany({
       where: {
-        creatorId: session?.user?.id as string,
-      },
+        OR: [
+          {
+            creatorId: session?.user?.id as string,
+          },
+          {
+            Editor: {
+              some: {
+                editorId: session?.user?.id as string,
+              },
+            },
+          },
+        ]
+      }
     });
+    
 
     return NextResponse.json({ workspace });
   } catch (error) {

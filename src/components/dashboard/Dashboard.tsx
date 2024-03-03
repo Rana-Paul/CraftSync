@@ -66,8 +66,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
       return data;
     },
   });
-  console.log("hereeeee:",workspaces);
-  
+  console.log("hereeeee:", workspaces);
 
   //TODO:
   // fetch all workspaces where the user is a editor
