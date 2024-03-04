@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { GetEditorResType } from '@/lib/validators/editor'
 import { useSession } from 'next-auth/react'
 import { Loader2 } from 'lucide-react'
+import EditorsInNavbar from './EditorsInNavbar'
 
 interface NavbarProps {
     editors: GetEditorResType[] | undefined
@@ -37,7 +38,7 @@ const Navbar: FC<NavbarProps> = ({editors, id}) => {
                   className="relative aspect-square h-full w-full"
                   key={index}
                 >
-                  <UserAccountNav
+                  <EditorsInNavbar
                     imageUrl={editor.editor.avatar}
                     name={editor.editor.name}
                     email={editor.editor.email}
