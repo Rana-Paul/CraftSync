@@ -77,6 +77,7 @@ const WorkSpace = ({ id }: { id: string }) => {
           </div>
         </MaxWidthWrapper>
       </nav>
+      
 
       {/* TODO: Create video page design and try to add sidebar for notes
        */}
