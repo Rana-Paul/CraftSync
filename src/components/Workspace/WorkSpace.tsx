@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import Navbar from "./Navbar";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);
@@ -42,6 +43,7 @@ const WorkSpace = ({ id }: { id: string }) => {
   return (
     <>
       {/* can separate workspace navbar */}
+      <Navbar editors={editors} id={id}/>
 
       
 
