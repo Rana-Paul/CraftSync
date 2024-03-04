@@ -42,15 +42,13 @@ const WorkSpace = ({ id }: { id: string }) => {
 
   return (
     <>
-      {/* can separate workspace navbar */}
       <Navbar editors={editors} id={id}/>
 
-      
+    {/* TODO: SideBar for Comment section */}
 
-      {/* TODO: Create video page design and try to add sidebar for notes
-       */}
+      <div>
 
-      <div>adjfivjadhuifv</div>
+      </div>
     </>
   );
 };
