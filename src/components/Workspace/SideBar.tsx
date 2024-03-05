@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Disclosure } from "@headlessui/react";
 import { Menu } from "lucide-react";
 
 interface SideBarProps {}
@@ -11,13 +10,14 @@ const SideBar: FC<SideBarProps> = ({}) => {
     
   return (
     <div>
-      <nav>
+      <div>
         <div className="absolute top-2 z-50 right-4 inline-flex items-center peer justify-center rounded-md p-2 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group">
           <Menu
             className="block md:hidden h-6 w-6"
             aria-hidden="true"
           />
         </div>
+
         <div className="p-6 w-[75%] h-screen border-r border-gray-300 bg-white fixed top-12 -left-96 lg:left-0 lg:w-[25%]  peer-focus:left-0 peer:transition ease-out delay-150 duration-200" onClick={handleClickInsideSidebar}>
           <div className="flex flex-col justify-start item-center">
             <h1 className="text-xl text-start cursor-pointer font-bold text-gray-600 border-b border-gray-100 pb-4 w-full">
@@ -55,7 +55,7 @@ const SideBar: FC<SideBarProps> = ({}) => {
             </div>
           </div>
         </div>
-      </nav>
+      </div>
     </div>
   );
 };
