@@ -11,6 +11,7 @@ import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Navbar from "./Navbar";
+import SideBar from "./SideBar";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);
@@ -45,7 +46,7 @@ const WorkSpace = ({ id }: { id: string }) => {
       <Navbar editors={editors} id={id}/>
 
     {/* TODO: SideBar for Comment section */}
-
+      <SideBar />
       <div>
 
       </div>
