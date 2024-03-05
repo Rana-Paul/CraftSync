@@ -42,7 +42,7 @@ const WorkSpace = ({ id }: { id: string }) => {
   }
 
   return (
-    <>
+    <div className="w-full">
       <Navbar editors={editors} id={id}/>
 
     {/* TODO: SideBar for Comment section */}
@@ -50,7 +50,7 @@ const WorkSpace = ({ id }: { id: string }) => {
       <div>
 
       </div>
-    </>
+    </div>
   );
 };
 
