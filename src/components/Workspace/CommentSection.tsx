@@ -52,6 +52,8 @@ const CommentSection: FC<CommentSection> = ({}) => {
     },
   ];
 
+  //TODO: fetch comment and post comment
+
   return (
     <div className="h-screen">
       <div className="h-[80%] flex flex-col justify-between text-xl m-4 shadow-sm shadow-gray-500 rounded-md border-gray-100 p-4">
@@ -61,11 +63,14 @@ const CommentSection: FC<CommentSection> = ({}) => {
             Add Comments for Editors{" "}
           </p>
 
+          {/* Divider */}
+          <hr className="my-2" />
+
           {/* Comment Div*/}
-          <div className="mt-3 h-[95%] overflow-scroll no-scrollbar">
+          <div className=" h-[95%] overflow-scroll no-scrollbar">
             {/* impliment the map */}
             {comments.map((data: any, index: number) => (
-              <div className="w-full text-sm mt-3 mb-2 shadow-sm shadow-gray-400 p-2 rounded-md">
+              <div className="w-full text-sm mt-2 mb-3 shadow-sm shadow-gray-400 p-2 rounded-lg">
                 <span className="text-blue-500">{data.name}:</span>{" "}
                 <span className="text-black">{data.Comment}</span>
               </div>

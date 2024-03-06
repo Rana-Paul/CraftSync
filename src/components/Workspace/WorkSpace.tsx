@@ -45,13 +45,19 @@ const WorkSpace = ({ id }: { id: string }) => {
     <div className="w-full">
       <Navbar editors={editors} id={id} />
 
-      {/* TODO: SideBar for Comment section */}
+      
 
-      <div className="w-full flex">
-        <div className="border-r w-[35%] border-gray-700">
+      <div className=" sm:flex-row sm:flex flex-col">
+
+        {/* TODO: Design Video section */}
+        <div className="bg-gray-900 w-full mt-4 sm:ml-5 ml-0">
+          <div className="h-full">lorem33</div>
+        </div>
+
+        {/* SideBar for Comment section */}
+        <div className="border-r w-full sm:w-[35%]">
           <CommentSection />
         </div>
-        <div className="bg-gray-900 w-full mr-6">test</div>
       </div>
     </div>
   );
