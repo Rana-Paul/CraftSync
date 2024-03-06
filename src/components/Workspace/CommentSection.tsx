@@ -12,40 +12,45 @@ const CommentSection: FC<CommentSection> = ({}) => {
   const comments = [
     {
       name: "Rana Paul",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
     {
       name: "Jani Sen",
-      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+      Comment:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?",
     },
-    
-    
-    
-  ]
+  ];
 
   return (
     <div className="h-screen">
@@ -61,11 +66,10 @@ const CommentSection: FC<CommentSection> = ({}) => {
             {/* impliment the map */}
             {comments.map((data: any, index: number) => (
               <div className="w-full text-sm mt-3 mb-2 shadow-sm shadow-gray-400 p-2 rounded-md">
-                {data.name} : {data.Comment}
+                <span className="text-blue-500">{data.name}:</span>{" "}
+                <span className="text-black">{data.Comment}</span>
               </div>
             ))}
-
-            
           </div>
         </div>
 
