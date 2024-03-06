@@ -11,7 +11,7 @@ import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Navbar from "./Navbar";
-import SideBar from "./CommentSection";
+import CommentSection from "./CommentSection";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);
@@ -49,7 +49,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
       <div className="w-full flex">
         <div className="border-r w-[35%] border-gray-700">
-          <SideBar />
+          <CommentSection />
         </div>
         <div className="bg-gray-900 w-full mr-6">test</div>
       </div>
