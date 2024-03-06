@@ -57,10 +57,10 @@ const CommentSection: FC<CommentSection> = ({}) => {
           </p>
 
           {/* Comment Div*/}
-          <div className="mt-3 h-[95%] overflow-scroll">
+          <div className="mt-3 h-[95%] overflow-scroll no-scrollbar">
             {/* impliment the map */}
             {comments.map((data: any, index: number) => (
-              <div className="w-full text-sm mt-2 shadow-sm shadow-gray-400 p-2 rounded-md">
+              <div className="w-full text-sm mt-3 mb-2 shadow-sm shadow-gray-400 p-2 rounded-md">
                 {data.name} : {data.Comment}
               </div>
             ))}
