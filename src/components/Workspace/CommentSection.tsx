@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { Menu } from "lucide-react";
 import { Input } from "../ui/input";
@@ -8,17 +9,64 @@ interface CommentSection {}
 const CommentSection: FC<CommentSection> = ({}) => {
   //TODO:  use vaul ui package for sidebar
 
+  const comments = [
+    {
+      name: "Rana Paul",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    {
+      name: "Jani Sen",
+      Comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat iure eos aspernatur?"
+    },
+    
+    
+    
+  ]
+
   return (
     <div className="h-screen">
       <div className="h-[80%] flex flex-col justify-between text-xl m-4 shadow-sm shadow-gray-500 rounded-md border-gray-100 p-4">
-        <div className="">
+        <div className="h-[90%]">
           {/* Heading*/}
           <p className="px-2 text-xl text-center text-gray-500">
             Add Comments for Editors{" "}
           </p>
 
           {/* Comment Div*/}
-          <div>Comments</div>
+          <div className="mt-3 h-[95%] overflow-scroll">
+            {/* impliment the map */}
+            {comments.map((data: any, index: number) => (
+              <div className="w-full text-sm mt-2 shadow-sm shadow-gray-400 p-2 rounded-md">
+                {data.name} : {data.Comment}
+              </div>
+            ))}
+
+            
+          </div>
         </div>
 
         {/* Input box */}
