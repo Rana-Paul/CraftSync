@@ -11,7 +11,7 @@ import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Navbar from "./Navbar";
-import SideBar from "./SideBar";
+import SideBar from "./CommentSection";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Menu } from "lucide-react";
 
-interface SideBarProps {}
+interface CommentSection {}
 
-const SideBar: FC<SideBarProps> = ({}) => {
+const CommentSection: FC<CommentSection> = ({}) => {
   //TODO:  use vaul ui package for sidebar
 
  return (
@@ -54,4 +54,4 @@ const SideBar: FC<SideBarProps> = ({}) => {
   );
 };
 
-export default SideBar;
+export default CommentSection;
