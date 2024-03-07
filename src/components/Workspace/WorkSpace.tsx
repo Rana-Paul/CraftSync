@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import CommentSection from "./CommentSection";
+import VideoPage from "./VideoPage/VideoPage";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);
@@ -51,7 +52,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
         {/* TODO: Design Video section */}
         <div className="bg-gray-900 w-full mt-4 sm:ml-5 ml-0">
-          <div className="h-full">lorem33</div>
+          <VideoPage />
         </div>
 
         {/* SideBar for Comment section */}
