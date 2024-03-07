@@ -56,7 +56,7 @@ const CommentSection: FC<CommentSection> = ({}) => {
 
   return (
     <div className="h-screen">
-      <div className="h-[80%] flex flex-col justify-between text-xl m-4 shadow-sm shadow-gray-500 rounded-md border-gray-100 p-4">
+      <div className="h-[80%] flex flex-col justify-between text-xl m-4 shadow-md shadow-gray-500 rounded-md border-gray-100 p-4">
         <div className="h-[90%]">
           {/* Heading*/}
           <p className="px-2 text-xl text-center text-gray-500">
@@ -67,7 +67,7 @@ const CommentSection: FC<CommentSection> = ({}) => {
           <hr className="my-2" />
 
           {/* Comment Div*/}
-          <div className=" h-[95%] overflow-scroll no-scrollbar">
+          <div className=" h-[95%]   overflow-scroll no-scrollbar">
             {/* impliment the map */}
             {comments.map((data: any, index: number) => (
               <div className="w-full text-sm mt-2 mb-3 shadow-sm shadow-gray-400 p-2 rounded-lg">
