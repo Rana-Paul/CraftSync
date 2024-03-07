@@ -1,13 +1,8 @@
 "use client";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import { Loader2 } from "lucide-react";
-import UserAccountNav from "../Navbar/UserAccontNav";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import InviteEditorButton from "./InviteEditorButton";
-import EditorAccountNav from "./EditorsInNavbar";
 import { useQuery } from "@tanstack/react-query";
-import { GetEditorResType } from "@/lib/validators/editor";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Navbar from "./Navbar";
