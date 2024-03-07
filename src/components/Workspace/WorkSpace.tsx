@@ -51,7 +51,7 @@ const WorkSpace = ({ id }: { id: string }) => {
       <div className=" sm:flex-row sm:flex flex-col">
 
         {/* TODO: Design Video section */}
-        <div className="bg-gray-900 w-full mt-4 sm:ml-5 ml-0">
+        <div className="w-full mt-4 sm:ml-5 ml-0">
           <VideoPage />
         </div>
 
