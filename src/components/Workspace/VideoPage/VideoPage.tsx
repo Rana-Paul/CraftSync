@@ -75,6 +75,8 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
                 <p className="text-red-500 text-sm">{errors.description.message}</p>
               )}
             </div>
+
+            {/* TODO: Add all input boxes */}
             <Button
               className={buttonVariants({
                 size: "sm",
