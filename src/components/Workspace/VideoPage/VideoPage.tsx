@@ -16,18 +16,19 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
 
-
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const addTags = (e: any) => {
-    if(e.key === "Enter" && tags){
+    if (e.key === "Enter" && tags) {
       e.preventDefault();
       setTags((prevTags) => [...prevTags, tagValue]);
-      setTagsValue("")
+      setTagsValue("");
     }
   };
 
-
+  const deleteTags = (index: number) => {
+    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+  };
 
   const {
     register,
@@ -38,12 +39,13 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     resolver: zodResolver(videoMetadataSchema),
   });
 
-  const submit: SubmitHandler<any> = async (data,event) => {
+  const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
-
+    
     // Mutation for update video metadata
-
+    
     console.log(data);
+    setIsSubmitting(false);
   };
 
   // Get metadata from db
@@ -59,68 +61,80 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
       </div>
 
       {/* Form page */}
-        <MaxWidthWrapper>
-          <form className="w-full mt-6" onSubmit={handleSubmit(submit)}>
-            {/* Ttile */}
-            <h2 className="text-md font-semibold">Add Title</h2>
-            <input
-              type="text"
-              className="w-full mt-1 rounded-sm"
-              placeholder="Enter your video title"
-              {...register("title", { required: "Title is required" })}
-            />
+      <MaxWidthWrapper>
+        <form className="w-full mt-6" onSubmit={handleSubmit(submit)}>
+          {/* Ttile */}
+          <h2 className="text-md font-semibold">Add Title</h2>
+          <input
+            type="text"
+            className="w-full mt-1 rounded-sm"
+            placeholder="Enter your video title"
+            {...register("title", { required: "Title is required" })}
+          />
 
-            <div className="h-3">
-              {errors.title?.message && (
-                <p className="text-red-500 text-sm">{errors.title.message}</p>
-              )}
-            </div>
-            {/* Description */}
-            <h2 className="text-md mt-1 font-semibold">Add Description</h2>
-            <textarea
-            
-              className="w-full mt-2 h-[175px] rounded-sm resize-none"
-              placeholder="Enter your video Description"
-              {...register("description")}
-            />
+          <div className="h-3">
+            {errors.title?.message && (
+              <p className="text-red-500 text-sm">{errors.title.message}</p>
+            )}
+          </div>
+          {/* Description */}
+          <h2 className="text-md mt-1 font-semibold">Add Description</h2>
+          <textarea
+            className="w-full mt-2 h-[175px] rounded-sm resize-none"
+            placeholder="Enter your video Description"
+            {...register("description")}
+          />
 
-            <div className="h-3">
-              {errors.description?.message && (
-                <p className="text-red-500 text-sm">{errors.description.message}</p>
-              )}
-            </div>
-
-            
-            <div className="">
+          <div className="h-3">
+            {errors.description?.message && (
+              <p className="text-red-500 text-sm">
+                {errors.description.message}
+              </p>
+            )}
+          </div>
+              {/* Tag Inputs */}
+          <div className="">
+            <div className="flex-col">
               {tags.map((tag, index) => (
                 <div
                   key={index}
-                  className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600"
+                  className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 m-2"
+                  onClick={() => {deleteTags(index)}}
                 >
                   {tag}
                 </div>
               ))}
-
-              <input type="text" placeholder="Add tags" onChange={(e) => setTagsValue(e.target.value)} onKeyDown={addTags} value={tagValue}/>
             </div>
+            <div>
+              <input
+                type="text"
+                className="w-full mt-1 rounded-sm"
+                placeholder="Add tags"
+                onChange={(e) => setTagsValue(e.target.value)}
+                onKeyDown={addTags}
+                value={tagValue}
+              />
+            </div>
+          </div>
 
-            
-
-            {/* TODO: Add all input boxes */}
-            <Button
-              className={buttonVariants({
-                size: "sm",
-                className: "mt-3",
-                variant: "default",
-              })}
-              onKeyDown={(e) => {if(e.key === "Enter") e.preventDefault(); return false;}}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Creating..." : "Create"}
-            </Button>
-          </form>
-        </MaxWidthWrapper>
+          {/* TODO: Add all input boxes */}
+          <Button
+            className={buttonVariants({
+              size: "sm",
+              className: "mt-3",
+              variant: "default",
+            })}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+              return false;
+            }}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating..." : "Create"}
+          </Button>
+        </form>
+      </MaxWidthWrapper>
     </>
   );
 };
