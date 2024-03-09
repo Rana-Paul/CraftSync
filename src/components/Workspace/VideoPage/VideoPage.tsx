@@ -9,6 +9,7 @@ import {
   videoMetadataSchema,
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { X } from "lucide-react";
 
 interface VideoPageProps {}
 
@@ -41,9 +42,9 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
   const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
-    
+
     // Mutation for update video metadata
-    
+
     console.log(data);
     setIsSubmitting(false);
   };
@@ -92,16 +93,18 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
               </p>
             )}
           </div>
-              {/* Tag Inputs */}
-          <div className="">
+          {/* Tag Inputs */}
+          <div>
             <div className="flex-col">
               {tags.map((tag, index) => (
                 <div
                   key={index}
                   className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 m-2"
-                  onClick={() => {deleteTags(index)}}
+                  onClick={() => {
+                    deleteTags(index);
+                  }}
                 >
-                  {tag}
+                  {tag} <X className="inline-block h-3 w-3 text-gray-600" />
                 </div>
               ))}
             </div>
@@ -124,10 +127,6 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
               className: "mt-3",
               variant: "default",
             })}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.preventDefault();
-              return false;
-            }}
             type="submit"
             disabled={isSubmitting}
           >
