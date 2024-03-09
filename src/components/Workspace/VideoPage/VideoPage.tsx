@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import Video from "./Video";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,7 +13,20 @@ import { Button, buttonVariants } from "@/components/ui/button";
 interface VideoPageProps {}
 
 const VideoPage: FC<VideoPageProps> = ({}) => {
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagValue, setTagsValue] = useState<string>("");
+
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const addTags = (e: any) => {
+    if(e.key === "Enter" && tags){
+      setTags((prevTags) => [...prevTags, tagValue]);
+    }
+    setTagsValue("")
+  };
+
+
 
   const {
     register,
@@ -24,7 +37,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     resolver: zodResolver(videoMetadataSchema),
   });
 
-  const submit: SubmitHandler<any> = async (data) => {
+  const submit: SubmitHandler<any> = async (data,event) => {
     setIsSubmitting(true);
 
     // Mutation for update video metadata
@@ -76,6 +89,19 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
               )}
             </div>
 
+            
+            <div className="flex-col gap-1">
+              {tags.map((tag, index) => (
+                <span key={index} className="text-sm flex-col gap-1">
+                  {tag}
+                </span>
+              ))}
+
+              <input type="text" placeholder="Add tags" onChange={(e) => setTagsValue(e.target.value)} onKeyDown={addTags}/>
+            </div>
+
+            
+
             {/* TODO: Add all input boxes */}
             <Button
               className={buttonVariants({
@@ -83,6 +109,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
                 className: "mt-3",
                 variant: "default",
               })}
+              onKeyDown={(e) => {if(e.key === "Enter") e.preventDefault(); return false;}}
               type="submit"
               disabled={isSubmitting}
             >
