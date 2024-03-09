@@ -21,9 +21,10 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
   const addTags = (e: any) => {
     if(e.key === "Enter" && tags){
+      e.preventDefault();
       setTags((prevTags) => [...prevTags, tagValue]);
+      setTagsValue("")
     }
-    setTagsValue("")
   };
 
 
@@ -90,14 +91,17 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
             </div>
 
             
-            <div className="flex-col gap-1">
+            <div className="">
               {tags.map((tag, index) => (
-                <span key={index} className="text-sm flex-col gap-1">
+                <div
+                  key={index}
+                  className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600"
+                >
                   {tag}
-                </span>
+                </div>
               ))}
 
-              <input type="text" placeholder="Add tags" onChange={(e) => setTagsValue(e.target.value)} onKeyDown={addTags}/>
+              <input type="text" placeholder="Add tags" onChange={(e) => setTagsValue(e.target.value)} onKeyDown={addTags} value={tagValue}/>
             </div>
 
             
