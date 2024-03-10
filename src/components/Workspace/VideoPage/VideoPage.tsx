@@ -32,6 +32,15 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
+  const uploadVideo = (video: File) => {
+    console.log(video);
+    
+  }
+  const uploadThumbnail = (thumb: File) => {
+    console.log(thumb);
+    
+  }
+
   const {
     register,
     handleSubmit,
@@ -67,7 +76,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
         <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
           {/* Upload Video Button */}
           <div className="h-full">
-            <input type="file" accept="video/*" id="video" className="hidden" />
+            <input type="file" accept="video/*" id="video" className="hidden" onChange={(video) => video.target.files && uploadVideo(video.target.files[0])} />
             <label
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
@@ -76,7 +85,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
             </label>
           </div>
           <div className=" mt-7 sm:mt-2">
-            <input type="file" accept="video/*" id="video" className="hidden" />
+            <input type="file" accept="images/*" id="video" className="hidden" onChange={(thumb) => thumb.target.files && uploadThumbnail(thumb.target.files[0])}/>
             <label
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
