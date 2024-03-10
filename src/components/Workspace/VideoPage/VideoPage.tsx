@@ -64,21 +64,21 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
       {/* Form page */}
       <MaxWidthWrapper className="mb-4">
-        <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-4">
+        <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
           {/* Upload Video Button */}
           <div className="h-full">
             <input type="file" accept="video/*" id="video" className="hidden" />
             <label
-              className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-blue-700"
+              className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
             >
               Select Video
             </label>
           </div>
-          <div className=" mt-4 sm:mt-0">
+          <div className=" mt-7 sm:mt-2">
             <input type="file" accept="video/*" id="video" className="hidden" />
             <label
-              className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-blue-700"
+              className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
             >
               Select Thumbnail
