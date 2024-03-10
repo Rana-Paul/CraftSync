@@ -1,3 +1,4 @@
+"use client";
 import { Loader2 } from "lucide-react";
 import React, { FC, useState } from "react";
 import Video from "./Video";
@@ -62,8 +63,16 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
       </div>
 
       {/* Form page */}
-      <MaxWidthWrapper>
-        <form className="w-full mt-6" onSubmit={handleSubmit(submit)}>
+      <MaxWidthWrapper className="mb-4">
+        <div className="mt-8">
+          <input type="file" accept="video/*" id="video" className="hidden" />
+          <div className="items-center justify-between w-full h-full">
+            <label className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" htmlFor="video">Select Video</label>
+            <label className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" htmlFor="video">Select Video</label>
+          </div>
+        </div>
+
+        <form className="w-full" onSubmit={handleSubmit(submit)}>
           {/* Ttile */}
           <h2 className="text-md font-semibold">Add Title</h2>
           <input
