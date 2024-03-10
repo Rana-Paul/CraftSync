@@ -61,6 +61,8 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
   // Get metadata from db
 
+  //TODO: AWS Setup
+
   return (
     <>
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
