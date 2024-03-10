@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import { FC, useEffect, useState } from 'react'
 import ReactPlayer from "react-player";
+import thumb from '../../../../public/img/poster2.png'
 
 
 interface VideoProps {
@@ -20,12 +21,13 @@ const Video: FC<VideoProps> = ({url}) => {
           {isClient ? (
             <ReactPlayer
             width="100%"
-            height="auto"
-            className="w-full h-full "
+            height={"100%"}
+            className="w-full"
             url={url}
             controls={true}
             // light is usefull incase of dark mode
-            light={false}
+            light='/img/poster3.png'
+            
             // picture in picture
             pip={true}
             style={{borderRadius: "100px",}}
