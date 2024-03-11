@@ -160,8 +160,8 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
 
 
-          <select name="status" id="" value="private" className="w-full mt-1 rounded-sm">
-            <option value="public">Public</option>
+          <select {...register("status")} name="status" id="" value="private" className="w-full mt-1 rounded-sm">
+            <option value="private">Public</option>
             <option value="public">Private</option>
           </select>
           </div>
