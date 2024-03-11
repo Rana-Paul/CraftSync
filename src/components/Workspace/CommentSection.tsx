@@ -79,7 +79,7 @@ const CommentSection: FC<CommentSection> = ({}) => {
         </div>
 
         {/* Input box */}
-        <div className="flex w-full max-w-sm items-center space-x-2">
+        <div className="flex w-full mt-4 sm:max-w-sm items-center space-x-2">
           <Input type="email" placeholder="Add comment" />
           <Button type="submit">Add</Button>
         </div>

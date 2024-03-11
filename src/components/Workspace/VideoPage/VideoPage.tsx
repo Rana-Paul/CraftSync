@@ -34,12 +34,10 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
   const uploadVideo = (video: File) => {
     console.log(video);
-    
-  }
+  };
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);
-    
-  }
+  };
 
   const {
     register,
@@ -78,7 +76,15 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
         <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
           {/* Upload Video Button */}
           <div className="h-full">
-            <input type="file" accept="video/*" id="video" className="hidden" onChange={(video) => video.target.files && uploadVideo(video.target.files[0])} />
+            <input
+              type="file"
+              accept="video/*"
+              id="video"
+              className="hidden"
+              onChange={(video) =>
+                video.target.files && uploadVideo(video.target.files[0])
+              }
+            />
             <label
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
@@ -87,7 +93,15 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
             </label>
           </div>
           <div className=" mt-7 sm:mt-2">
-            <input type="file" accept="images/*" id="video" className="hidden" onChange={(thumb) => thumb.target.files && uploadThumbnail(thumb.target.files[0])}/>
+            <input
+              type="file"
+              accept="images/*"
+              id="video"
+              className="hidden"
+              onChange={(thumb) =>
+                thumb.target.files && uploadThumbnail(thumb.target.files[0])
+              }
+            />
             <label
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
               htmlFor="video"
@@ -156,14 +170,18 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
           {/* video status */}
           <div className="mt-4">
-          <h2 className="text-md mt-1 font-semibold">Select Video Status</h2>
+            <h2 className="text-md mt-1 font-semibold">Select Video Status</h2>
 
-
-
-          <select {...register("status")} name="status" id="" value="private" className="w-full mt-1 rounded-sm">
-            <option value="private">Public</option>
-            <option value="public">Private</option>
-          </select>
+            <select
+              {...register("status")}
+              name="status"
+              id=""
+              value="private"
+              className="w-full mt-1 rounded-sm"
+            >
+              <option value="private">Public</option>
+              <option value="public">Private</option>
+            </select>
           </div>
 
           {/* TODO: Add all input boxes */}
