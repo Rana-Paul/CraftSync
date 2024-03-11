@@ -23,7 +23,7 @@ const Video: FC<VideoProps> = ({ url }) => {
           url={url}
           controls={true}
           // light is usefull incase of dark mode
-          light="/img/poster2.png"
+          // light="/img/poster2.png"
           // picture in picture
           pip={true}
           
