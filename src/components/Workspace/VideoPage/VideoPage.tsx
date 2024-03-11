@@ -154,6 +154,18 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
             </div>
           </div>
 
+          {/* video status */}
+          <div className="mt-4">
+          <h2 className="text-md mt-1 font-semibold">Select Video Status</h2>
+
+
+
+          <select name="status" id="" value="private" className="w-full mt-1 rounded-sm">
+            <option value="public">Public</option>
+            <option value="public">Private</option>
+          </select>
+          </div>
+
           {/* TODO: Add all input boxes */}
           <Button
             className={buttonVariants({
