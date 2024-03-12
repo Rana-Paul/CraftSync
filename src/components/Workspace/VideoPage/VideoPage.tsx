@@ -39,6 +39,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     },
   });
 
+  // Create a loader for uploading video
 
   const uploadVideo = async(video: File) => {    
     const uploadUrl = await fetch("/api/presignurls", {
@@ -46,6 +47,8 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     });
     const url = await uploadUrl.json();
     console.log(url.url);
+
+    //TODO: Upload the video to s3
     
   };
 
