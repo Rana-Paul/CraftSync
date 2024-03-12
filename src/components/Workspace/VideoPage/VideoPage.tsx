@@ -11,7 +11,7 @@ import {
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface VideoPageProps {}
 
@@ -33,29 +33,19 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
-  // console.log(video);
-
-  // // Mutation for upload video
-  // const {data} = useQuery({
-  //   queryKey: ['upload-video'],
-  //   queryFn: async() => {
-  //     const res = await fetch('/api/savevideo', {
-  //       method: 'GET',
-  //     })
-  //     console.log(res.json());
-  //     return res.json();
-      
-  //   }
-  // });
-  // console.log(data);
+  // All Mutations
+  const {mutate} = useMutation({
+    mutationFn: async () => {
+    },
+  });
 
 
-  const uploadVideo = async(video: File) => {
-    console.log(video);
-    const uploadUrl =await fetch('/api/presignurls', {
-      method: 'GET',
-    })
-    console.log(uploadUrl);
+  const uploadVideo = async(video: File) => {    
+    const uploadUrl = await fetch("/api/presignurls", {
+      method: "GET",
+    });
+    const url = await uploadUrl.json();
+    console.log(url.url);
     
   };
 
