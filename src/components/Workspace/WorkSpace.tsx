@@ -39,9 +39,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
   return (
     <div className="w-full">
-      <Navbar editors={editors} id={id} />
-
-      
+      <Navbar editors={editors} id={id} />   
 
       <div className=" sm:flex-row sm:flex flex-col">
 
