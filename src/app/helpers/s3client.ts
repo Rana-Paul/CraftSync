@@ -9,7 +9,7 @@ export const s3Client = new S3Client({
     },
 });
 
-export const generateUploadUrl = (key:string, contentType: string) => {
+export const generateUploadUrl = ({key, contentType}: {key: string, contentType: string}) => {
     const command = new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME as string,
         Key: key,
