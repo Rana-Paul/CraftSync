@@ -1,6 +1,6 @@
 "use client";
 import { Loader2 } from "lucide-react";
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import Video from "./Video";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import {
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 interface VideoPageProps {}
 
@@ -32,9 +33,34 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
-  const uploadVideo = (video: File) => {
+  // console.log(video);
+
+  // // Mutation for upload video
+  // const {data} = useQuery({
+  //   queryKey: ['upload-video'],
+  //   queryFn: async() => {
+  //     const res = await fetch('/api/savevideo', {
+  //       method: 'GET',
+  //     })
+  //     console.log(res.json());
+  //     return res.json();
+      
+  //   }
+  // });
+  // console.log(data);
+
+
+  const uploadVideo = async(video: File) => {
     console.log(video);
+    const uploadUrl =await fetch('/api/presignurls', {
+      method: 'GET',
+    })
+    console.log(uploadUrl);
+    
   };
+
+
+
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);
   };
@@ -78,7 +104,7 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
           <div className="h-full">
             <input
               type="file"
-              accept="video/*"
+              accept="images/*"
               id="video"
               className="hidden"
               onChange={(video) =>
