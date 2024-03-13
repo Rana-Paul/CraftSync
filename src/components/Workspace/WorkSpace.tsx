@@ -45,7 +45,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
         {/* TODO: Design Video section */}
         <div className="w-full mt-4 sm:ml-5 ml-0">
-          <VideoPage />
+          <VideoPage workspaceId={id}/>
         </div>
 
         {/* SideBar for Comment section */}

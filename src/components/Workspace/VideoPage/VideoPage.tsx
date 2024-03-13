@@ -10,14 +10,22 @@ import {
   videoMetadataSchema,
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useSession } from 'next-auth/react'
 import { X } from "lucide-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-interface VideoPageProps {}
+interface VideoPageProps {
+  workspaceId: string
+}
 
-const VideoPage: FC<VideoPageProps> = ({}) => {
+const VideoPage: FC<VideoPageProps> = ({ workspaceId }: { workspaceId: string }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
+
+  const { data: session, status } = useSession();
+
+  console.log("id:", workspaceId);
+  
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -41,8 +49,12 @@ const VideoPage: FC<VideoPageProps> = ({}) => {
 
   // Create a loader for uploading video
 
-  const uploadVideo = async(video: File) => {    
-    const uploadUrl = await fetch("/api/presignurls", {
+  const uploadVideo = async(video: File) => {   
+    console.log(video.name);
+    console.log(video.type);
+
+         
+    const uploadUrl = await fetch(`/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}`, {
       method: "GET",
     });
     const url = await uploadUrl.json();
