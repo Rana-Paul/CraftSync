@@ -10,23 +10,26 @@ import {
   videoMetadataSchema,
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useSession } from 'next-auth/react'
+import { useSession } from "next-auth/react";
 import { X } from "lucide-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 interface VideoPageProps {
-  workspaceId: string
+  workspaceId: string;
 }
 
-const VideoPage: FC<VideoPageProps> = ({ workspaceId }: { workspaceId: string }) => {
+const VideoPage: FC<VideoPageProps> = ({
+  workspaceId,
+}: {
+  workspaceId: string;
+}) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
 
   const { data: session, status } = useSession();
 
   console.log("id:", workspaceId);
-  
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -43,35 +46,32 @@ const VideoPage: FC<VideoPageProps> = ({ workspaceId }: { workspaceId: string })
   };
 
   // All Mutations
-  const {mutate} = useMutation({
-    mutationFn: async () => {
-    },
+  const { mutate } = useMutation({
+    mutationFn: async () => {},
   });
 
   // Create a loader for uploading video
 
-  const uploadVideo = async(video: File) => {   
+  const uploadVideo = async (video: File) => {
     console.log(video.name);
     console.log(video.type);
 
-         
-    const uploadUrl = await fetch(`/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`, {
-      method: "GET",
-    });
+    const uploadUrl = await fetch(
+      `/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`,
+      {
+        method: "GET",
+      }
+    );
 
-    
-        if (!uploadUrl.ok) {
-          toast.error("something went wrong, Please try again later");
-          return;
-        }
+    if (!uploadUrl.ok) {
+      toast.error("something went wrong, Please try again later");
+      return;
+    }
     const url = await uploadUrl.json();
     console.log(url.url);
 
     //TODO: Upload the video to s3
-    
   };
-
-
 
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);
