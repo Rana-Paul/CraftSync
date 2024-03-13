@@ -11,14 +11,21 @@ import {s3Client} from '@/app/helpers/s3client'
 export async function GET(request: Request) {
     // TODO: Add security to this route
     // TODO: Get Key and contentType as parameter
-    const command = new PutObjectCommand({
+    
+
+    try {
+      const command = new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME as string,
         Key: '/',
         ContentType: 'video/mp4',
     });
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 28800 });
-    console.log(url);
+    console.log(url);  
+    return NextResponse.json({ url });
+    } catch (error) {
+      return new Error("Something went wrong");
+
+    }
     
-  return NextResponse.json({ url });
 }
