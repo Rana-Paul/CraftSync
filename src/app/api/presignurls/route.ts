@@ -18,8 +18,10 @@ export async function GET(request: NextRequest) {
     
 
     
+    throw new Error();
 
     try {
+
       const command = new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME as string,
         Key: key as string,

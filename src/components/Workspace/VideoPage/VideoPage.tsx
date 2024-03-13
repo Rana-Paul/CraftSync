@@ -13,6 +13,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { useSession } from 'next-auth/react'
 import { X } from "lucide-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 interface VideoPageProps {
   workspaceId: string
@@ -57,6 +58,12 @@ const VideoPage: FC<VideoPageProps> = ({ workspaceId }: { workspaceId: string })
     const uploadUrl = await fetch(`/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`, {
       method: "GET",
     });
+
+    
+        if (!uploadUrl.ok) {
+          toast.error("something went wrong, Please try again later");
+          return;
+        }
     const url = await uploadUrl.json();
     console.log(url.url);
 
