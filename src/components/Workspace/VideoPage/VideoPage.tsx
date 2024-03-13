@@ -54,7 +54,7 @@ const VideoPage: FC<VideoPageProps> = ({ workspaceId }: { workspaceId: string })
     console.log(video.type);
 
          
-    const uploadUrl = await fetch(`/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}`, {
+    const uploadUrl = await fetch(`/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`, {
       method: "GET",
     });
     const url = await uploadUrl.json();

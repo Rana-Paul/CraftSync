@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
     // TODO: Add security to this route
     // TODO: Get Key and contentType as parameter
     const key = request.nextUrl.searchParams.get("key");
+    const type = request.nextUrl.searchParams.get("type");
 
     console.log(key);
     
@@ -22,7 +23,7 @@ export async function GET(request: NextRequest) {
       const command = new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME as string,
         Key: key as string,
-        ContentType: 'video/mp4',
+        ContentType: type as string,
     });
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 28800 });
