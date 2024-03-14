@@ -50,11 +50,14 @@ const VideoPage: FC<VideoPageProps> = ({
     mutationFn: async () => {},
   });
 
-  // Create a loader for uploading video
+
+// ----------------- Upload video to s3 ----------------------
 
   const uploadVideo = async (video: File, data: any) => {
     console.log(video.name);
     console.log(video.type);
+
+    // TODO: Impklement a nice loader for video upload
 
     const uploadUrl = await fetch(
       `/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`,
@@ -67,11 +70,11 @@ const VideoPage: FC<VideoPageProps> = ({
       toast.error("something went wrong, Please try again later");
       return;
     }
-    const {url} = await uploadUrl.json();
+    const { url } = await uploadUrl.json();
     console.log(url);
 
-    //TODO: Upload the video to s3
-  
+    // Upload the video to s3
+
     const uploadToS3 = await fetch(url, {
       method: "PUT",
       body: video,
@@ -79,11 +82,15 @@ const VideoPage: FC<VideoPageProps> = ({
 
     console.log(uploadToS3);
 
-   data.target.value = null;
+    data.target.value = null;
 
+    //TODO: Generate get presign url for video
 
     
+    //TODO: Update video link to db
   };
+
+  // ----------------- Upload thumbnail to s3 ----------------------
 
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);

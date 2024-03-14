@@ -9,8 +9,6 @@ import { s3Client } from "@/app/helpers/s3client";
 // ADD this route in middleware
 
 export async function GET(request: NextRequest) {
-  // TODO: Add security to this route
-  // TODO: Get Key and contentType as parameter
   const key = request.nextUrl.searchParams.get("key");
   const type = request.nextUrl.searchParams.get("type");
 
