@@ -67,10 +67,19 @@ const VideoPage: FC<VideoPageProps> = ({
       toast.error("something went wrong, Please try again later");
       return;
     }
-    const url = await uploadUrl.json();
-    console.log(url.url);
+    const {url} = await uploadUrl.json();
+    console.log(url);
 
     //TODO: Upload the video to s3
+
+
+    const uploadToS3 = await fetch(url, {
+      method: "PUT",
+      body: video,
+    });
+
+    console.log(await uploadToS3.json());
+    
   };
 
   const uploadThumbnail = (thumb: File) => {
