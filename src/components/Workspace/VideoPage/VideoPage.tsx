@@ -52,7 +52,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Create a loader for uploading video
 
-  const uploadVideo = async (video: File) => {
+  const uploadVideo = async (video: File, data: any) => {
     console.log(video.name);
     console.log(video.type);
 
@@ -71,14 +71,17 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(url);
 
     //TODO: Upload the video to s3
-
-
+  
     const uploadToS3 = await fetch(url, {
       method: "PUT",
       body: video,
     });
 
-    console.log(await uploadToS3.json());
+    console.log(uploadToS3);
+
+   data.target.value = null;
+
+
     
   };
 
@@ -128,8 +131,8 @@ const VideoPage: FC<VideoPageProps> = ({
               accept="images/*"
               id="video"
               className="hidden"
-              onChange={(video) =>
-                video.target.files && uploadVideo(video.target.files[0])
+              onChange={(data) =>
+                data.target.files && uploadVideo(data.target.files[0], data)
               }
             />
             <label
