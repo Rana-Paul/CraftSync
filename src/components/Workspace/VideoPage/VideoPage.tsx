@@ -80,13 +80,15 @@ const VideoPage: FC<VideoPageProps> = ({
       body: video,
     });
 
+    // TODO: Handle error of uploading video
+
     console.log(uploadToS3);
 
     data.target.value = null;
 
     //TODO: Generate get presign url for video
 
-    
+
     //TODO: Update video link to db
   };
 
