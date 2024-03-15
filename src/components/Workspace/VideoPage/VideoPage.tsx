@@ -69,7 +69,7 @@ const VideoPage: FC<VideoPageProps> = ({
         }
         return prev + 5;
       });
-    }, 500);
+    }, 1000);
 
     return intervel;
   };
@@ -112,6 +112,7 @@ const VideoPage: FC<VideoPageProps> = ({
     data.target.value = null;
 
     clearInterval(progessIntervel);
+    setUploadProgress(100);
 
     //TODO: Generate get presign url for video
 
@@ -202,17 +203,12 @@ const VideoPage: FC<VideoPageProps> = ({
               <Dialog open={isUploaading}>
                 <DialogContent>
                   <Progress
-                    indicatorColor={uploadProgess === 100 ? "bg-green-500" : ""}
+                    indicatorColor={"bg-green-500"}
                     value={uploadProgess}
                     className="h-1 w-full bg-zinc-200 "
                   />
 
-                  {uploadProgess === 100 && (
-                    <div className="flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2">
-                      <Loader2 className="h-3 w-3 animate-spin" />
-                      Redirecting...
-                    </div>
-                  )}
+                  
                 </DialogContent>
               </Dialog>
             </div>
