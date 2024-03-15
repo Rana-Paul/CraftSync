@@ -26,6 +26,7 @@ const VideoPage: FC<VideoPageProps> = ({
 }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
+  const [uploadProgess, setUploadProgress] = useState<number>(0);
 
   const { data: session, status } = useSession();
 
@@ -49,6 +50,26 @@ const VideoPage: FC<VideoPageProps> = ({
   const { mutate } = useMutation({
     mutationFn: async () => {},
   });
+
+  // Progress bar logic
+
+  const startSimulatedProgress = () => {
+    // setIsUploading(true);
+    setUploadProgress(0);
+
+    const intervel = setInterval(() => {
+      setUploadProgress((prev) => {
+        if (prev >= 95) {
+          // setIsUploading(false);
+          clearInterval(intervel);
+          return prev;
+        }
+        return prev + 5;
+      });
+    }, 500);
+
+    return intervel;
+  };
 
 
 // ----------------- Upload video to s3 ----------------------
