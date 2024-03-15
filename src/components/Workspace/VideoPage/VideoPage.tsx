@@ -105,7 +105,14 @@ const VideoPage: FC<VideoPageProps> = ({
       body: video,
     });
 
-    // TODO: Handle error of uploading video
+    // Handle error of uploading video
+    if (!uploadToS3.ok) {
+      clearInterval(progessIntervel);
+      setUploadProgress(100);
+      setIsUploading(false);
+      toast.error("something went wrong, Please try again later");
+      return;
+    }
 
     console.log(uploadToS3);
 
