@@ -27,7 +27,7 @@ const VideoPage: FC<VideoPageProps> = ({
 }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
-  const [uploadProgess, setUploadProgress] = useState<number>(0);
+  const [uploadProgess, setUploadProgress] = useState<number>(100);
   const [isUploaading, setIsUploading] = useState<boolean>(true);
 
 
@@ -198,12 +198,12 @@ const VideoPage: FC<VideoPageProps> = ({
         {isUploaading && (
                 <div className="w-full mt-4 max-w-xs mx-auto">
                   <Progress
-                  color={
+                  indicatorColor={
                     uploadProgess === 100
-                      ? "green"
+                      ? "bg-green-500"
                       : ""
                   }
-                    value={50}
+                    value={100}
                     className="h-1 w-full bg-zinc-200 "
                   />
                   {uploadProgess === 100 && (
