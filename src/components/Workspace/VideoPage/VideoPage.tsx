@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import { X } from "lucide-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Progress } from "@/components/ui/progress";
 
 interface VideoPageProps {
   workspaceId: string;
@@ -27,6 +28,8 @@ const VideoPage: FC<VideoPageProps> = ({
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
+  const [isUploaading, setIsUploading] = useState<boolean>(true);
+
 
   const { data: session, status } = useSession();
 
@@ -189,6 +192,29 @@ const VideoPage: FC<VideoPageProps> = ({
               Select Thumbnail
             </label>
           </div>
+        </div>
+
+        <div>
+        {isUploaading && (
+                <div className="w-full mt-4 max-w-xs mx-auto">
+                  <Progress
+                  color={
+                    uploadProgess === 100
+                      ? "green"
+                      : ""
+                  }
+                    value={50}
+                    className="h-1 w-full bg-zinc-200 "
+                  />
+                  {uploadProgess === 100 && (
+                    <div className="flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      Redirecting...
+                    </div>
+                  )}
+                </div>
+              )}
+
         </div>
 
         <form className="w-full" onSubmit={handleSubmit(submit)}>
