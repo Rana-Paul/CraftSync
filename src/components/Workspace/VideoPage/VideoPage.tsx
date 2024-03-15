@@ -54,7 +54,7 @@ const VideoPage: FC<VideoPageProps> = ({
     mutationFn: async () => {},
   });
 
-  // Progress bar logic
+  // ----------- Progress bar logic ------------
 
   const startSimulatedProgress = () => {
     // setIsUploading(true);
@@ -113,6 +113,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
     clearInterval(progessIntervel);
     setUploadProgress(100);
+    setIsUploading(false);
+    toast.success("Video uploaded successfully");
 
     //TODO: Generate get presign url for video
 
@@ -197,18 +199,25 @@ const VideoPage: FC<VideoPageProps> = ({
           </div>
         </div>
 
+        {/* Progress bar */}
         <div>
           {isUploaading && (
             <div className="w-full mt-4 max-w-xs mx-auto">
-              <Dialog open={isUploaading}>
+              <Dialog open={true}>
                 <DialogContent>
-                  <Progress
-                    indicatorColor={"bg-green-500"}
-                    value={uploadProgess}
-                    className="h-1 w-full bg-zinc-200 "
-                  />
+                  <div className="w-full mt-4">
+                    <Progress
+                      indicatorColor={"bg-green-500"}
+                      value={uploadProgess}
+                      className="h-1 w-full bg-zinc-200 "
+                    />
 
-                  
+                    <div className="mt-2">
+                      <span className="text-sm">
+                        Uploading... {uploadProgess}%
+                      </span>
+                    </div>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
