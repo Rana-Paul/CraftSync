@@ -47,5 +47,3 @@ export async function POST(request: NextRequest) {
     return new Error("Something went wrong");
   }
 }
-
-// TODO: Create POST request for get opbject pre sign url

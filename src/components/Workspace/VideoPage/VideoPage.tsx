@@ -82,8 +82,6 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(video.name);
     console.log(video.type);
 
-    // TODO: Impklement a nice loader for video upload
-
     const uploadUrl = await fetch(
       `/api/presignurls?key=${session?.user?.id}/${workspaceId}/Video/${video.name}&type=${video.type}`,
       {
@@ -116,27 +114,28 @@ const VideoPage: FC<VideoPageProps> = ({
 
     console.log(uploadToS3);
 
-
-
     //TODO: Generate get presign url for video
 
-    const getVideoUrl = await fetch('/api/presignurls', {
-      method: 'POST',
-      body: JSON.stringify({ key: `${session?.user?.id}/${workspaceId}/Video/${video.name}` }),
-    })
+    const getVideoUrl = await fetch("/api/presignurls", {
+      method: "POST",
+      body: JSON.stringify({
+        key: `${session?.user?.id}/${workspaceId}/Video/${video.name}`,
+      }),
+    });
 
-    const {myVideoUrl} = await getVideoUrl.json()
-    console.log('video url: ', myVideoUrl);
+    const { myVideoUrl } = await getVideoUrl.json();
 
+    //TODO: Update video link to db
+
+    // TODO: Try Separate video upload and thumbnail upload 
+
+    // Clear inputs and Interval
     data.target.value = null;
 
     clearInterval(progessIntervel);
     setUploadProgress(100);
     setIsUploading(false);
     toast.success("Video uploaded successfully");
-    
-
-    //TODO: Update video link to db
   };
 
   // ----------------- Upload thumbnail to s3 ----------------------
