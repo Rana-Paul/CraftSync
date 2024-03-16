@@ -116,12 +116,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
     console.log(uploadToS3);
 
-    data.target.value = null;
 
-    clearInterval(progessIntervel);
-    setUploadProgress(100);
-    setIsUploading(false);
-    toast.success("Video uploaded successfully");
 
     //TODO: Generate get presign url for video
 
@@ -131,6 +126,13 @@ const VideoPage: FC<VideoPageProps> = ({
     })
 
     console.log('video url: ', getVideoUrl);
+
+    data.target.value = null;
+
+    clearInterval(progessIntervel);
+    setUploadProgress(100);
+    setIsUploading(false);
+    toast.success("Video uploaded successfully");
     
 
     //TODO: Update video link to db
