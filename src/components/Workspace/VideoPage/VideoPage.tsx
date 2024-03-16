@@ -125,6 +125,14 @@ const VideoPage: FC<VideoPageProps> = ({
 
     //TODO: Generate get presign url for video
 
+    const getVideoUrl = await fetch('api/presignurls', {
+      method: 'POST',
+      body: JSON.stringify({ key: `${session?.user?.id}/${workspaceId}/Video/${video.name}` }),
+    })
+
+    console.log('video url: ', getVideoUrl);
+    
+
     //TODO: Update video link to db
   };
 
