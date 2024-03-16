@@ -31,6 +31,8 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const { key } = await request.json();
   // throw new Error();
+  console.log(key);
+  
 
   try {
     const command = new GetObjectCommand({
@@ -38,9 +40,9 @@ export async function POST(request: NextRequest) {
       Key: key as string,
     });
 
-    const url = await getSignedUrl(s3Client, command, { expiresIn: 7 * 24 * 60 * 60 });
-    console.log(url);
-    return NextResponse.json({ url });
+    const myVideoUrl = await getSignedUrl(s3Client, command, { expiresIn: 7 * 24 * 60 * 60 });
+    console.log("my video url: ",myVideoUrl);
+    return NextResponse.json({ myVideoUrl });
   } catch (error) {
     return new Error("Something went wrong");
   }
