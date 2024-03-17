@@ -127,7 +127,11 @@ const VideoPage: FC<VideoPageProps> = ({
 
     //TODO: Update video link to db
     const updateVideo = await fetch("/api/mediaupdate", {
-      method: "GET",
+      method: "PATCH",
+      body: JSON.stringify({
+        workspaceId,
+        newUrl: myVideoUrl,
+      }),
     })
 
     // TODO: Try Separate video upload and thumbnail upload 
