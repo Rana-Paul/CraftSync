@@ -1,12 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { db } from "@/db";
-export async function PATCH(request: NextRequest) {
+export async function PATCH(request: Request) {
   console.log("insideeeeeeeeeeeeeeeeeeeeeeee---------------------");
 
-  const { workspaceId } = await request.json();
-  const { newUrl } = await request.json();
+  const requestBody = await request.json(); // Parse JSON payload once
+
+  const { workspaceId, newUrl } = requestBody; 
 
   console.log("new route: ", workspaceId, newUrl);
 
@@ -17,6 +18,7 @@ export async function PATCH(request: NextRequest) {
       AND: [
         {
           id: workspaceId,
+          
         },
         {
           Editor: {
@@ -26,7 +28,7 @@ export async function PATCH(request: NextRequest) {
           },
         },
       ],
-    },
+    }
   });
 
   if (!isAuth) {
@@ -36,7 +38,18 @@ export async function PATCH(request: NextRequest) {
     });
   }
 
-  console.log("here: ", isAuth.Video);
+  const updateVideo = await db.video.update({
+    where: {
+      workspaceId,
+    },
+    data: {
+      url: newUrl,
+    }
+  });
+
+  console.log("updateVideo: ", updateVideo);
+  
+
 
   return NextResponse.json({});
 }
