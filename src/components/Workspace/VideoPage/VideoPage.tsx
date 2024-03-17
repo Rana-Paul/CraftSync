@@ -1,6 +1,6 @@
 "use client";
 import { Loader2 } from "lucide-react";
-import React, { FC, useCallback, useState } from "react";
+import React, { ChangeEvent, FC, InputHTMLAttributes, useCallback, useState } from "react";
 import Video from "./Video";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -76,7 +76,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // ----------------- Upload video to s3 ----------------------
 
-  const uploadVideo = async (video: File, data: any) => {
+  const uploadVideo = async (video: File, data: ChangeEvent<HTMLInputElement>) => {
     setIsUploading(true);
     const progessIntervel = startSimulatedProgress();
     console.log(video.name);
@@ -137,7 +137,7 @@ const VideoPage: FC<VideoPageProps> = ({
     // TODO: Try Separate video upload and thumbnail upload 
 
     // Clear inputs and Interval
-    data.target.value = null;
+    data.target.value = '';
 
     clearInterval(progessIntervel);
     setUploadProgress(100);
