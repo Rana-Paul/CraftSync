@@ -1,8 +1,7 @@
-import { db } from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { s3Client } from "@/app/helpers/s3client";
+import { s3Client } from "@/helpers/s3client";
 
 // ADD this route in middleware
 
