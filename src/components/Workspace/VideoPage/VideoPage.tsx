@@ -109,6 +109,8 @@ const VideoPage: FC<VideoPageProps> = ({
     toast.error(videoUpload.msg);
   };
 
+  // TODO: Extract data from DB and store into state
+
   // ----------------- Upload thumbnail to s3 ----------------------
 
   const uploadThumbnail = (thumb: File) => {
