@@ -89,7 +89,15 @@ const VideoPage: FC<VideoPageProps> = ({
     id: string | undefined,
     workspaceId: string
   ) => {
+    setIsUploading(true);
+    const progessIntervel = startSimulatedProgress();
     const videoUpload = await uploadVideoFile(video, data, id, workspaceId);
+
+    // needed
+    clearInterval(progessIntervel);
+    setUploadProgress(100);
+    setIsUploading(false);
+    toast.error("something went wrong, Please try again later");
   };
 
   // ----------------- Upload thumbnail to s3 ----------------------
@@ -141,7 +149,13 @@ const VideoPage: FC<VideoPageProps> = ({
               id="video"
               className="hidden"
               onChange={(data) =>
-                data.target.files && uploadVideo(data.target.files[0], data, session?.user.id, workspaceId)
+                data.target.files &&
+                uploadVideo(
+                  data.target.files[0],
+                  data,
+                  session?.user.id,
+                  workspaceId
+                )
               }
             />
             <label
