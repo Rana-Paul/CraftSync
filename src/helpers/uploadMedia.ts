@@ -75,5 +75,6 @@ export const uploadVideoFile = async (
     return {
       status: true,
       msg: "Video uploaded successfully",
+      myVideoUrl,
     }
 };

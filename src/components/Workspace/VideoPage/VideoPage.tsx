@@ -66,7 +66,6 @@ const VideoPage: FC<VideoPageProps> = ({
   const startSimulatedProgress = () => {
     // setIsUploading(true);
     setUploadProgress(0);
-
     const intervel = setInterval(() => {
       setUploadProgress((prev) => {
         if (prev >= 95) {
@@ -77,7 +76,6 @@ const VideoPage: FC<VideoPageProps> = ({
         return prev + 5;
       });
     }, 1000);
-
     return intervel;
   };
 
@@ -93,11 +91,22 @@ const VideoPage: FC<VideoPageProps> = ({
     const progessIntervel = startSimulatedProgress();
     const videoUpload = await uploadVideoFile(video, data, id, workspaceId);
 
-    // needed
+    // Handle error of uploading video
+    if (!videoUpload.status) {
+      // Clear inputs and Interval
+      clearInterval(progessIntervel);
+      setUploadProgress(100);
+      setIsUploading(false);
+      data.target.value = "";
+      toast.error(videoUpload.msg);
+      return;
+    }
+    // upload Successful
     clearInterval(progessIntervel);
     setUploadProgress(100);
     setIsUploading(false);
-    toast.error("something went wrong, Please try again later");
+    data.target.value = "";
+    toast.error(videoUpload.msg);
   };
 
   // ----------------- Upload thumbnail to s3 ----------------------
@@ -299,5 +308,4 @@ const VideoPage: FC<VideoPageProps> = ({
     </>
   );
 };
-
 export default VideoPage;
