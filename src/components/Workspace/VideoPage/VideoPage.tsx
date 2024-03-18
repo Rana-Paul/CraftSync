@@ -143,7 +143,13 @@ const VideoPage: FC<VideoPageProps> = ({
       }),
     });
 
-    // TODO: Handle error of updating video url
+    if(!updateVideo.ok) {
+      clearInterval(progessIntervel);
+      setUploadProgress(100);
+      setIsUploading(false);
+      toast.error("something went wrong, Please try again later");
+      return;
+    }
 
     // TODO: Try Separate video upload and thumbnail upload
 
