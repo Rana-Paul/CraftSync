@@ -56,25 +56,25 @@ export const uploadVideoFile = async (
 
   const { myVideoUrl } = await getVideoUrl.json();
 
- // Update video link to db
-    const updateVideo = await fetch("/api/mediaupdate", {
-      method: "PATCH",
-      body: JSON.stringify({
-        workspaceId,
-        newUrl: myVideoUrl,
-      }),
-    });
+  // Update video link to db
+  const updateVideo = await fetch("/api/mediaupdate", {
+    method: "PATCH",
+    body: JSON.stringify({
+      workspaceId,
+      newUrl: myVideoUrl,
+    }),
+  });
 
-    if (!updateVideo.ok) {
-      return {
-        status: false,
-        msg: "something went wrong, Please try again later",
-      }
-    }
-
+  if (!updateVideo.ok) {
     return {
-      status: true,
-      msg: "Video uploaded successfully",
-      myVideoUrl,
-    }
+      status: false,
+      msg: "something went wrong, Please try again later",
+    };
+  }
+
+  return {
+    status: true,
+    msg: "Video uploaded successfully",
+    myVideoUrl,
+  };
 };

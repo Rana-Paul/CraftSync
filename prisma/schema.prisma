@@ -1,7 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -60,8 +59,8 @@ model Video {
 
 // add invite schema
 model Invitation {
-  id          String    @id @default(cuid())
+  id              String @id @default(cuid())
   invitation_code String
-  workspaceId   String
-  editorEmail   String
+  workspaceId     String
+  editorEmail     String
 }
