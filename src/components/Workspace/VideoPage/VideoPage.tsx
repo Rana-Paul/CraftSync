@@ -40,8 +40,6 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const { data: session, status } = useSession();
 
-  console.log("id:", workspaceId);
-
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const addTags = (e: any) => {
@@ -284,7 +282,6 @@ const VideoPage: FC<VideoPageProps> = ({
             <select
               {...register("status")}
               name="status"
-              id=""
               value="private"
               className="w-full mt-1 rounded-sm"
             >
