@@ -53,3 +53,5 @@ export async function PATCH(request: Request) {
 
   return NextResponse.json({});
 }
+
+// Add a route for updating the image
