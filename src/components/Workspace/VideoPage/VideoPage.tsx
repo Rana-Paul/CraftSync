@@ -4,8 +4,6 @@ import React, {
   ChangeEvent,
   FC,
   InputHTMLAttributes,
-  use,
-  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -76,6 +74,7 @@ const VideoPage: FC<VideoPageProps> = ({
     }
   }, [isSuccess, data]);
 
+  // TODO: Create a beautiful Loading Skeleton
   if(isLoading) {
     return <div>Loading...</div>
   }
@@ -293,6 +292,7 @@ const VideoPage: FC<VideoPageProps> = ({
           {/* Tag Inputs */}
           <div>
             <div className="flex-col">
+              {/* TODO: Rander Tags */}
               {tags.map((tag, index) => (
                 <div
                   key={index}
