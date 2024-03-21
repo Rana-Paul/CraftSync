@@ -6,6 +6,7 @@ import React, {
   InputHTMLAttributes,
   use,
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import Video from "./Video";
@@ -35,9 +36,11 @@ const VideoPage: FC<VideoPageProps> = ({
 }: {
   workspaceId: string;
 }) => {
+
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [videoUrl, setVideoUrl] = useState<string>("");
   const [videoStatus, setVideoStatus] = useState<VideoStatus>(
     VideoStatus.PRIVATE
   );
@@ -48,6 +51,33 @@ const VideoPage: FC<VideoPageProps> = ({
   const { data: session, status } = useSession();
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["getvideometadata"],
+    queryFn: async () => {
+      const res = await fetch(`/api/getvideometadata?workspaceId=${workspaceId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // console.log("res : ", await res.json());
+      const resData = await res.json();
+      return resData;
+    },    
+  });
+
+  useEffect(() => {
+    if(isSuccess && data) {
+      console.log("data : ", data);
+      setTitle(data.title);
+      setDescription(data.description);
+      setVideoStatus(data.videoStatus);
+      setVideoUrl(data.url);
+    }
+  }, [isSuccess, data]);
+  
 
   const addTags = (e: any) => {
     if (e.key === "Enter" && tags) {
@@ -63,22 +93,9 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // TODO: EEXTRACT AL DATA FROM DB HERE
   // TODO: Test getvideometadata api
-  const { data } = useQuery({
-    queryKey: ["getvideometadata"],
-    queryFn: async () => {
-      const res = await fetch(`/api/getvideometadata?workspaceId=${workspaceId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      console.log("res : ", await res.json());
-      const resData = await res.json();
-      return resData;
-      
-    },
-  });
+
+  
 
   // ----------- Progress bar logic ------------
 
@@ -163,7 +180,7 @@ const VideoPage: FC<VideoPageProps> = ({
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="mt-8 flow-root sm:mt-5">
           <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-            <Video url="https://utfs.io/f/b99b4e90-1c38-4836-b69a-85c708d1dd7d-1uswaj.mp4" />
+            <Video url={videoUrl} />
           </div>
         </div>
       </div>
@@ -246,6 +263,7 @@ const VideoPage: FC<VideoPageProps> = ({
             type="text"
             className="w-full mt-1 rounded-sm"
             placeholder="Enter your video title"
+            value={title}
             {...register("title", { required: "Title is required" })}
           />
 
@@ -260,6 +278,7 @@ const VideoPage: FC<VideoPageProps> = ({
             className="w-full mt-2 h-[175px] rounded-sm resize-none"
             placeholder="Enter your video Description"
             {...register("description")}
+            value={description}
           />
 
           <div className="h-3">
