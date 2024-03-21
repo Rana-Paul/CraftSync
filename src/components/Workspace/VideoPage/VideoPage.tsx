@@ -41,9 +41,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
-  const [videoStatus, setVideoStatus] = useState<VideoStatus>(
-    VideoStatus.PRIVATE
-  );
+  const [videoStatus, setVideoStatus] = useState<VideoStatus>(VideoStatus.PRIVATE);
   const [description, setDescription] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
@@ -322,11 +320,11 @@ const VideoPage: FC<VideoPageProps> = ({
             <select
               {...register("status")}
               name="status"
-              value="private"
+              value={videoStatus}
               className="w-full mt-1 rounded-sm"
             >
-              <option value="private">Public</option>
-              <option value="public">Private</option>
+              <option value="private">Private</option>
+              <option value="public">Public</option>
             </select>
           </div>
 
