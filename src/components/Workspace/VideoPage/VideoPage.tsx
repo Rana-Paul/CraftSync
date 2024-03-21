@@ -75,6 +75,10 @@ const VideoPage: FC<VideoPageProps> = ({
       setVideoUrl(data.url);
     }
   }, [isSuccess, data]);
+
+  if(isLoading) {
+    return <div>Loading...</div>
+  }
   
 
   const addTags = (e: any) => {
