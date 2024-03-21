@@ -6,6 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const workspaceId = request.nextUrl.searchParams.get("workspaceId");
+  console.log("workspaceId: ", workspaceId);
+  
   
   if(!session || !workspaceId) {
     return new Error("Something went wrong");

@@ -4,6 +4,7 @@ import React, {
   ChangeEvent,
   FC,
   InputHTMLAttributes,
+  use,
   useCallback,
   useState,
 } from "react";
@@ -62,8 +63,21 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // TODO: EEXTRACT AL DATA FROM DB HERE
   // TODO: Test getvideometadata api
-  const { mutate } = useMutation({
-    mutationFn: async () => {},
+  const { data } = useQuery({
+    queryKey: ["getvideometadata"],
+    queryFn: async () => {
+      const res = await fetch(`/api/getvideometadata?workspaceId=${workspaceId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("res : ", await res.json());
+      const resData = await res.json();
+      return resData;
+      
+    },
   });
 
   // ----------- Progress bar logic ------------
