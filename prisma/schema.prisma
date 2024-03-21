@@ -51,6 +51,7 @@ model Video {
   url         String    @default("")
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
+  tags        String[]
   createdAt   DateTime  @default(now())
   videoStatus String    @default("private")
 
