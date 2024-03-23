@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-
-    const isCreator = db.workspace.findFirst({
+    let creatorStatus = false
+    const isCreator = await db.workspace.findFirst({
       where: {
         AND: [
           {id: workspaceId},
@@ -24,7 +24,11 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    const isEditor = db.editor.findFirst({
+    if(isCreator) {
+      creatorStatus = true
+    }
+
+    const isEditor = await db.editor.findFirst({
       where: {
         AND: [
           {workspaceId: workspaceId},
@@ -46,7 +50,8 @@ export async function GET(request: NextRequest) {
         workspaceId: workspaceId
       },
     });
-    return NextResponse.json(video);
+    const videoData = [{video},{isCreator: creatorStatus}];
+    return NextResponse.json(videoData);
 
   } catch (error) {
     return new Error("Something went wrong");

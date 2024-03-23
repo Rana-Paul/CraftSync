@@ -34,12 +34,13 @@ const VideoPage: FC<VideoPageProps> = ({
 }: {
   workspaceId: string;
 }) => {
-
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
-  const [videoStatus, setVideoStatus] = useState<VideoStatus>(VideoStatus.PRIVATE);
+  const [videoStatus, setVideoStatus] = useState<VideoStatus>(
+    VideoStatus.PRIVATE
+  );
   const [description, setDescription] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
@@ -50,30 +51,35 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Get Initial Data
 
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ["getvideometadata"],
     queryFn: async () => {
-      const res = await fetch(`/api/getvideometadata?workspaceId=${workspaceId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `/api/getvideometadata?workspaceId=${workspaceId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // console.log("res : ", await res.json());
       const resData = await res.json();
+      console.log(resData[0].video);
+      
       return resData;
-    },    
+    },
   });
 
   // UseEffect
   useEffect(() => {
-    if(isSuccess && data) {
+    if (isSuccess && data) {
       console.log("data : ", data);
-      setTitle(data.title);
-      setDescription(data.description);
-      setVideoStatus(data.videoStatus);
-      setVideoUrl(data.url);
+      setTitle(data[0].video.title);
+      setDescription(data[0].video.description);
+      setVideoStatus(data[0].video.videoStatus);
+      setVideoUrl(data[0].video.url);
     }
   }, [isSuccess, data]);
 
@@ -163,6 +169,8 @@ const VideoPage: FC<VideoPageProps> = ({
   const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
     console.log(tags);
+
+    console.log(title);
     
 
     // Mutation for update video metadata
@@ -187,7 +195,6 @@ const VideoPage: FC<VideoPageProps> = ({
 
       {/* Form page */}
       <MaxWidthWrapper className="mb-4">
-
         {/* Video */}
         <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
           {/* Upload Video Button */}
@@ -266,6 +273,7 @@ const VideoPage: FC<VideoPageProps> = ({
             type="text"
             className="w-full mt-1 rounded-sm"
             placeholder="Enter your video title"
+            defaultValue={title}
             value={title}
             {...register("title", { required: "Title is required" })}
           />
@@ -335,17 +343,34 @@ const VideoPage: FC<VideoPageProps> = ({
           </div>
 
           {/* TODO: Add all input boxes */}
-          <Button
-            className={buttonVariants({
-              size: "sm",
-              className: "mt-3",
-              variant: "default",
-            })}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Creating..." : "Create"}
-          </Button>
+          <div className="flex justify-space-between">
+            <div className="w-full">
+              <Button
+                className={buttonVariants({
+                  size: "sm",
+                  className: "mt-3",
+                  variant: "default",
+                })}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Creating..." : "Create"}
+              </Button>
+            </div>
+            <div>
+              <Button
+                className={buttonVariants({
+                  size: "sm",
+                  className: "mt-3",
+                  variant: "default",
+                })}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Creating..." : "Create"}
+              </Button>
+            </div>
+          </div>
         </form>
       </MaxWidthWrapper>
     </>
