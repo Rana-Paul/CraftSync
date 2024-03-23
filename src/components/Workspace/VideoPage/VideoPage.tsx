@@ -155,13 +155,14 @@ const VideoPage: FC<VideoPageProps> = ({
     queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
   };
 
-  // TODO: Extract data from DB and store into state
-
   // ----------------- Upload thumbnail to s3 ----------------------
 
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);
   };
+
+  //Todo: Update Metadata func here-----------
+
 
   // React form handler
   const {
@@ -173,6 +174,7 @@ const VideoPage: FC<VideoPageProps> = ({
     resolver: zodResolver(videoMetadataSchema),
   });
 
+  // Submit Handler
   const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
     console.log(tags);
@@ -184,8 +186,6 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(data);
     setIsSubmitting(false);
   };
-
-  // Get metadata from db
 
   //TODO: AWS Setup
 
