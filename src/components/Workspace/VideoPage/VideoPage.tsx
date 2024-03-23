@@ -149,7 +149,7 @@ const VideoPage: FC<VideoPageProps> = ({
     setUploadProgress(100);
     setIsUploading(false);
     data.target.value = "";
-    toast.error(videoUpload.msg);
+    toast.success(videoUpload.msg);
   };
 
   // TODO: Extract data from DB and store into state
