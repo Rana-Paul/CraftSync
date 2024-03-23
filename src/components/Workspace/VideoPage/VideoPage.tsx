@@ -18,7 +18,7 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { X } from "lucide-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -49,6 +49,8 @@ const VideoPage: FC<VideoPageProps> = ({
   const { data: session, status } = useSession();
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const queryClient = useQueryClient();
 
   // Get Initial Data
 
@@ -150,6 +152,7 @@ const VideoPage: FC<VideoPageProps> = ({
     setIsUploading(false);
     data.target.value = "";
     toast.success(videoUpload.msg);
+    queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
   };
 
   // TODO: Extract data from DB and store into state
