@@ -75,10 +75,6 @@ const VideoPage: FC<VideoPageProps> = ({
   }, [isSuccess, data]);
 
   // TODO: Create a beautiful Loading Skeleton
-  if(isLoading) {
-    return <div>Loading...</div>
-  }
-  
 
   const addTags = (e: any) => {
     if (e.key === "Enter" && tags) {
@@ -165,6 +161,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
+    console.log(tags);
+    
 
     // Mutation for update video metadata
 
