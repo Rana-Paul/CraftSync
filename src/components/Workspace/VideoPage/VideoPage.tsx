@@ -81,6 +81,9 @@ const VideoPage: FC<VideoPageProps> = ({
       setVideoStatus(data[0].video.videoStatus);
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
+      setTags(data[0].video.tags);
+      console.log(tags);
+      
     }
   }, [isSuccess, data]);
 
@@ -302,7 +305,7 @@ const VideoPage: FC<VideoPageProps> = ({
           {/* Tag Inputs */}
           <div>
             <div className="flex-col">
-              {/* TODO: Rander Tags */}
+              {/* Rander Tags */}
               {tags.map((tag, index) => (
                 <div
                   key={index}
