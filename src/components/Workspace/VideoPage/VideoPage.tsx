@@ -44,6 +44,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const [description, setDescription] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
+  const [isCreator, setIsCreator] = useState<boolean>(false);
 
   const { data: session, status } = useSession();
 
@@ -66,8 +67,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
       // console.log("res : ", await res.json());
       const resData = await res.json();
-      console.log(resData[0].video);
-      
+
       return resData;
     },
   });
@@ -80,6 +80,7 @@ const VideoPage: FC<VideoPageProps> = ({
       setDescription(data[0].video.description);
       setVideoStatus(data[0].video.videoStatus);
       setVideoUrl(data[0].video.url);
+      setIsCreator(data[1].isCreator);
     }
   }, [isSuccess, data]);
 
@@ -171,7 +172,6 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(tags);
 
     console.log(title);
-    
 
     // Mutation for update video metadata
 
@@ -343,7 +343,40 @@ const VideoPage: FC<VideoPageProps> = ({
           </div>
 
           {/* TODO: Add all input boxes */}
-          <div className="flex justify-space-between">
+
+          {isCreator ? (
+            <div className="flex justify-space-between">
+              <div className="w-full">
+                <Button
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "mt-3 ",
+                    variant: "ghost",
+                  })
+                  
+                }
+                  type="submit"
+
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Updating..." : "Update"}
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "mt-3 bg-blue-700 hover:bg-blue-800 hover:text-white",
+                    variant: "default",
+                  })}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Uploading..." : "Upload"}
+                </Button>
+              </div>
+            </div>
+          ) : (
             <div className="w-full">
               <Button
                 className={buttonVariants({
@@ -354,23 +387,10 @@ const VideoPage: FC<VideoPageProps> = ({
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Creating..." : "Create"}
+                {isSubmitting ? "Creating..." : "Review"}
               </Button>
             </div>
-            <div>
-              <Button
-                className={buttonVariants({
-                  size: "sm",
-                  className: "mt-3",
-                  variant: "default",
-                })}
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Creating..." : "Create"}
-              </Button>
-            </div>
-          </div>
+          )}
         </form>
       </MaxWidthWrapper>
     </>
