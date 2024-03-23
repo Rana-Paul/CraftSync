@@ -48,6 +48,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  // Get Initial Data
+
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["getvideometadata"],
     queryFn: async () => {
@@ -64,6 +66,7 @@ const VideoPage: FC<VideoPageProps> = ({
     },    
   });
 
+  // UseEffect
   useEffect(() => {
     if(isSuccess && data) {
       console.log("data : ", data);
@@ -76,6 +79,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // TODO: Create a beautiful Loading Skeleton
 
+  // Tags logic
   const addTags = (e: any) => {
     if (e.key === "Enter" && tags) {
       e.preventDefault();
@@ -83,16 +87,12 @@ const VideoPage: FC<VideoPageProps> = ({
       setTagsValue("");
     }
   };
-
   const deleteTags = (index: number) => {
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
   // TODO: EEXTRACT AL DATA FROM DB HERE
   // TODO: Test getvideometadata api
-
-
-  
 
   // ----------- Progress bar logic ------------
 
@@ -150,6 +150,7 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(thumb);
   };
 
+  // React form handler
   const {
     register,
     handleSubmit,
@@ -186,6 +187,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
       {/* Form page */}
       <MaxWidthWrapper className="mb-4">
+
+        {/* Video */}
         <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
           {/* Upload Video Button */}
           <div className="h-full">
@@ -255,6 +258,7 @@ const VideoPage: FC<VideoPageProps> = ({
           )}
         </div>
 
+        {/* Form */}
         <form className="w-full" onSubmit={handleSubmit(submit)}>
           {/* Ttile */}
           <h2 className="text-md font-semibold">Add Title</h2>
