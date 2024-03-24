@@ -4,6 +4,7 @@ import React, {
   ChangeEvent,
   FC,
   InputHTMLAttributes,
+  ReactEventHandler,
   useEffect,
   useState,
 } from "react";
@@ -161,21 +162,15 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(thumb);
   };
 
-  const disableUpdateButton = (value: string) => { 
-    console.log(value);
-    console.log(title);
-    
-    if(value.length !== title.length) {
-      setIsAcctiveButton(false);
-    } else {
-      setIsAcctiveButton(true);
-    }
+  const disableUpdateButton = (event: ChangeEvent<HTMLInputElement>) => { 
+    console.log(event);
 
-    if(value.length !== description.length) {
-      setIsAcctiveButton(false);
-    } else {
+    if((event.target.value == title && event.target.name === "title") || (event.target.value == description && event.target.name === "description")) {
       setIsAcctiveButton(true);
+    } else {
+      setIsAcctiveButton(false);
     }
+    // console.log(title);
   }
 
   //Todo: Update Metadata func here-----------
@@ -295,7 +290,7 @@ const VideoPage: FC<VideoPageProps> = ({
             {...register("title", {
               required: "Title is required" ,
               onChange(event) {
-                disableUpdateButton(event.target.value);
+                disableUpdateButton(event);
               },
             })}
           />
@@ -310,7 +305,11 @@ const VideoPage: FC<VideoPageProps> = ({
           <textarea
             className="w-full mt-2 h-[175px] rounded-sm resize-none"
             placeholder="Enter your video Description"
-            {...register("description")}
+            {...register("description", {
+              onChange(event) {
+                disableUpdateButton(event);
+              },
+            })}
             defaultValue={description}
           />
 
