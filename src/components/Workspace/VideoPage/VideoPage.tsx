@@ -166,7 +166,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const disableUpdateButton = (event: ChangeEvent<HTMLInputElement>) => { 
     console.log(event);
 
-    if((event.target.value == title && event.target.name === "title") || (event.target.value == description && event.target.name === "description")) {
+    if((event.target.value == title && event.target.name === "title") || (event.target.value == description && event.target.name === "description") || (event.target.value == videoStatus && event.target.name === "status")) {
       setIsAcctiveButton(true);
     } else {
       setIsAcctiveButton(false);
@@ -194,8 +194,6 @@ const VideoPage: FC<VideoPageProps> = ({
 
     setIsSubmitting(false);
   };
-
-  //TODO: AWS Setup
 
   return (
     <>
@@ -354,9 +352,13 @@ const VideoPage: FC<VideoPageProps> = ({
             <h2 className="text-md mt-1 font-semibold">Select Video Status</h2>
 
             <select
-              {...register("status")}
+              {...register("status", {
+                onChange(event) {
+                  disableUpdateButton(event);
+                }
+              })}
               name="status"
-              value={videoStatus}
+              defaultValue={videoStatus}
               className="w-full mt-1 rounded-sm"
             >
               <option value="private">Private</option>
