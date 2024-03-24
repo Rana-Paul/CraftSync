@@ -95,7 +95,7 @@ const VideoPage: FC<VideoPageProps> = ({
   // Tags logic
   const addTags = (e: any) => {
     if (e.key === "Enter" && tags) {
-      setIsAcctiveButton(false)
+      setIsAcctiveButton(false);
       e.preventDefault();
       setTags((prevTags) => [...prevTags, tagValue]);
       setTagsValue("");
@@ -163,16 +163,22 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(thumb);
   };
 
-  const disableUpdateButton = (event: ChangeEvent<HTMLInputElement>) => { 
+  // Desable update button logic
+  const disableUpdateButton = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event);
 
-    if((event.target.value == title && event.target.name === "title") || (event.target.value == description && event.target.name === "description") || (event.target.value == videoStatus && event.target.name === "status")) {
+    if (
+      (event.target.value == title && event.target.name === "title") ||
+      (event.target.value == description &&
+        event.target.name === "description") ||
+      (event.target.value == videoStatus && event.target.name === "status")
+    ) {
       setIsAcctiveButton(true);
     } else {
       setIsAcctiveButton(false);
     }
     // console.log(title);
-  }
+  };
 
   //Todo: Update Metadata func here-----------
 
@@ -188,6 +194,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Submit Handler
   const submit: SubmitHandler<any> = async (data, event) => {
+
+    // TODO: Update metadata on db
     setIsSubmitting(true);
 
     console.log(data, tags);
@@ -287,7 +295,7 @@ const VideoPage: FC<VideoPageProps> = ({
             placeholder="Enter your video title"
             defaultValue={title}
             {...register("title", {
-              required: "Title is required" ,
+              required: "Title is required",
               onChange(event) {
                 disableUpdateButton(event);
               },
@@ -355,7 +363,7 @@ const VideoPage: FC<VideoPageProps> = ({
               {...register("status", {
                 onChange(event) {
                   disableUpdateButton(event);
-                }
+                },
               })}
               name="status"
               defaultValue={videoStatus}
