@@ -45,6 +45,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
   const [isCreator, setIsCreator] = useState<boolean>(false);
+  const [isActiveButton, setIsAcctiveButton] = useState<boolean>(true);
 
   const { data: session, status } = useSession();
 
@@ -85,7 +86,6 @@ const VideoPage: FC<VideoPageProps> = ({
       setIsCreator(data[1].isCreator);
       setTags(data[0].video.tags);
       console.log(tags);
-      
     }
   }, [isSuccess, data]);
 
@@ -163,7 +163,6 @@ const VideoPage: FC<VideoPageProps> = ({
 
   //Todo: Update Metadata func here-----------
 
-
   // React form handler
   const {
     register,
@@ -179,12 +178,11 @@ const VideoPage: FC<VideoPageProps> = ({
     setIsSubmitting(true);
 
     console.log(data, tags);
-    
 
     setIsSubmitting(false);
   };
 
-  //TODO: AWS Setup 
+  //TODO: AWS Setup
 
   return (
     <>
@@ -277,7 +275,25 @@ const VideoPage: FC<VideoPageProps> = ({
             className="w-full mt-1 rounded-sm"
             placeholder="Enter your video title"
             defaultValue={title}
-            {...register("title", { required: "Title is required" })}
+            onFocus={(e) => {
+              console.log(e.target.value);
+              if (e.target.value.length !== title.length) {
+                {
+                  setIsAcctiveButton(false);
+                }
+              }
+            }}
+            {...register("title", {
+              required: "Title is required" ,
+              onChange(event) {
+                if (event.target.value.length == title.length) {
+                  setIsAcctiveButton(true);
+                }
+                else {
+                  setIsAcctiveButton(false);
+                }
+              },
+            })}
           />
 
           <div className="h-3">
@@ -354,12 +370,9 @@ const VideoPage: FC<VideoPageProps> = ({
                     size: "sm",
                     className: "mt-3 ",
                     variant: "ghost",
-                  })
-                  
-                }
+                  })}
                   type="submit"
-
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isActiveButton}
                 >
                   {isSubmitting ? "Updating..." : "Update"}
                 </Button>
@@ -368,7 +381,8 @@ const VideoPage: FC<VideoPageProps> = ({
                 <Button
                   className={buttonVariants({
                     size: "sm",
-                    className: "mt-3 bg-blue-700 hover:bg-blue-800 hover:text-white",
+                    className:
+                      "mt-3 bg-blue-700 hover:bg-blue-800 hover:text-white",
                     variant: "default",
                   })}
                   type="submit"
