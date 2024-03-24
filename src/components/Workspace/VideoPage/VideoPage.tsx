@@ -275,14 +275,6 @@ const VideoPage: FC<VideoPageProps> = ({
             className="w-full mt-1 rounded-sm"
             placeholder="Enter your video title"
             defaultValue={title}
-            onFocus={(e) => {
-              console.log(e.target.value);
-              if (e.target.value.length !== title.length) {
-                {
-                  setIsAcctiveButton(false);
-                }
-              }
-            }}
             {...register("title", {
               required: "Title is required" ,
               onChange(event) {
