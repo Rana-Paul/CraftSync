@@ -161,6 +161,23 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(thumb);
   };
 
+  const disableUpdateButton = (value: string) => { 
+    console.log(value);
+    console.log(title);
+    
+    if(value.length !== title.length) {
+      setIsAcctiveButton(false);
+    } else {
+      setIsAcctiveButton(true);
+    }
+
+    if(value.length !== description.length) {
+      setIsAcctiveButton(false);
+    } else {
+      setIsAcctiveButton(true);
+    }
+  }
+
   //Todo: Update Metadata func here-----------
 
   // React form handler
@@ -278,12 +295,7 @@ const VideoPage: FC<VideoPageProps> = ({
             {...register("title", {
               required: "Title is required" ,
               onChange(event) {
-                if (event.target.value.length == title.length) {
-                  setIsAcctiveButton(true);
-                }
-                else {
-                  setIsAcctiveButton(false);
-                }
+                disableUpdateButton(event.target.value);
               },
             })}
           />
