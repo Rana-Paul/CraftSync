@@ -177,17 +177,14 @@ const VideoPage: FC<VideoPageProps> = ({
   // Submit Handler
   const submit: SubmitHandler<any> = async (data, event) => {
     setIsSubmitting(true);
-    console.log(tags);
 
-    console.log(title);
+    console.log(data, tags);
+    
 
-    // Mutation for update video metadata
-
-    console.log(data);
     setIsSubmitting(false);
   };
 
-  //TODO: AWS Setup
+  //TODO: AWS Setup 
 
   return (
     <>
@@ -199,7 +196,7 @@ const VideoPage: FC<VideoPageProps> = ({
         </div>
       </div>
 
-      {/* Form page */}
+      {/* Form wrapper */}
       <MaxWidthWrapper className="mb-4">
         {/* Video */}
         <div className="mt-8 items-center w-full h-full justify-between sm:flex mb-6">
@@ -280,7 +277,6 @@ const VideoPage: FC<VideoPageProps> = ({
             className="w-full mt-1 rounded-sm"
             placeholder="Enter your video title"
             defaultValue={title}
-            value={title}
             {...register("title", { required: "Title is required" })}
           />
 
@@ -295,7 +291,7 @@ const VideoPage: FC<VideoPageProps> = ({
             className="w-full mt-2 h-[175px] rounded-sm resize-none"
             placeholder="Enter your video Description"
             {...register("description")}
-            value={description}
+            defaultValue={description}
           />
 
           <div className="h-3">
