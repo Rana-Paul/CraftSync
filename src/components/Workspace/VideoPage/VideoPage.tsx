@@ -95,6 +95,7 @@ const VideoPage: FC<VideoPageProps> = ({
   // Tags logic
   const addTags = (e: any) => {
     if (e.key === "Enter" && tags) {
+      setIsAcctiveButton(false)
       e.preventDefault();
       setTags((prevTags) => [...prevTags, tagValue]);
       setTagsValue("");
