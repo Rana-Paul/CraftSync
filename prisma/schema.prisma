@@ -47,12 +47,12 @@ model Editor {
 
 model Video {
   id          String    @id @default(cuid())
-  title       String    @default("Untitled")
+  title       String    @default("")
   url         String    @default("")
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
   tags        String[]
-  description String    @default("No description")
+  description String    @default("")
   createdAt   DateTime  @default(now())
   videoStatus String    @default("private")
 
