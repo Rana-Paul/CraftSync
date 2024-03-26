@@ -73,6 +73,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Update VideoMeta Data mutation
 
+  // TODO: Update metadata on db
   const { mutate } = useMutation({
     mutationKey: ["videometadataupdate"],
     mutationFn: async (data: UpdateVideoMetaDataType) => {
@@ -85,6 +86,8 @@ const VideoPage: FC<VideoPageProps> = ({
       });
       return await res.json();
     },
+
+    // todo: Hnadle error state and success state
   });
 
   // UseEffect
