@@ -39,7 +39,7 @@ model Editor {
   id          String    @id @default(cuid())
   editor      User      @relation(fields: [editorId], references: [id])
   editorId    String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
 
   @@index([workspaceId, editorId])
