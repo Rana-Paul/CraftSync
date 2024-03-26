@@ -44,11 +44,9 @@ const VideoPage: FC<VideoPageProps> = ({
   const [isUploaading, setIsUploading] = useState<boolean>(false);
   const [isCreator, setIsCreator] = useState<boolean>(false);
   const [isActiveButton, setIsAcctiveButton] = useState<boolean>(true);
-
-  const { data: session, status } = useSession();
-
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  const { data: session, status } = useSession();
   const queryClient = useQueryClient();
 
   // Get Initial Data
@@ -83,7 +81,6 @@ const VideoPage: FC<VideoPageProps> = ({
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
       setTags(data[0].video.tags);      
-      console.log(videoStatus);
     }
   }, [isSuccess, data]);
 
