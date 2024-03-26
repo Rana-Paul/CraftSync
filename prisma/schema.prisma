@@ -57,6 +57,7 @@ model Video {
   videoStatus String    @default("private")
 
   @@unique([workspaceId])
+  @@index([workspaceId])
 }
 
 // add invite schema
