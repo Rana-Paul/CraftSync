@@ -73,28 +73,29 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Update VideoMeta Data mutation
 
-  const {mutate}  =useMutation({
-    mutationKey: ["updatevideometadata"],
+  const { mutate } = useMutation({
+    mutationKey: ["videometadataupdate"],
     mutationFn: async (data: UpdateVideoMetaDataType) => {
-      const res = await fetch("/api/updatevideometadata", {
+      const res = await fetch("/api/videometadataupdate", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
       });
-    }
-  })
+      return await res.json();
+    },
+  });
 
   // UseEffect
   useEffect(() => {
     if (isSuccess && data) {
       setTitle(data[0].video.title);
       setDescription(data[0].video.description);
-      setVideoStatus(data[0].video.videoStatus);      
+      setVideoStatus(data[0].video.videoStatus);
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
-      setTags(data[0].video.tags);      
+      setTags(data[0].video.tags);
     }
   }, [isSuccess, data]);
 
@@ -202,14 +203,17 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Submit Handler
   const submit: SubmitHandler<any> = async (data, event) => {
-
     // TODO: Update metadata on db
     setIsSubmitting(true);
 
     console.log(data, tags);
-    if(data.title > 0){
-      mutate({ title: data.title, description: data.description, status: data.status, tags: tags, workspaceId: workspaceId });
-    }
+    mutate({
+      title: data.title,
+      description: data.description,
+      status: data.status,
+      tags: tags,
+      workspaceId: workspaceId,
+    });
 
     setIsSubmitting(false);
   };
@@ -377,10 +381,11 @@ const VideoPage: FC<VideoPageProps> = ({
                 },
               })}
               name="status"
-              
               className="w-full mt-1 rounded-sm"
             >
-              <option value="" selected disabled hidden>{videoStatus.length > 0 ? videoStatus : "Select Video Status"}</option>
+              <option value="" selected disabled hidden>
+                {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
+              </option>
               <option value="private">Private</option>
               <option value="public">Public</option>
             </select>
