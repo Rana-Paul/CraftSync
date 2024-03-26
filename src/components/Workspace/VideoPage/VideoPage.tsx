@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   VideoMetaDataType,
   videoMetadataSchema,
+  UpdateVideoMetaDataType,
 } from "@/lib/validators/video-metadata";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
@@ -74,7 +75,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const {mutate}  =useMutation({
     mutationKey: ["updatevideometadata"],
-    mutationFn: async (data: VideoMetaDataType) => {
+    mutationFn: async (data: UpdateVideoMetaDataType) => {
       const res = await fetch("/api/updatevideometadata", {
         method: "POST",
         body: JSON.stringify(data),
@@ -206,6 +207,9 @@ const VideoPage: FC<VideoPageProps> = ({
     setIsSubmitting(true);
 
     console.log(data, tags);
+    if(data.title > 0){
+      mutate({ title: data.title, description: data.description, status: data.status, tags: tags, workspaceId: workspaceId });
+    }
 
     setIsSubmitting(false);
   };
