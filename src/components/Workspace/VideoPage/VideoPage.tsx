@@ -50,7 +50,6 @@ const VideoPage: FC<VideoPageProps> = ({
   const queryClient = useQueryClient();
 
   // Get Initial Data
-
   const { data, isSuccess } = useQuery({
     queryKey: ["getvideometadata"],
     queryFn: async () => {
@@ -71,10 +70,24 @@ const VideoPage: FC<VideoPageProps> = ({
     },
   });
 
+  // Update VideoMeta Data mutation
+
+  const {mutate}  =useMutation({
+    mutationKey: ["updatevideometadata"],
+    mutationFn: async (data: VideoMetaDataType) => {
+      const res = await fetch("/api/updatevideometadata", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  })
+
   // UseEffect
   useEffect(() => {
     if (isSuccess && data) {
-      console.log("data : ", data);
       setTitle(data[0].video.title);
       setDescription(data[0].video.description);
       setVideoStatus(data[0].video.videoStatus);      
