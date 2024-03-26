@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { VideoStatus } from "./videostatus";
 
 export const videoMetadataSchema = z.object({
   title: z
@@ -8,7 +7,7 @@ export const videoMetadataSchema = z.object({
   description: z
     .string()
     .max(5000, { message: "Description should be at most 500 characters" }),
-  status: z.enum([VideoStatus.PUBLIC, VideoStatus.PRIVATE]),
+  status: z.string(),
 });
 
 export type VideoMetaDataType = z.infer<typeof videoMetadataSchema>;

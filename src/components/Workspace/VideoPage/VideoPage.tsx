@@ -24,7 +24,6 @@ import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { uploadVideoFile } from "@/helpers/uploadMedia";
-import { VideoStatus } from "@/lib/validators/videostatus";
 
 interface VideoPageProps {
   workspaceId: string;
@@ -39,9 +38,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
-  const [videoStatus, setVideoStatus] = useState<VideoStatus>(
-    VideoStatus.PRIVATE
-  );
+  const [videoStatus, setVideoStatus] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
@@ -82,11 +79,11 @@ const VideoPage: FC<VideoPageProps> = ({
       console.log("data : ", data);
       setTitle(data[0].video.title);
       setDescription(data[0].video.description);
-      setVideoStatus(data[0].video.videoStatus);
+      setVideoStatus(data[0].video.videoStatus);      
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
-      setTags(data[0].video.tags);
-      console.log(tags);
+      setTags(data[0].video.tags);      
+      console.log(videoStatus);
     }
   }, [isSuccess, data]);
 
@@ -366,9 +363,10 @@ const VideoPage: FC<VideoPageProps> = ({
                 },
               })}
               name="status"
-              defaultValue={videoStatus}
+              
               className="w-full mt-1 rounded-sm"
             >
+              <option value="" selected disabled hidden>{videoStatus.length > 0 ? videoStatus : "Select Video Status"}</option>
               <option value="private">Private</option>
               <option value="public">Public</option>
             </select>
