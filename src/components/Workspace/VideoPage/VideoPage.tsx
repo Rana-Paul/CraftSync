@@ -73,7 +73,6 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // Update VideoMeta Data mutation
 
-  // TODO: Update metadata on db
   const { mutate } = useMutation({
     mutationKey: ["videometadataupdate"],
     mutationFn: async (data: UpdateVideoMetaDataType) => {
@@ -209,7 +208,7 @@ const VideoPage: FC<VideoPageProps> = ({
     setIsSubmitting(true);
 
     console.log(title);
-    mutate({
+    await mutate({
       title: title,
       description: description,
       status: videoStatus,
@@ -391,6 +390,8 @@ const VideoPage: FC<VideoPageProps> = ({
               <option value="" selected disabled hidden>
                 {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
               </option>
+
+              {/* Fix this bug */}
               <option value="private">private</option>
               <option value="public">public</option>
             </select>

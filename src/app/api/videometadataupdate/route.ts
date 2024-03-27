@@ -43,43 +43,15 @@ export async function POST(request: Request) {
     });
   }
 
-  if (title.length > 0) {
-    const res = await db.video.update({
-      where: {
-        workspaceId: workspaceId,
-      },
-      data: {
-        title,
-      },
-    });
-  }
-  if (description.length > 0) {
-    const res = await db.video.update({
-      where: {
-        workspaceId: workspaceId,
-      },
-      data: {
-        description,
-      },
-    });
-  }
-  if (status.length > 0) {
-    const res = await db.video.update({
-      where: {
-        workspaceId: workspaceId,
-      },
-      data: {
-        videoStatus: status,
-      },
-    });
-  }
-
-  const tagUpdate = await db.video.update({
+  const update = await db.video.update({
     where: {
       workspaceId: workspaceId,
     },
     data: {
-      tags,
+      title: title,
+      description: description,
+      videoStatus: status,
+      tags: tags,
     },
   });
 
