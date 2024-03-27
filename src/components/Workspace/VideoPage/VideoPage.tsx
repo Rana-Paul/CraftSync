@@ -208,7 +208,7 @@ const VideoPage: FC<VideoPageProps> = ({
     // TODO: Update metadata on db
     setIsSubmitting(true);
 
-    console.log(data, tags);
+    console.log(title);
     mutate({
       title: data.title,
       description: data.description,
@@ -314,6 +314,7 @@ const VideoPage: FC<VideoPageProps> = ({
             {...register("title", {
               required: "Title is required",
               onChange(event) {
+                setTitle(event.target.value);
                 disableUpdateButton(event);
               },
             })}
@@ -331,6 +332,7 @@ const VideoPage: FC<VideoPageProps> = ({
             placeholder="Enter your video Description"
             {...register("description", {
               onChange(event) {
+                setDescription(event.target.value);
                 disableUpdateButton(event);
               },
             })}
@@ -379,6 +381,7 @@ const VideoPage: FC<VideoPageProps> = ({
             <select
               {...register("status", {
                 onChange(event) {
+                  setVideoStatus(event.target.value);
                   disableUpdateButton(event);
                 },
               })}
