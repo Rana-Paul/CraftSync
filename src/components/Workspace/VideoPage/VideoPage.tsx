@@ -180,14 +180,13 @@ const VideoPage: FC<VideoPageProps> = ({
     console.log(event);
 
     if (
-      (event.target.value == title && event.target.name === "title") ||
-      (event.target.value == description &&
-        event.target.name === "description") ||
-      (event.target.value == videoStatus && event.target.name === "status")
+      event.target.name === "title" ||
+      event.target.name === "description" ||
+      event.target.name === "status"
     ) {
-      setIsAcctiveButton(true);
-    } else {
       setIsAcctiveButton(false);
+    } else {
+      setIsAcctiveButton(true);
     }
     // console.log(title);
   };
