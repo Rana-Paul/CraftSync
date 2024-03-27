@@ -210,9 +210,9 @@ const VideoPage: FC<VideoPageProps> = ({
 
     console.log(title);
     mutate({
-      title: data.title,
-      description: data.description,
-      status: data.status,
+      title: title,
+      description: description,
+      status: videoStatus,
       tags: tags,
       workspaceId: workspaceId,
     });
@@ -391,8 +391,8 @@ const VideoPage: FC<VideoPageProps> = ({
               <option value="" selected disabled hidden>
                 {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
               </option>
-              <option value="private">Private</option>
-              <option value="public">Public</option>
+              <option value="private">private</option>
+              <option value="public">public</option>
             </select>
           </div>
 
