@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         }
     })
 
-    if(!isCreator && !isEditor) {
+    if(isCreator?.creatorId !== session?.user?.id && !isEditor) {
         return NextResponse.json({ message: "You are not authorized to update video metadata", status: 401 });
     }
     
