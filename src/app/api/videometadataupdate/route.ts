@@ -32,53 +32,52 @@ export async function POST(request: Request) {
     if(title.length > 0) {
         const res = await db.video.update({
             where: {
-                id: workspaceId
+                workspaceId: workspaceId
             },
             data: {
                 title
             }
         });
-        return NextResponse.json({ message: "Video metadata updated successfully", status: 200 });
     }
     if(description.length > 0) {
         const res = await db.video.update({
             where: {
-                id: workspaceId
+                workspaceId: workspaceId
             },
             data: {
                 description
             }
         });
-        return NextResponse.json({ message: "Video metadata updated successfully", status: 200 });
 
     }
     if(status.length > 0) {
         const res = await db.video.update({
             where: {
-                id: workspaceId
+                workspaceId: workspaceId
             },
             data: {
                 videoStatus: status
             }
         });
-        return NextResponse.json({ message: "Video metadata updated successfully", status: 200 });
 
     }
     if(tags.length > 0) {
         const res = await db.video.update({
             where: {
-                id: workspaceId
+                workspaceId: workspaceId
             },
             data: {
                 tags
             }
         });
-        return NextResponse.json({ message: "Video metadata updated successfully", status: 200 });
     }
 
     // if exists, update video metadata
         // check which data to update
 
-    // return NextResponse.json({ message: "Video metadata updated successfully" });
+        console.log("Video metadata updated successfully");
+        
+
+    return NextResponse.json({ message: "Video metadata updated successfully" });
 
 }
