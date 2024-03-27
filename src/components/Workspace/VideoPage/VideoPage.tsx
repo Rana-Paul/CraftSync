@@ -37,7 +37,6 @@ const VideoPage: FC<VideoPageProps> = ({
 }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagValue, setTagsValue] = useState<string>("");
-  const [defaultTags, setDefaultTags] = useState<string[]>([]);
   const [title, setTitle] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [videoStatus, setVideoStatus] = useState<string>("");
@@ -99,7 +98,7 @@ const VideoPage: FC<VideoPageProps> = ({
       setVideoStatus(data[0].video.videoStatus);
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
-      setDefaultTags(data[0].video.tags);
+      setTags(data[0].video.tags);
     }
   }, [isSuccess, data]);
 
@@ -111,7 +110,6 @@ const VideoPage: FC<VideoPageProps> = ({
       setIsAcctiveButton(false);
       e.preventDefault();
       setTags((prevTags) => [...prevTags, tagValue]);
-      setDefaultTags((prevTags) => [...prevTags, tagValue]);
       setTagsValue("");
     }
   };
@@ -211,14 +209,12 @@ const VideoPage: FC<VideoPageProps> = ({
     // TODO: Update metadata on db
     setIsSubmitting(true);
 
-    console.log("myyy: " ,tags.length );
-    
-
+    console.log(data, tags);
     mutate({
       title: data.title,
       description: data.description,
       status: data.status,
-      tags: tags.length > 0 ? defaultTags : tags,
+      tags: tags,
       workspaceId: workspaceId,
     });
 
@@ -353,7 +349,7 @@ const VideoPage: FC<VideoPageProps> = ({
           <div>
             <div className="flex-col">
               {/* Rander Tags */}
-              {defaultTags.map((tag, index) => (
+              {tags.map((tag, index) => (
                 <div
                   key={index}
                   className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 m-2"
