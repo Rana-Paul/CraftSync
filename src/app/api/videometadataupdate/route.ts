@@ -62,6 +62,8 @@ export async function POST(request: Request) {
 
     }
     if(tags.length > 0) {
+        console.log("fuck");
+        
         const res = await db.video.update({
             where: {
                 workspaceId: workspaceId
