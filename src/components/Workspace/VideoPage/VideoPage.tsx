@@ -94,6 +94,14 @@ const VideoPage: FC<VideoPageProps> = ({
         toast.success(data.message);
       }
     },
+    onError: (_, message) => {
+      // Internal server error
+      setIsSubmitting(false);
+      console.log("error", message);
+      toast.error(
+        "There was an error while updating content, please try again later"
+      );
+    }
 
     // todo: Hnadle error state and success state
   });
@@ -222,7 +230,6 @@ const VideoPage: FC<VideoPageProps> = ({
       workspaceId: workspaceId,
     });
 
-    setIsSubmitting(false);
   };
 
   return (
