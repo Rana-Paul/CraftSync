@@ -116,9 +116,6 @@ const VideoPage: FC<VideoPageProps> = ({
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
-  // TODO: EEXTRACT AL DATA FROM DB HERE
-  // TODO: Test getvideometadata api
-
   // ----------- Progress bar logic ------------
 
   const startSimulatedProgress = () => {
@@ -392,8 +389,8 @@ const VideoPage: FC<VideoPageProps> = ({
               </option>
 
               {/* Fix this bug */}
-              <option value="private">private</option>
-              <option value="public">public</option>
+              <option selected={videoStatus === "private"} value="private">private</option>
+              <option selected={videoStatus === "public"} value="public">public</option>
             </select>
           </div>
 
