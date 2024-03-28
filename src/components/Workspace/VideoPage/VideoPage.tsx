@@ -23,7 +23,7 @@ import { X } from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { uploadVideoFile } from "@/helpers/uploadMedia";
 
 interface VideoPageProps {
@@ -99,10 +99,8 @@ const VideoPage: FC<VideoPageProps> = ({
       // Internal server error
       setIsSubmitting(false);
       console.log("error", message);
-      toast.error(
-        "There was an error while updating content, please try again later"
-      );
-    }
+      toast.error("Something went wrong, please try again later");
+    },
   });
 
   // UseEffect
@@ -229,7 +227,6 @@ const VideoPage: FC<VideoPageProps> = ({
       tags: tags,
       workspaceId: workspaceId,
     });
-
   };
 
   return (
@@ -404,8 +401,12 @@ const VideoPage: FC<VideoPageProps> = ({
                 {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
               </option>
 
-              <option selected={videoStatus === "private"} value="private">private</option>
-              <option selected={videoStatus === "public"} value="public">public</option>
+              <option selected={videoStatus === "private"} value="private">
+                private
+              </option>
+              <option selected={videoStatus === "public"} value="public">
+                public
+              </option>
             </select>
           </div>
 
