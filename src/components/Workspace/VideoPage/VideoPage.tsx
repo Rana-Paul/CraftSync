@@ -91,6 +91,7 @@ const VideoPage: FC<VideoPageProps> = ({
         toast.error(data.message);
       } else {
         queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
+        setIsAcctiveButton(true);
         toast.success(data.message);
       }
     },
@@ -102,8 +103,6 @@ const VideoPage: FC<VideoPageProps> = ({
         "There was an error while updating content, please try again later"
       );
     }
-
-    // todo: Hnadle error state and success state
   });
 
   // UseEffect
@@ -130,6 +129,7 @@ const VideoPage: FC<VideoPageProps> = ({
     }
   };
   const deleteTags = (index: number) => {
+    setIsAcctiveButton(false);
     setTags((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
