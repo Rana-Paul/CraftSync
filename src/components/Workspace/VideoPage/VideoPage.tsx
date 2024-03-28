@@ -85,6 +85,15 @@ const VideoPage: FC<VideoPageProps> = ({
       });
       return await res.json();
     },
+    onSuccess: async (data) => {
+      setIsSubmitting(false);
+      if (data.status === 401) {
+        toast.error(data.message);
+      } else {
+        queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
+        toast.success(data.message);
+      }
+    },
 
     // todo: Hnadle error state and success state
   });
@@ -388,7 +397,6 @@ const VideoPage: FC<VideoPageProps> = ({
                 {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
               </option>
 
-              {/* Fix this bug */}
               <option selected={videoStatus === "private"} value="private">private</option>
               <option selected={videoStatus === "public"} value="public">public</option>
             </select>
