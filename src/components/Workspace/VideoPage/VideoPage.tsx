@@ -202,8 +202,6 @@ const VideoPage: FC<VideoPageProps> = ({
     // console.log(title);
   };
 
-  //Todo: Update Metadata func here-----------
-
   // React form handler
   const {
     register,

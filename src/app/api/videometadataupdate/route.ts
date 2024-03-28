@@ -44,9 +44,6 @@ export async function POST(request: Request) {
       },
     });
 
-    // if exists, update video metadata
-    // check which data to update
-
     return NextResponse.json({
       message: "Video metadata updated successfully",
     });
