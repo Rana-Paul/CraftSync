@@ -441,6 +441,7 @@ const VideoPage: FC<VideoPageProps> = ({
               </div>
             </div>
           ) : (
+            // Editor button
             <div className="w-full">
               <Button
                 className={buttonVariants({

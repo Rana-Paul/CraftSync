@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const update = await db.video.update({
+    await db.video.update({
       where: {
         workspaceId: workspaceId,
       },
@@ -46,6 +46,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       message: "Video metadata updated successfully",
+      status: 200,
     });
   } catch (error) {
     throw new Error("Something went wrong");
