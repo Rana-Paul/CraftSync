@@ -451,7 +451,7 @@ const VideoPage: FC<VideoPageProps> = ({
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Creating..." : "Review"}
+                {isSubmitting ? "Updating..." : "Review"}
               </Button>
             </div>
           )}
