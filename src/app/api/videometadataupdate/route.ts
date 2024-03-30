@@ -52,5 +52,4 @@ export async function POST(request: Request) {
     throw new Error("Something went wrong");
   }
 
-  // Check if user can update video metadata
 }

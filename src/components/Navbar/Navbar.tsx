@@ -7,7 +7,6 @@ import UserAccountNav from "./UserAccontNav";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 const Navbar = () => {
-
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <Loader2 className="h-4 w-4 animate-spin" />;
@@ -68,18 +67,16 @@ const Navbar = () => {
                     Dashboard
                   </Link>
                   <div className="mt-2">
-
-                  <UserAccountNav
-                    name={
-                      !session?.user.name
-                        ? "Your Account"
-                        : `${session?.user.name}`
-                    }
-                    email={session?.user.email ?? ""}
-                    imageUrl={session?.user.image ?? ""}
-                  />
+                    <UserAccountNav
+                      name={
+                        !session?.user.name
+                          ? "Your Account"
+                          : `${session?.user.name}`
+                      }
+                      email={session?.user.email ?? ""}
+                      imageUrl={session?.user.image ?? ""}
+                    />
                   </div>
-
                 </div>
               </div>
             )}
