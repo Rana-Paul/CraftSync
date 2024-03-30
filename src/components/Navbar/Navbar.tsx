@@ -56,16 +56,18 @@ const Navbar = () => {
               </>
             ) : (
               <div>
-                <div>
+                <div className="flex space-x-2">
                   <Link
                     href="/dashboard"
                     className={buttonVariants({
                       variant: "ghost",
                       size: "sm",
+                      className: "mt-2",
                     })}
                   >
                     Dashboard
                   </Link>
+                  <div className="mt-2">
 
                   <UserAccountNav
                     name={
@@ -76,6 +78,8 @@ const Navbar = () => {
                     email={session?.user.email ?? ""}
                     imageUrl={session?.user.image ?? ""}
                   />
+                  </div>
+
                 </div>
               </div>
             )}
