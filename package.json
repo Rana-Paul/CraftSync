@@ -28,6 +28,7 @@
     "@tanstack/react-query-devtools": "^5.18.1",
     "@upstash/ratelimit": "^1.0.0",
     "@upstash/redis": "^1.28.3",
+    "@vidstack/react": "^1.11.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
