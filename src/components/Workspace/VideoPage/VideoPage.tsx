@@ -158,7 +158,7 @@ const VideoPage: FC<VideoPageProps> = ({
   ) => {
     setIsUploading(true);
     const progessIntervel = startSimulatedProgress();
-    const videoUpload = await uploadVideoFile(video, data, id, workspaceId);
+    const videoUpload = await uploadVideoFile(video, id, workspaceId);
 
     // Handle error of uploading video
     if (!videoUpload.status) {
@@ -183,6 +183,8 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const uploadThumbnail = (thumb: File) => {
     console.log(thumb);
+
+    // TODO: Upload thumbnail logic
   };
 
   // Desable update button logic

@@ -4,7 +4,6 @@ import { ChangeEvent } from "react";
 
 export const uploadVideoFile = async (
   video: File,
-  data: ChangeEvent<HTMLInputElement>,
   userId: string | undefined,
   workspaceId: string
 ) => {
@@ -80,5 +79,5 @@ export const uploadVideoFile = async (
 };
 
 export const uploadThumbnail = async() => {
-
+  // TODO: upload thumbnail logic
 }
