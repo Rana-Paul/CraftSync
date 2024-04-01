@@ -1,8 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import thumb from "../../../../public/img/poster2.png";
-
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
 interface VideoProps {
   url: string;
 }
@@ -17,7 +16,27 @@ const Video: FC<VideoProps> = ({ url }) => {
   return (
     <div suppressHydrationWarning={true} className="w-full">
       {isClient ? (
-        <ReactPlayer
+        <MediaPlayer
+          title="Sprite Fight"
+          src={url}
+          onPlay={() => console.log("play")}
+          controls
+          poster=""
+        >
+          <MediaProvider />
+            
+        </MediaPlayer>
+      ) : (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      )}
+    </div>
+  );
+};
+
+export default Video;
+
+{
+  /* <ReactPlayer
           width="100%"
           height="auto"
           url={url}
@@ -27,12 +46,5 @@ const Video: FC<VideoProps> = ({ url }) => {
           // picture in picture
           pip={true}
           
-        />
-      ) : (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      )}
-    </div>
-  );
-};
-
-export default Video;
+        /> */
+}
