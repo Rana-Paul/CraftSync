@@ -78,3 +78,7 @@ export const uploadVideoFile = async (
     myVideoUrl,
   };
 };
+
+export const uploadThumbnail = async() => {
+
+}

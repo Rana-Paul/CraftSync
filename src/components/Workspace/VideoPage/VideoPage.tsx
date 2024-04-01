@@ -3,8 +3,6 @@ import { Loader2 } from "lucide-react";
 import React, {
   ChangeEvent,
   FC,
-  InputHTMLAttributes,
-  ReactEventHandler,
   useEffect,
   useState,
 } from "react";
@@ -39,6 +37,7 @@ const VideoPage: FC<VideoPageProps> = ({
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
   const [videoStatus, setVideoStatus] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [uploadProgess, setUploadProgress] = useState<number>(0);
@@ -232,7 +231,7 @@ const VideoPage: FC<VideoPageProps> = ({
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="mt-8 flow-root sm:mt-5">
           <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-            <Video url={videoUrl} />
+            <Video url={videoUrl} thumbnail={thumbnailUrl} />
           </div>
         </div>
       </div>
@@ -265,11 +264,12 @@ const VideoPage: FC<VideoPageProps> = ({
               Select Video
             </label>
           </div>
+          {/* Upload Thumbnail Button */}
           <div className=" mt-7 sm:mt-2">
             <input
               type="file"
               accept="images/*"
-              id="video"
+              id="thumbnail"
               className="hidden"
               onChange={(thumb) =>
                 thumb.target.files && uploadThumbnail(thumb.target.files[0])
@@ -277,7 +277,7 @@ const VideoPage: FC<VideoPageProps> = ({
             />
             <label
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
-              htmlFor="video"
+              htmlFor="thumbnail"
             >
               Select Thumbnail
             </label>
