@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 interface VideoProps {
   url: string;
+  thumbnail: string;
 }
 
 const Video: FC<VideoProps> = ({ url }) => {

@@ -49,6 +49,7 @@ model Video {
   id          String    @id @default(cuid())
   title       String    @default("")
   url         String    @default("")
+  thumbnail  String    @default("")
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
   tags        String[]
