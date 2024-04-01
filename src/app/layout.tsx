@@ -7,6 +7,8 @@ import { Provider } from "@/components/Providers/SessionProvider";
 import QueryclientProvider from "@/components/Providers/QueryClientProvider";
 import 'react-loading-skeleton/dist/skeleton.css'
 import NavBarController from "@/components/Navbar/NavBarController";
+// Base styles for media player and provider (~400B).
+import '@vidstack/react/player/styles/base.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
