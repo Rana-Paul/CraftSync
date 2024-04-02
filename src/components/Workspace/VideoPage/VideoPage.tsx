@@ -111,6 +111,7 @@ const VideoPage: FC<VideoPageProps> = ({
       setVideoUrl(data[0].video.url);
       setIsCreator(data[1].isCreator);
       setTags(data[0].video.tags);
+      setThumbnailUrl(data[0].video.thumbnail);
     }
   }, [isSuccess, data]);
 
