@@ -270,7 +270,7 @@ const VideoPage: FC<VideoPageProps> = ({
           <div className=" mt-7 sm:mt-2">
             <input
               type="file"
-              accept="images/*"
+              accept="image/*"
               id="thumbnail"
               className="hidden"
               onChange={(thumb) =>
@@ -397,7 +397,7 @@ const VideoPage: FC<VideoPageProps> = ({
               name="status"
               className="w-full mt-1 rounded-sm"
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 {videoStatus.length > 0 ? videoStatus : "Select Video Status"}
               </option>
 
