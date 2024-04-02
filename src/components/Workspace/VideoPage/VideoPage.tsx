@@ -145,7 +145,6 @@ const VideoPage: FC<VideoPageProps> = ({
   };
 
   console.log(thumbnailUrl);
-  
 
   // ----------------- Upload video to s3 ----------------------
 
@@ -157,16 +156,16 @@ const VideoPage: FC<VideoPageProps> = ({
   ) => {
     setIsUploading(true);
     const progessIntervel = startSimulatedProgress();
-    const videoUpload = await uploadFileToS3(file, id, workspaceId);
+    const fileUpload = await uploadFileToS3(file, id, workspaceId);
 
     // Handle error of uploading video
-    if (!videoUpload.status) {
+    if (!fileUpload.status) {
       // Clear inputs and Interval
       clearInterval(progessIntervel);
       setUploadProgress(100);
       setIsUploading(false);
       data.target.value = "";
-      toast.error(videoUpload.msg);
+      toast.error(fileUpload.msg);
       return;
     }
     // upload Successful
@@ -174,7 +173,7 @@ const VideoPage: FC<VideoPageProps> = ({
     setUploadProgress(100);
     setIsUploading(false);
     data.target.value = "";
-    toast.success(videoUpload.msg);
+    toast.success(fileUpload.msg);
     queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
   };
 
@@ -259,6 +258,9 @@ const VideoPage: FC<VideoPageProps> = ({
               Select Video
             </label>
           </div>
+
+          {/* TODO: Show Thumbnail button */}
+
           {/* Upload Thumbnail Button */}
           <div className=" mt-7 sm:mt-2">
             <input

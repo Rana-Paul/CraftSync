@@ -1,7 +1,5 @@
 "use client";
 
-import { ChangeEvent } from "react";
-
 export const uploadFileToS3 = async (
   video: File,
   userId: string | undefined,

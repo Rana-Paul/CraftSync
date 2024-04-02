@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { db } from "@/db";
 export async function PATCH(request: Request) {
-  console.log("insideeeeeeeeeeeeeeeeeeeeeeee---------------------");
+
+  // TODO: add error handling
 
   const requestBody = await request.json(); // Parse JSON payload once
 
