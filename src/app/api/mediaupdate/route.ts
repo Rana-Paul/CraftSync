@@ -7,7 +7,7 @@ export async function PATCH(request: Request) {
 
   const requestBody = await request.json(); // Parse JSON payload once
 
-  const { workspaceId, newUrl } = requestBody; 
+  const { workspaceId, newUrl, type } = requestBody; 
 
   console.log("new route: ", workspaceId, newUrl);
 
@@ -36,6 +36,19 @@ export async function PATCH(request: Request) {
       message: "You are not authorized to update this workspace",
       status: 401,
     });
+  }
+
+  if(type === "image") {
+    const updateImage = await db.video.update({
+      where: {
+        workspaceId,
+      },
+      data: {
+        thumbnail: newUrl,
+      }
+    });
+    return NextResponse.json({ message: "Image updated successfully", status: 200 });
+    
   }
 
   const updateVideo = await db.video.update({
