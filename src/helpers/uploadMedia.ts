@@ -8,7 +8,7 @@ export const uploadVideoFile = async (
   workspaceId: string
 ) => {
   const uploadUrl = await fetch(
-    `/api/presignurls?key=${userId}/${workspaceId}/Video/${video.name}&type=${video.type}`,
+    `/api/presignurls?key=${userId}/${workspaceId}/Files/${video.name}&type=${video.type}`,
     {
       method: "GET",
     }
@@ -77,7 +77,3 @@ export const uploadVideoFile = async (
     myVideoUrl,
   };
 };
-
-export const uploadThumbnail = async() => {
-  // TODO: upload thumbnail logic
-}
