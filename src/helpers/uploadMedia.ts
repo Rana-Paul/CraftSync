@@ -43,7 +43,7 @@ export const uploadFileToS3 = async (
   const getVideoUrl = await fetch("/api/presignurls", {
     method: "POST",
     body: JSON.stringify({
-      key: `${userId}/${workspaceId}/Video/${video.name}`,
+      key: `${userId}/${workspaceId}/Files/${video.name}`,
     }),
   });
 
