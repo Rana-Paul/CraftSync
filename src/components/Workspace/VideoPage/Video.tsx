@@ -1,13 +1,13 @@
 import { Loader2 } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import { MediaPlayer, MediaProvider, Thumbnail } from "@vidstack/react";
 interface VideoProps {
   url: string;
   thumbnail: string;
 }
 
-const Video: FC<VideoProps> = ({ url }) => {
+const Video: FC<VideoProps> = ({ url, thumbnail }) => {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -22,10 +22,9 @@ const Video: FC<VideoProps> = ({ url }) => {
           src={url}
           onPlay={() => console.log("play")}
           controls
-          poster=""
+          poster={thumbnail}
         >
           <MediaProvider />
-            
         </MediaPlayer>
       ) : (
         <Loader2 className="h-4 w-4 animate-spin" />

@@ -144,6 +144,9 @@ const VideoPage: FC<VideoPageProps> = ({
     return intervel;
   };
 
+  console.log(thumbnailUrl);
+  
+
   // ----------------- Upload video to s3 ----------------------
 
   const fileUpload = async (
