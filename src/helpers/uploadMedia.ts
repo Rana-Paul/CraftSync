@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent } from "react";
-import { getExtension } from "./getextension";
 
 export const uploadFileToS3 = async (
   video: File,

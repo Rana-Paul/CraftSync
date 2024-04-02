@@ -1,11 +1,6 @@
 "use client";
 import { Loader2 } from "lucide-react";
-import React, {
-  ChangeEvent,
-  FC,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import Video from "./Video";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -151,15 +146,15 @@ const VideoPage: FC<VideoPageProps> = ({
 
   // ----------------- Upload video to s3 ----------------------
 
-  const uploadVideo = async (
-    video: File,
+  const fileUpload = async (
+    file: File,
     data: ChangeEvent<HTMLInputElement>,
     id: string | undefined,
     workspaceId: string
   ) => {
     setIsUploading(true);
     const progessIntervel = startSimulatedProgress();
-    const videoUpload = await uploadFileToS3(video, id, workspaceId);
+    const videoUpload = await uploadFileToS3(file, id, workspaceId);
 
     // Handle error of uploading video
     if (!videoUpload.status) {
@@ -181,12 +176,6 @@ const VideoPage: FC<VideoPageProps> = ({
   };
 
   // ----------------- Upload thumbnail to s3 ----------------------
-
-  const uploadThumbnail = (thumb: File) => {
-    console.log(thumb);
-
-    // TODO: Upload thumbnail logic
-  };
 
   // Desable update button logic
   const disableUpdateButton = (event: ChangeEvent<HTMLInputElement>) => {
@@ -252,7 +241,7 @@ const VideoPage: FC<VideoPageProps> = ({
               className="hidden"
               onChange={(data) =>
                 data.target.files &&
-                uploadVideo(
+                fileUpload(
                   data.target.files[0],
                   data,
                   session?.user.id,
@@ -274,8 +263,14 @@ const VideoPage: FC<VideoPageProps> = ({
               accept="image/*"
               id="thumbnail"
               className="hidden"
-              onChange={(thumb) =>
-                thumb.target.files && uploadThumbnail(thumb.target.files[0])
+              onChange={(data) =>
+                data.target.files &&
+                fileUpload(
+                  data.target.files[0],
+                  data,
+                  session?.user.id,
+                  workspaceId
+                )
               }
             />
             <label
