@@ -8,7 +8,7 @@ export const uploadFileToS3 = async (
   userId: string | undefined,
   workspaceId: string
 ) => {
-  var fileType = getExtension(video.name)
+  const extractedType = video.type.split('/')[0];
   const uploadUrl = await fetch(
     `/api/presignurls?key=${userId}/${workspaceId}/Files/${video.name}&type=${video.type}`,
     {
@@ -57,17 +57,17 @@ export const uploadFileToS3 = async (
 
   const { myVideoUrl } = await getVideoUrl.json();
 
-  if(video.type)
   // Update video link to db
-  const updateVideo = await fetch("/api/mediaupdate", {
+  const updateMediaFile = await fetch("/api/mediaupdate", {
     method: "PATCH",
     body: JSON.stringify({
       workspaceId,
       newUrl: myVideoUrl,
+      type: extractedType,
     }),
   });
 
-  if (!updateVideo.ok) {
+  if (!updateMediaFile.ok) {
     return {
       status: false,
       msg: "something went wrong, Please try again later",
