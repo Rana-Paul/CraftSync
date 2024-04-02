@@ -22,7 +22,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { uploadVideoFile } from "@/helpers/uploadMedia";
+import { uploadFileToS3 } from "@/helpers/uploadMedia";
 
 interface VideoPageProps {
   workspaceId: string;
@@ -159,7 +159,7 @@ const VideoPage: FC<VideoPageProps> = ({
   ) => {
     setIsUploading(true);
     const progessIntervel = startSimulatedProgress();
-    const videoUpload = await uploadVideoFile(video, id, workspaceId);
+    const videoUpload = await uploadFileToS3(video, id, workspaceId);
 
     // Handle error of uploading video
     if (!videoUpload.status) {

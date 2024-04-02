@@ -1,12 +1,14 @@
 "use client";
 
 import { ChangeEvent } from "react";
+import { getExtension } from "./getextension";
 
-export const uploadVideoFile = async (
+export const uploadFileToS3 = async (
   video: File,
   userId: string | undefined,
   workspaceId: string
 ) => {
+  var fileType = getExtension(video.name)
   const uploadUrl = await fetch(
     `/api/presignurls?key=${userId}/${workspaceId}/Files/${video.name}&type=${video.type}`,
     {
@@ -55,6 +57,7 @@ export const uploadVideoFile = async (
 
   const { myVideoUrl } = await getVideoUrl.json();
 
+  if(video.type)
   // Update video link to db
   const updateVideo = await fetch("/api/mediaupdate", {
     method: "PATCH",
