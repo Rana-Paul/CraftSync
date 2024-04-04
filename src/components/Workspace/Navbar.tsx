@@ -12,10 +12,11 @@ import EditorsInNavbar from './EditorsInNavbar'
 interface NavbarProps {
     editors: GetEditorResType[] | undefined
     id: string
+    isCreator: boolean
 }
 
 
-const Navbar: FC<NavbarProps> = ({editors, id}) => {
+const Navbar: FC<NavbarProps> = ({editors, id, isCreator}) => {
 
   const { data: session, status } = useSession();
 

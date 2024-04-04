@@ -22,28 +22,53 @@ import Link from "next/link";
 
 interface VideoPageProps {
   workspaceId: string;
+  workspacetags: string[];
+  workspacetitle: string;
+  workspaceVideoUrl: string;
+  workspaceThumbnailUrl: string;
+  workspaceDescription: string;
+  workspaceVideoStatus: string;
+  workspaceIsCreator: boolean;
 }
 
 const VideoPage: FC<VideoPageProps> = ({
   workspaceId,
+  workspacetags,
+  workspacetitle,
+  workspaceVideoUrl,
+  workspaceThumbnailUrl,
+  workspaceDescription,
+  workspaceVideoStatus,
+  workspaceIsCreator,
+
 }: {
   workspaceId: string;
+  workspacetags: string[];
+  workspacetitle: string;
+  workspaceVideoUrl: string;
+  workspaceThumbnailUrl: string;
+  workspaceDescription: string;
+  workspaceVideoStatus: string;
+  workspaceIsCreator: boolean;
 }) => {
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(workspacetags);
   const [tagValue, setTagsValue] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [videoUrl, setVideoUrl] = useState<string>("");
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
-  const [videoStatus, setVideoStatus] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>(workspacetitle);
+  const [videoUrl, setVideoUrl] = useState<string>(workspaceVideoUrl);
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>(workspaceThumbnailUrl);
+  const [videoStatus, setVideoStatus] = useState<string>(workspaceVideoStatus);
+  const [description, setDescription] = useState<string>(workspaceDescription);
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
-  const [isCreator, setIsCreator] = useState<boolean>(false);
+  const [isCreator, setIsCreator] = useState<boolean>(workspaceIsCreator);
   const [isActiveButton, setIsAcctiveButton] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
+
+  console.log("taggg",tags);
+  
 
   // Get Initial Data
   const { data, isSuccess } = useQuery({
@@ -99,17 +124,17 @@ const VideoPage: FC<VideoPageProps> = ({
   });
 
   // UseEffect
-  useEffect(() => {
-    if (isSuccess && data) {
-      setTitle(data[0].video.title);
-      setDescription(data[0].video.description);
-      setVideoStatus(data[0].video.videoStatus);
-      setVideoUrl(data[0].video.url);
-      setIsCreator(data[1].isCreator);
-      setTags(data[0].video.tags);
-      setThumbnailUrl(data[0].video.thumbnail);
-    }
-  }, [isSuccess, data]);
+  // useEffect(() => {
+  //   if (isSuccess && data) {
+  //     setTitle(data[0].video.title);
+  //     setDescription(data[0].video.description);
+  //     setVideoStatus(data[0].video.videoStatus);
+  //     setVideoUrl(data[0].video.url);
+  //     setIsCreator(data[1].isCreator);
+  //     setTags(data[0].video.tags);
+  //     setThumbnailUrl(data[0].video.thumbnail);
+  //   }
+  // }, [isSuccess, data]);
 
   // TODO: Create a beautiful Loading Skeleton
 
