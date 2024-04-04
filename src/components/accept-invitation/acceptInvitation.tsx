@@ -65,7 +65,7 @@ export const AcceptInvitation: FC<acceptInvitationProps> = ({
         <h1 className="max-w-5xl text-6xl font-bold md:text-7xl lg:text-7xl">
           Craft<span className="text-blue-600">Sync</span>{" "}
         </h1>
-        <p className="mt-5 max-w-[338px] text-zinc-700 sm:text-md">
+        <p className="mt-5 max-w-[338px] text-zinc-700 text-balance sm:text-md">
           Elevate creativity with seamless collaboration. Effortless video
           syncing for your content creation joureny.
         </p>
