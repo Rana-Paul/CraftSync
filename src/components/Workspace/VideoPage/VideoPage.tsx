@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { uploadFileToS3 } from "@/helpers/uploadMedia";
+import Link from "next/link";
 
 interface VideoPageProps {
   workspaceId: string;
@@ -260,6 +261,16 @@ const VideoPage: FC<VideoPageProps> = ({
           </div>
 
           {/* TODO: Show Thumbnail button */}
+          <div className=" mt-7 sm:mt-2">
+            
+            <Link
+              className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
+              href={thumbnailUrl}
+              target="_blank"
+            >
+              Show Thumbnail
+            </Link>
+          </div>
 
           {/* Upload Thumbnail Button */}
           <div className=" mt-7 sm:mt-2">
