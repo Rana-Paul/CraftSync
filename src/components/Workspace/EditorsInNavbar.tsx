@@ -15,9 +15,10 @@ interface EditorAccountNav {
   email: string | undefined;
   name: string;
   imageUrl: string;
+  buttonStatus: boolean;
 }
 
-const EditorsInNavbar = ({ email, imageUrl, name }: EditorAccountNav) => {
+const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus }: EditorAccountNav) => {
   // TODO:
   // delete editor api
   // delete editor from workspace
@@ -60,6 +61,7 @@ const EditorsInNavbar = ({ email, imageUrl, name }: EditorAccountNav) => {
 
         <DropdownMenuItem asChild>
           <Button
+            disabled={!buttonStatus}
             onClick={() => {}}
             className={cn(
               buttonVariants({ variant: "destructive", size: "sm" }),

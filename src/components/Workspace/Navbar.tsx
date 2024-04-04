@@ -40,6 +40,7 @@ const Navbar: FC<NavbarProps> = ({editors, id, isCreator}) => {
                   key={index}
                 >
                   <EditorsInNavbar
+                  buttonStatus={isCreator}
                     imageUrl={editor.editor.avatar}
                     name={editor.editor.name}
                     email={editor.editor.email}
