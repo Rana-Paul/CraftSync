@@ -40,56 +40,25 @@ const VideoPage: FC<VideoPageProps> = ({
   workspaceDescription,
   workspaceVideoStatus,
   workspaceIsCreator,
-
-}: {
-  workspaceId: string;
-  workspacetags: string[];
-  workspacetitle: string;
-  workspaceVideoUrl: string;
-  workspaceThumbnailUrl: string;
-  workspaceDescription: string;
-  workspaceVideoStatus: string;
-  workspaceIsCreator: boolean;
 }) => {
   const [tags, setTags] = useState<string[]>(workspacetags);
   const [tagValue, setTagsValue] = useState<string>("");
   const [title, setTitle] = useState<string>(workspacetitle);
-  const [videoUrl, setVideoUrl] = useState<string>(workspaceVideoUrl);
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>(workspaceThumbnailUrl);
+  // const [videoUrl, setVideoUrl] = useState<string>(workspaceVideoUrl);
+  // const [thumbnailUrl, setThumbnailUrl] = useState<string>(
+  //   workspaceThumbnailUrl
+  // );
   const [videoStatus, setVideoStatus] = useState<string>(workspaceVideoStatus);
   const [description, setDescription] = useState<string>(workspaceDescription);
   const [uploadProgess, setUploadProgress] = useState<number>(0);
   const [isUploaading, setIsUploading] = useState<boolean>(false);
-  const [isCreator, setIsCreator] = useState<boolean>(workspaceIsCreator);
   const [isActiveButton, setIsAcctiveButton] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
 
-  console.log("taggg",tags);
-  
-
-  // Get Initial Data
-  const { data, isSuccess } = useQuery({
-    queryKey: ["getvideometadata"],
-    queryFn: async () => {
-      const res = await fetch(
-        `/api/getvideometadata?workspaceId=${workspaceId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // console.log("res : ", await res.json());
-      const resData = await res.json();
-
-      return resData;
-    },
-  });
+  console.log("taggg", tags);
 
   // Update VideoMeta Data mutation
 
@@ -122,20 +91,6 @@ const VideoPage: FC<VideoPageProps> = ({
       toast.error("Something went wrong, please try again later");
     },
   });
-
-  // UseEffect
-  // useEffect(() => {
-  //   if (isSuccess && data) {
-  //     setTitle(data[0].video.title);
-  //     setDescription(data[0].video.description);
-  //     setVideoStatus(data[0].video.videoStatus);
-  //     setVideoUrl(data[0].video.url);
-  //     setIsCreator(data[1].isCreator);
-  //     setTags(data[0].video.tags);
-  //     setThumbnailUrl(data[0].video.thumbnail);
-  //   }
-  // }, [isSuccess, data]);
-
   // TODO: Create a beautiful Loading Skeleton
 
   // Tags logic
@@ -170,7 +125,6 @@ const VideoPage: FC<VideoPageProps> = ({
     return intervel;
   };
 
-  console.log(thumbnailUrl);
 
   // ----------------- Upload video to s3 ----------------------
 
@@ -251,7 +205,7 @@ const VideoPage: FC<VideoPageProps> = ({
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="mt-8 flow-root sm:mt-5">
           <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-            <Video url={videoUrl} thumbnail={thumbnailUrl} />
+            <Video url={workspaceVideoUrl} thumbnail={workspaceThumbnailUrl} />
           </div>
         </div>
       </div>
@@ -287,10 +241,9 @@ const VideoPage: FC<VideoPageProps> = ({
 
           {/* TODO: Show Thumbnail button */}
           <div className=" mt-7 sm:mt-2">
-            
             <Link
               className="cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white hover:bg-gray-700"
-              href={thumbnailUrl}
+              href={workspaceThumbnailUrl}
               target="_blank"
             >
               Show Thumbnail
@@ -449,7 +402,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
           {/* TODO: Add all input boxes */}
 
-          {isCreator ? (
+          {workspaceIsCreator ? (
             <div className="flex justify-space-between">
               <div className="w-full">
                 <Button
