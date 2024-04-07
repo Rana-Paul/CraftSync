@@ -33,7 +33,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     },
     onError: () => {
       toast.error(
-        "There was an error whilec deleting your workspace, please try again later"
+        "There was an error while deleting workspace, please try again later"
       );
     },
     onSuccess: async (data) => {
