@@ -6,7 +6,8 @@ export async function PATCH(request: Request) {
 
   // TODO: add error handling
 
-  const requestBody = await request.json(); // Parse JSON payload once
+  try {
+    const requestBody = await request.json(); // Parse JSON payload once
 
   const { workspaceId, newUrl, type } = requestBody; 
 
@@ -66,6 +67,13 @@ export async function PATCH(request: Request) {
 
 
   return NextResponse.json({});
+    
+  } catch (error) {
+    return NextResponse.json({ message: "Something went wrong", status: 500 });
+    
+  }
+
+  
 }
 
 // Add a route for updating the image
