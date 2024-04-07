@@ -66,7 +66,7 @@ export async function PATCH(request: Request) {
   
 
 
-  return NextResponse.json({});
+  return NextResponse.json({message: "Video updated successfully", status: 200 });
     
   } catch (error) {
     return NextResponse.json({ message: "Something went wrong", status: 500 });
