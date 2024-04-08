@@ -23,9 +23,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// TODO:
-// Invite Editor endpoint
-
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const { email, workspaceId }: { email: string; workspaceId: string } =
@@ -83,20 +80,4 @@ export async function POST(request: NextRequest) {
 function emailSender(arg0: { email: string; invitation_code: string }) {
   throw new Error("Function not implemented.");
 }
-// Delete editor api (Try)
-// export async function DELETE(request: NextRequest) {
-//   const session = await getServerSession(authOptions);
-//   // const { id } = await request.json();
-//   try {
-//     const editor = await db.editor.deleteMany({
-//       where: {
-//         workspaceId: "clsxbvkmg000110oo0de3gt2d" as string,
-//         editorId: "106790389685886129132"
-//       },
-//     });
-//     return NextResponse.json(editor);
-//   }
-//   catch (error) {
-//     throw new Error("Something went wrong");
-//   }
-// }
+
