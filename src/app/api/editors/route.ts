@@ -77,7 +77,4 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function emailSender(arg0: { email: string; invitation_code: string }) {
-  throw new Error("Function not implemented.");
-}
 
