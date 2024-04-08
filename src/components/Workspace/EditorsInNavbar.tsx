@@ -22,6 +22,10 @@ const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus }: EditorAccountN
   // TODO:
   // delete editor api
   // delete editor from workspace
+
+  const deleteEditor = (email: string) => {
+    console.log(email);
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
@@ -62,7 +66,7 @@ const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus }: EditorAccountN
         <DropdownMenuItem asChild>
           <Button
             disabled={!buttonStatus}
-            onClick={() => {}}
+            onClick={() => deleteEditor(email as string)}
             className={cn(
               buttonVariants({ variant: "destructive", size: "sm" }),
               "w-full"
