@@ -80,8 +80,31 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  const { email, id } = await request.json();
-  console.log("deleted id: ", id);
+  const { email, workspaceId } = await request.json();
+  console.log("deleted id: ", workspaceId);
+
+  const isAuth = await db.workspace.findFirst({
+    where: {
+      AND: [
+        {
+          id: workspaceId,
+        },
+        {
+          creatorId: session?.user.id,
+        },
+      ],
+    },
+  });
+
+  if(!isAuth) {
+    return NextResponse.json({
+      message: "You have no access to delete the Editor",
+      status: 403,
+    });
+  }
+
+  // delete editor
+  
 
   // TODO: add logic for deleting editor
 }
