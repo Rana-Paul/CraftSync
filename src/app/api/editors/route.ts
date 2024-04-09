@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  const { id } = await request.json();
+  const { email, id } = await request.json();
   console.log("deleted id: ", id);
 
   // TODO: add logic for deleting editor
