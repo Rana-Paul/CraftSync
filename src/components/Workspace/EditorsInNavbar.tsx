@@ -18,33 +18,34 @@ interface EditorAccountNav {
   imageUrl: string;
   buttonStatus: boolean;
   workspaceId: string;
+  editorId: string;
 }
 
-// delete editor mutation
-const {mutate} = useMutation({
-  mutationKey: ["deleteEditor"],
-  mutationFn: async ({ editorId, deleteWorkspaceId }: { editorId: string; deleteWorkspaceId: string }) => {
-    const response = await fetch("/api/editors", {
-      method: "DELETE",
-      body: JSON.stringify({ editorId, deleteWorkspaceId }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    console.log(await response.json());
-    
-  }
-})
-
-const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId }: EditorAccountNav) => {
+const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId, editorId }: EditorAccountNav) => {
   // TODO:
+  // delete editor mutation
+  const {mutate} = useMutation({
+    mutationKey: ["deleteEditor"],
+    mutationFn: async ({ deleteEditorId, deleteWorkspaceId }: { deleteEditorId: string; deleteWorkspaceId: string }) => {
+      // const response = await fetch("/api/editors", {
+      //   method: "DELETE",
+      //   body: JSON.stringify({ editorId, deleteWorkspaceId }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+  
+      // console.log(await response.json());
+      
+    }
+  })
   // delete editor api
   // delete editor from workspace
 
-  const deleteEditor = (editorid: string) => {
-    console.log(editorid);
-    mutate({ editorId: editorid, deleteWorkspaceId: workspaceId })
+  const deleteEditor = () => {
+    console.log(editorId, workspaceId);
+    // mutate({ deleteEditorId: editorid, deleteWorkspaceId: workspaceId })
   }
   return (
     <DropdownMenu>
@@ -86,7 +87,7 @@ const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId }: E
         <DropdownMenuItem asChild>
           <Button
             disabled={!buttonStatus}
-            onClick={() => deleteEditor(email as string)}
+            onClick={() => deleteEditor()}
             className={cn(
               buttonVariants({ variant: "destructive", size: "sm" }),
               "w-full"

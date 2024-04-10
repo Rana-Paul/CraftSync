@@ -44,6 +44,8 @@ const Navbar: FC<NavbarProps> = ({editors, id, isCreator}) => {
                     imageUrl={editor.editor.avatar}
                     name={editor.editor.name}
                     email={editor.editor.email}
+                    editorId={editor.editor.id}
+                    workspaceId={id}
                   />
                 </div>
               ))}
