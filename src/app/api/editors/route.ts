@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  const { email, workspaceId } = await request.json();
+  const { editorId, workspaceId } = await request.json();
   console.log("deleted id: ", workspaceId);
 
   const isAuth = await db.workspace.findFirst({
@@ -104,7 +104,23 @@ export async function DELETE(request: NextRequest) {
   }
 
   // delete editor
-  
+ await db.editor.deleteMany({
+   where: {
+    AND: [
+      {
+        editorId: editorId
+      },
+      {
+        workspaceId: workspaceId
+      }
+    ]
+   }
+ })
+
+ return NextResponse.json({
+   message: "Editor deleted successfully",
+   status: 200
+ })
 
   // TODO: add logic for deleting editor
 }
