@@ -27,25 +27,25 @@ const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId, edi
   // delete editor mutation
   const {mutate} = useMutation({
     mutationKey: ["deleteEditor"],
-    mutationFn: async ({ deleteEditorId, deleteWorkspaceId }: { deleteEditorId: string; deleteWorkspaceId: string }) => {
-      // const response = await fetch("/api/editors", {
-      //   method: "DELETE",
-      //   body: JSON.stringify({ editorId, deleteWorkspaceId }),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
+    mutationFn: async () => {
+      const response = await fetch("/api/editors", {
+        method: "DELETE",
+        body: JSON.stringify({ editorId, workspaceId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
   
-      // console.log(await response.json());
+      console.log(await response.json());
       
     }
   })
   // delete editor api
   // delete editor from workspace
 
-  const deleteEditor = () => {
+  const deleteEditor = async () => {
     console.log(editorId, workspaceId);
-    // mutate({ deleteEditorId: editorid, deleteWorkspaceId: workspaceId })
+    await mutate();
   }
   return (
     <DropdownMenu>
