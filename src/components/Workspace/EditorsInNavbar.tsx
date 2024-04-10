@@ -10,21 +10,41 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 
 interface EditorAccountNav {
   email: string | undefined;
   name: string;
   imageUrl: string;
   buttonStatus: boolean;
+  workspaceId: string;
 }
 
-const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus }: EditorAccountNav) => {
+// delete editor mutation
+const {mutate} = useMutation({
+  mutationKey: ["deleteEditor"],
+  mutationFn: async ({ editorId, deleteWorkspaceId }: { editorId: string; deleteWorkspaceId: string }) => {
+    const response = await fetch("/api/editors", {
+      method: "DELETE",
+      body: JSON.stringify({ editorId, deleteWorkspaceId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(await response.json());
+    
+  }
+})
+
+const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId }: EditorAccountNav) => {
   // TODO:
   // delete editor api
   // delete editor from workspace
 
-  const deleteEditor = (email: string) => {
-    console.log(email);
+  const deleteEditor = (editorid: string) => {
+    console.log(editorid);
+    mutate({ editorId: editorid, deleteWorkspaceId: workspaceId })
   }
   return (
     <DropdownMenu>
