@@ -45,7 +45,6 @@ export async function POST(request: NextRequest) {
 
     // check if editor already exists in the workspace
 
-
     const invitation_code = await nanoid(8);
 
     const data = await invitationEmail({
@@ -77,11 +76,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
-
 export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const { editorId, workspaceId } = await request.json();
   console.log("deleted id: ", workspaceId);
+
+  //TODO: handle error
 
   const isAuth = await db.workspace.findFirst({
     where: {
@@ -96,7 +96,7 @@ export async function DELETE(request: NextRequest) {
     },
   });
 
-  if(!isAuth) {
+  if (!isAuth) {
     return NextResponse.json({
       message: "You have no access to delete the Editor",
       status: 403,
@@ -104,23 +104,23 @@ export async function DELETE(request: NextRequest) {
   }
 
   // delete editor
- await db.editor.deleteMany({
-   where: {
-    AND: [
-      {
-        editorId: editorId
-      },
-      {
-        workspaceId: workspaceId
-      }
-    ]
-   }
- })
+  await db.editor.deleteMany({
+    where: {
+      AND: [
+        {
+          editorId: editorId,
+        },
+        {
+          workspaceId: workspaceId,
+        },
+      ],
+    },
+  });
 
- return NextResponse.json({
-   message: "Editor deleted successfully",
-   status: 200
- })
+  return NextResponse.json({
+    message: "Editor deleted successfully",
+    status: 200,
+  });
 
   // TODO: add logic for deleting editor
 }

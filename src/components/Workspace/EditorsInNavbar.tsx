@@ -21,11 +21,17 @@ interface EditorAccountNav {
   editorId: string;
 }
 
-
-const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId, editorId }: EditorAccountNav) => {
+const EditorsInNavbar = ({
+  email,
+  imageUrl,
+  name,
+  buttonStatus,
+  workspaceId,
+  editorId,
+}: EditorAccountNav) => {
   // TODO:
   // delete editor mutation
-  const {mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationKey: ["deleteEditor"],
     mutationFn: async () => {
       const response = await fetch("/api/editors", {
@@ -35,18 +41,20 @@ const EditorsInNavbar = ({ email, imageUrl, name, buttonStatus, workspaceId, edi
           "Content-Type": "application/json",
         },
       });
-  
+
       console.log(await response.json());
-      
-    }
-  })
+
+      //TODO: handle error and success toast
+      //TODO: invalidate editor query
+    },
+  });
   // delete editor api
   // delete editor from workspace
 
   const deleteEditor = async () => {
     console.log(editorId, workspaceId);
     await mutate();
-  }
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
