@@ -77,50 +77,57 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const session = await getServerSession(authOptions);
-  const { editorId, workspaceId } = await request.json();
-  console.log("deleted id: ", workspaceId);
+  try {
+    const session = await getServerSession(authOptions);
+    const { editorId, workspaceId } = await request.json();
+    console.log("deleted id: ", workspaceId);
 
-  //TODO: handle error
+    //TODO: handle error
 
-  const isAuth = await db.workspace.findFirst({
-    where: {
-      AND: [
-        {
-          id: workspaceId,
-        },
-        {
-          creatorId: session?.user.id,
-        },
-      ],
-    },
-  });
+    const isAuth = await db.workspace.findFirst({
+      where: {
+        AND: [
+          {
+            id: workspaceId,
+          },
+          {
+            creatorId: session?.user.id,
+          },
+        ],
+      },
+    });
 
-  if (!isAuth) {
+    if (!isAuth) {
+      return NextResponse.json({
+        message: "You have no access to delete the Editor",
+        status: 403,
+      });
+    }
+
+    // delete editor
+    await db.editor.deleteMany({
+      where: {
+        AND: [
+          {
+            editorId: editorId,
+          },
+          {
+            workspaceId: workspaceId,
+          },
+        ],
+      },
+    });
+
     return NextResponse.json({
-      message: "You have no access to delete the Editor",
-      status: 403,
+      message: "Editor deleted successfully",
+      status: 200,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      message: "Something went wrong",
+      status: 500,
     });
   }
-
-  // delete editor
-  await db.editor.deleteMany({
-    where: {
-      AND: [
-        {
-          editorId: editorId,
-        },
-        {
-          workspaceId: workspaceId,
-        },
-      ],
-    },
-  });
-
-  return NextResponse.json({
-    message: "Editor deleted successfully",
-    status: 200,
-  });
 
   // TODO: add logic for deleting editor
 }
