@@ -10,7 +10,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 interface EditorAccountNav {
   email: string | undefined;
@@ -29,6 +30,7 @@ const EditorsInNavbar = ({
   workspaceId,
   editorId,
 }: EditorAccountNav) => {
+  const queryClient = useQueryClient();
   // TODO:
   // delete editor mutation
   const { mutate } = useMutation({
@@ -43,9 +45,24 @@ const EditorsInNavbar = ({
       });
 
       console.log(await response.json());
-
-      //TODO: handle error and success toast
-      //TODO: invalidate editor query
+      return response.json();
+    },
+    onSuccess: async (data) => {
+      if (data.status === 403) {
+        // logic for workspace already exists error (UI)
+        toast.error(data.message);
+      } else {
+        // OR logic for workspace created (UI)
+        queryClient.invalidateQueries({ queryKey: ["workspaces"] });
+        toast.success(data.message);
+      }
+    },
+    onError: (_, message) => {
+      // Internal server error
+      console.log("error", message);
+      toast.error(
+        "There was an error while creating your workspace, please try again later"
+      );
     },
   });
   // delete editor api
