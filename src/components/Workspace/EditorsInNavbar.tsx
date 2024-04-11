@@ -65,8 +65,7 @@ const EditorsInNavbar = ({
       );
     },
   });
-  // delete editor api
-  // delete editor from workspace
+
 
   const deleteEditor = async () => {
     console.log(editorId, workspaceId);

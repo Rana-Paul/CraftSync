@@ -76,6 +76,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// delete editor
 export async function DELETE(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
