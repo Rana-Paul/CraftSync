@@ -22,3 +22,5 @@ export async function invitationEmail ({email, invitation_code, workspaceName, w
     return data.data;
 }
 
+// TODO: create a function for sending review email
+// TODO: create a new email  template for review

@@ -44,6 +44,8 @@ export async function POST (request: NextRequest) {
     console.log("creator:--------------------------------- ", creator);
     
 
+    // TODO: ADD SEND EMAIL LOGIC HERE
+
 
 
 }
