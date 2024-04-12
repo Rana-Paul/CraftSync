@@ -124,6 +124,12 @@ const VideoPage: FC<VideoPageProps> = ({
     }, 1000);
     return intervel;
   };
+  // ----------- Progress bar logic ------------
+
+  const review = () => {
+    // setIsUploading(true);
+    
+  };
 
   // ----------------- Upload video to s3 ----------------------
 
@@ -455,7 +461,7 @@ const VideoPage: FC<VideoPageProps> = ({
                       "mt-3",
                     variant: "default",
                   })}
-                  type="submit"
+                  onClick={}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Loading..." : "Review"}
