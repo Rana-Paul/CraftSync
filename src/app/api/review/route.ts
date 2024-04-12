@@ -6,6 +6,8 @@ import { db } from "@/db";
 export async function POST (request: NextRequest) {
     const session = await getServerSession(authOptions);
     const { workspaceId } = await request.json();
+    console.log("workspaceId: ", workspaceId);
+    
 
     const isAuth = await db.editor.findFirst({
         where: {
@@ -24,6 +26,23 @@ export async function POST (request: NextRequest) {
             status: 403
         })
     }
+
+    const creator = await db.workspace.findUnique({
+        where: {
+            id: workspaceId
+        },
+        include: {creator: true}
+    })
+
+    if(!creator) {
+        return NextResponse.json({
+            message: "Workspace not found",
+            status: 404
+        })
+    }
+
+    console.log("creator:--------------------------------- ", creator);
+    
 
 
 

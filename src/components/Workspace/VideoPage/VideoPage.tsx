@@ -94,9 +94,11 @@ const VideoPage: FC<VideoPageProps> = ({
   const { mutate: reviewMutation } = useMutation({
     mutationKey: ["review"],
     mutationFn: async () => {
+      console.log("in mutation", workspaceId);
+      
       const res = await fetch("/api/review", {
         method: "POST",
-        body: JSON.stringify(workspaceId),
+        body: JSON.stringify({workspaceId: workspaceId}),
         headers: {
           "Content-Type": "application/json",
         },
