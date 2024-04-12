@@ -125,7 +125,6 @@ const VideoPage: FC<VideoPageProps> = ({
     return intervel;
   };
 
-
   // ----------------- Upload video to s3 ----------------------
 
   const fileUpload = async (
@@ -434,18 +433,34 @@ const VideoPage: FC<VideoPageProps> = ({
             </div>
           ) : (
             // Editor button
-            <div className="w-full">
-              <Button
-                className={buttonVariants({
-                  size: "sm",
-                  className: "mt-3",
-                  variant: "default",
-                })}
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Updating..." : "Review"}
-              </Button>
+            <div className="flex justify-space-between">
+              <div className="w-full">
+                <Button
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "mt-3 bg-blue-700 hover:bg-blue-800 hover:text-white",
+                    variant: "default",
+                  })}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Updating..." : "Update"}
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={buttonVariants({
+                    size: "sm",
+                    className:
+                      "mt-3",
+                    variant: "default",
+                  })}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Loading..." : "Review"}
+                </Button>
+              </div>
             </div>
           )}
         </form>
