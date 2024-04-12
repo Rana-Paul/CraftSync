@@ -157,7 +157,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const review = () => {
     // setIsUploading(true);
-    
+    reviewMutation();
     
   };
 
@@ -491,7 +491,7 @@ const VideoPage: FC<VideoPageProps> = ({
                       "mt-3",
                     variant: "default",
                   })}
-                  onClick={}
+                  onClick={review}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Loading..." : "Review"}
