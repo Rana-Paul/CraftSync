@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from "nanoid";
-import { invitationEmail } from "@/lib/send-emails";
+import { invitationEmail } from "@/helpers/send-emails";
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   // throw new Error();

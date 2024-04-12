@@ -1,6 +1,6 @@
 import { PrimaryActionEmailHtml } from '@/components/emails/InvitationEmail'
 import {Resend} from 'resend'
-import { InvitationEmailType } from './validators/invitationEmail';
+import { InvitationEmailType } from '../lib/validators/invitationEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 export async function invitationEmail ({email, invitation_code, workspaceName, workspaceId}: InvitationEmailType) {
