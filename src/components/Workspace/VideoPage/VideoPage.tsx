@@ -91,6 +91,35 @@ const VideoPage: FC<VideoPageProps> = ({
       toast.error("Something went wrong, please try again later");
     },
   });
+  const { mutate: reviewMutation } = useMutation({
+    mutationKey: ["review"],
+    mutationFn: async () => {
+      const res = await fetch("/api/review", {
+        method: "POST",
+        body: JSON.stringify(workspaceId),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return await res.json();
+    },
+    onSuccess: async (data) => {
+      setIsSubmitting(false);
+      if (data.status === 401) {
+        toast.error(data.message);
+      } else {
+        queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
+        setIsAcctiveButton(true);
+        toast.success(data.message);
+      }
+    },
+    onError: (_, message) => {
+      // Internal server error
+      setIsSubmitting(false);
+      console.log("error", message);
+      toast.error("Something went wrong, please try again later");
+    },
+  });
   // TODO: Create a beautiful Loading Skeleton
 
   // Tags logic
@@ -128,6 +157,7 @@ const VideoPage: FC<VideoPageProps> = ({
 
   const review = () => {
     // setIsUploading(true);
+    
     
   };
 
