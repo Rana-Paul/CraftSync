@@ -4,3 +4,9 @@ export interface InvitationEmailType {
     workspaceName: string
     workspaceId: string
 }
+
+export interface ReviewContentEmailType {
+    email: string
+    workspaceName: string
+    editorName: string
+}
