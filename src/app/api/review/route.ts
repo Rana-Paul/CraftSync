@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { db } from "@/db";
+import { reviewEmail } from "@/helpers/send-emails";
 
 export async function POST (request: NextRequest) {
     const session = await getServerSession(authOptions);
@@ -45,6 +46,16 @@ export async function POST (request: NextRequest) {
     
 
     // TODO: ADD SEND EMAIL LOGIC HERE
+    await reviewEmail({
+        email: creator.creator.email,
+        workspaceName: creator.title,
+        editorName: session?.user?.name as string
+    })
+
+    return NextResponse.json({
+        message: "Email sent",
+        status: 200
+    })
 
 
 
