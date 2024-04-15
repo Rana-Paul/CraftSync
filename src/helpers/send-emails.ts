@@ -1,6 +1,7 @@
 import { PrimaryActionEmailHtml } from '@/components/emails/InvitationEmail'
 import {Resend} from 'resend'
 import { InvitationEmailType, ReviewContentEmailType } from '../lib/validators/invitationEmail';
+import { ReviewEmailTemplateHtml } from '@/components/emails/ReviewEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 export async function invitationEmail ({email, invitation_code, workspaceName, workspaceId}: InvitationEmailType) {
@@ -29,10 +30,12 @@ export async function reviewEmail ({email, workspaceName, editorName}: ReviewCon
         to: [email],
         subject:
         `${editorName} has invited you to review the content of ${workspaceName} workspace`,
-        html: PrimaryActionEmailHtml({
+        html: ReviewEmailTemplateHtml({
           actionLabel: "Review Content",
           buttonText: "Review Content",
           href: `${process.env.NEXT_PUBLIC_URL}/dashboard/${workspaceName}`,
+          workspaceName,
+          editorName
         }),
     });
     console.log(data.data);
