@@ -107,8 +107,10 @@ const VideoPage: FC<VideoPageProps> = ({
     },
     onSuccess: async (data) => {
       setIsSubmitting(false);
-      if (data.status === 401) {
+      if (data.status === 403 || data.status === 404) {
         toast.error(data.message);
+        setIsAcctiveButton(true);
+
       } else {
         // queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
         setIsAcctiveButton(true);
