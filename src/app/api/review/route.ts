@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      message: "Email sent",
+      message: "Successfully sent review request",
       status: 200,
     });
   } catch (error) {

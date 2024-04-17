@@ -110,7 +110,7 @@ const VideoPage: FC<VideoPageProps> = ({
       if (data.status === 401) {
         toast.error(data.message);
       } else {
-        queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
+        // queryClient.invalidateQueries({ queryKey: ["getvideometadata"] });
         setIsAcctiveButton(true);
         toast.success(data.message);
       }
