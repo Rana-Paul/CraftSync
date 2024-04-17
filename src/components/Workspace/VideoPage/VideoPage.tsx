@@ -117,10 +117,11 @@ const VideoPage: FC<VideoPageProps> = ({
         toast.success(data.message);
       }
     },
+
+    //TODO: test the review route
     onError: (_, message) => {
       // Internal server error
       setIsSubmitting(false);
-      console.log("error", message);
       toast.error("Something went wrong, please try again later");
     },
   });
