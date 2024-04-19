@@ -229,6 +229,8 @@ const VideoPage: FC<VideoPageProps> = ({
   const submit: SubmitHandler<any> = async (data, event) => {
     // TODO: Update metadata on db
     setIsSubmitting(true);
+    console.log("hereeeeeee is the issue----s");
+    
 
     console.log(title);
     await mutate({
@@ -497,6 +499,7 @@ const VideoPage: FC<VideoPageProps> = ({
                     variant: "default",
                   })}
                   onClick={review}
+                  type="button"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Loading..." : "Review"}
