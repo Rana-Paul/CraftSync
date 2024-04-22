@@ -86,8 +86,6 @@ const WorkSpace = ({ id }: { id: string }) => {
         {/* SideBar for Comment section */}
         <div className="border-r w-full sm:w-[35%]">
           <CommentSection />
-
-          {/* Create a Thumbnail viewer component */}
         </div>
       </div>
     </div>
