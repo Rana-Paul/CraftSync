@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import CommentSection from "./CommentSection";
 import VideoPage from "./VideoPage/VideoPage";
+import VideoPageSkeleton from "./VideoPage/VideoPageSkeleton";
 
 const WorkSpace = ({ id }: { id: string }) => {
   const [isCreator, setIsCreator] = useState(false);
@@ -58,7 +59,7 @@ const WorkSpace = ({ id }: { id: string }) => {
   const { data: session, status } = useSession();
 
   if (status === "loading" || isLoading) {
-    return <Loader2 className="h-4 w-4 animate-spin" />;
+    return <VideoPageSkeleton />;
   }
 
   return (
