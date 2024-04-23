@@ -58,7 +58,7 @@ const WorkSpace = ({ id }: { id: string }) => {
 
   const { data: session, status } = useSession();
 
-  if (true) {
+  if (status === "loading" || isLoading) {
     return <VideoPageSkeleton />;
   }
 

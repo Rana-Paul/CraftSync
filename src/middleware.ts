@@ -6,6 +6,8 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   //   console.log("midd token" + token?.email);
   //   console.log(request.nextUrl.pathname);
+
+  // TODO: Add routes 
   const authURLS = ["/dashboard", "/api/workspace"];
 
   if (token && request.nextUrl.pathname == "/api/auth/signin") {
