@@ -8,12 +8,12 @@ export async function middleware(request: NextRequest) {
   //   console.log(request.nextUrl.pathname);
 
   // TODO: Add routes 
-  const authURLS = ["/dashboard", "/api/workspace"];
+  // const authURLS = ["/dashboard", "/api/workspace", "dashboard/"];
 
   if (token && request.nextUrl.pathname == "/api/auth/signin") {
     return NextResponse.redirect(new URL("/", request.url));
   }
-  if (authURLS.includes(request.nextUrl.pathname) && !token) {
+  if (request.nextUrl.pathname.includes("/dashboard") && !token) {
     return NextResponse.redirect(new URL("/api/auth/signin", request.url));
   }
 
