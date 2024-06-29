@@ -14,6 +14,10 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       authorization: {
         params: {
+          // expires_in: "43200",
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
           scope:
             "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.upload  ",
         },
@@ -22,6 +26,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   session: {
+    maxAge: 172800,
     strategy: "jwt",
   },
   callbacks: {
@@ -51,7 +56,10 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, account, profile }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
+        console.log("refresh token: ",account.refresh_token);
+        
         token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
       }
       return token;
     },
